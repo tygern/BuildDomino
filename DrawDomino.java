@@ -5,9 +5,14 @@ public class DrawDomino extends Canvas
     Tableau dominoTableau;
     int scale = 50;
     int offset = 10;
+    int titleHeight = 30;
+    public int width;
+    public int height;
 
     public DrawDomino(Tableau input) {
 	dominoTableau = input;
+	width = scale*input.maxWidth() + 2*offset;
+	height = scale*input.maxHeight() + 2*offset + titleHeight;
     }
 
     public void paint(Graphics graphics) {

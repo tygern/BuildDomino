@@ -33,7 +33,7 @@ class BuildDomino {
 
 	DrawDomino canvas = new DrawDomino(t);
         JFrame frame = new JFrame();
-        frame.setSize(400, 400);
+        frame.setSize(canvas.width, canvas.height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(canvas);
         frame.setVisible(true);
