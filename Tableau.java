@@ -35,6 +35,19 @@ class Tableau {
 	}
     }
     
+    public Domino getDomino(int position) {
+	assert(position < size);
+	return dominoes[position];
+    }
+
+    public int getSize() {
+	return size;
+    }
+
+    public int getRank() {
+	return rank;
+    }
+
     /**
      * This method adds a domino to a tableau using Garfinkle's
      * algorithms.  Please see README.md for more information about
