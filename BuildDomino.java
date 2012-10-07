@@ -31,5 +31,11 @@ class BuildDomino {
 
 	t.tikzDraw();
 
+	DrawDomino canvas = new DrawDomino(t);
+        JFrame frame = new JFrame();
+        frame.setSize(400, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(canvas);
+        frame.setVisible(true);
     }
 }

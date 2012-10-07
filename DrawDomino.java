@@ -1,34 +1,37 @@
-import java.awt.Graphics;
-import javax.swing.JPanel;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.BorderLayout;
-
-public class DrawDomino extends JPanel {
+import java.awt.*;
+import javax.swing.*;
+public class DrawDomino extends Canvas
+{
     Tableau dominoTableau;
-    
+    int scale = 50;
+    int offset = 10;
+
     public DrawDomino(Tableau input) {
-        super();
-        setBackground(Color.WHITE);
 	dominoTableau = input;
     }
-    
-    public void paintComponent(Graphics g) {
-        int width = getWidth();
-        int height = getHeight();
-		DrawDomino panel = new DrawDomino(fakeTableau);
-        JFrame application = new JFrame();
-        
-        application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        application.add(panel);           
 
-        application.setSize(500, 400);
-        application.setVisible(true);          
+    public void paint(Graphics graphics) {
+	int longSide = 2*scale;
+	int shortSide = scale;
+	for (int i = 0; i < dominoTableau.getSize(); i++) {
+	    Domino current = dominoTableau.getDomino(i);
+	    int xVal = current.getFirstBlock().getXVal();
+	    int yVal = current.getFirstBlock().getYVal();
+	    int labelInt = current.getLabel();
+	    String labelSt = Integer.toString(labelInt);
+	    int xCoord = scale*(xVal-1)+offset;
+	    int yCoord = scale*(yVal-1)+offset;
 
-        super.paintComponent(g);
-	
-	g.drawRect(0,0,100,100);
+	    if (dominoTableau.getDomino(i).getIsVertical()) {
+		graphics.drawRect(xCoord, yCoord, shortSide, longSide);
+		graphics.drawString(labelSt, xCoord+scale/2, yCoord+scale);
+	    }
+	    else {
+		graphics.drawRect(xCoord, yCoord, longSide, shortSide);
+		graphics.drawString(labelSt, xCoord+scale, yCoord+scale/2);
+	    }
+	}
     }
+
 
 }
