@@ -1,14 +1,28 @@
+/**
+* This class stores a tableau of dominoes, and allows a user to add a
+* domino to the tableau using a technique called "shuffling".
+* @author Tyson Gern
+* @version 0.1
+*/
 class Tableau {
-    private int rank;
-    private Domino[] dominoes;
-    private int size = 0;
-    private int maxLabel = 0;
+    private int rank; // The rank (max size) of a tableau
+    private Domino[] dominoes; // array of dominoes in a tableau
+    private int size = 0; // number of dominoes in a tableau
+    private int maxLabel = 0; // largest label in the tableau
 
+    /**
+     * This constructs an empty tableau of a certain rank
+     * @param rank The rank of the tableau
+     */
     public Tableau (int rank) {
 	dominoes = new Domino[rank];
 	this.rank = rank;
     }
 
+    /**
+     * This constructs a tableau from an element w of a Coxeter group
+     * @param w The element of the Coxeter group
+     */
     public Tableau (Element w) {
 	rank = w.getRank();
 	dominoes = new Domino[rank];
@@ -164,4 +178,24 @@ class Tableau {
 	return count;
     }
 
+    public void tikzDraw() {
+	System.out.println("\\begin{tikzpicture}[node distance=0 cm,outer sep = 0pt]");
+	System.out.println("\\tikzstyle{ver}=[rectangle, draw, thick, minimum width=1cm, minimum height=2cm]");        
+	System.out.println("\\tikzstyle{hor}=[rectangle, draw, thick, minimum width=2cm, minimum height=1cm]");
+	
+	for (int i = 0; i < size; i++) {
+	    Domino current = dominoes[i];
+	    int xDom = current.getFirstBlock().getXVal();
+	    int yDom = current.getFirstBlock().getYVal();
+	    boolean vert = current.getIsVertical();
+	    int label = current.getLabel();
+	    if (vert) {
+		System.out.println("\\node[ver] at (0 + " + xDom + ", 4 - " + yDom + ") {" + label + "};");	
+	    }
+	    else {
+		System.out.println("\\node[hor] at (.5 + " + xDom + ", 4.5 - " + yDom + ") {" + label + "};");	
+	    }
+	}
+	System.out.println("\\end{tikzpicture}");
+    }
 }
