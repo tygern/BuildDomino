@@ -4,8 +4,8 @@
 * @version 0.1
 */
 class Coordinate {
-    private int xVal;
-    private int yVal;
+    private int xVal; // x-coordinate
+    private int yVal; // y-coordinate
 
     /**
      * This constructs an coordinate pair
