@@ -1,6 +1,8 @@
 /**
 * This class stores a tableau of dominoes, and allows a user to add a
-* domino to the tableau using a technique called "shuffling".
+* domino to the tableau using a technique called "shuffling" developed
+* by Devra Garfinkle.  Please see README.md for more information about
+* Garfinkle's techniques.
 * @author Tyson Gern
 * @version 0.1
 */
@@ -33,6 +35,13 @@ class Tableau {
 	}
     }
     
+    /**
+     * This method adds a domino to a tableau using Garfinkle's
+     * algorithms.  Please see README.md for more information about
+     * Garfinkle's algorithm.
+     * @param current The domino to add
+     * @return Nothing
+     */
     public void addDomino(Domino current) {
 	int domLabel = current.getLabel();
 	if (domLabel > maxLabel) {
@@ -63,10 +72,23 @@ class Tableau {
 	}
     }
 
+    /**
+     * This method gets the largest x-coordinate of a domino in a
+     * given row
+     * @param row The row
+     * @return The largest x-coordinate in row
+     */
     public int largestInRow(int row) {
 	return largestInRow(row, rank + 1);
     }
 
+    /**
+     * This method gets the largest x-coordinate of a domino with
+     * label less than bound in a given row
+     * @param row The row
+     * @param bound The bound
+     * @return The largest x-coordinate in row, given the bound
+     */
     public int largestInRow(int row, int bound) {
 	int column = 0;
 	for(int i = 0; i < size; i++) {
@@ -82,10 +104,23 @@ class Tableau {
 	return column;
     }
  
+    /**
+     * This method gets the largest y-coordinate of a domino in a
+     * given column
+     * @param column The column
+     * @return The largest y-coordinate in column
+     */
     public int largestInCol(int column) {
 	return largestInCol(column, rank + 1);
     }
 
+    /**
+     * This method gets the largest y-coordinate of a domino with
+     * label less than bound in a given column
+     * @param col The column
+     * @param bound The bound
+     * @return The largest y-coordinate in column, given the bound
+     */
     public int largestInCol(int column, int bound) {
 	int row = 0;
 	for(int i = 0; i < size; i++) {
@@ -101,6 +136,12 @@ class Tableau {
 	return row;
     }
  
+    /**
+     * This method prints the coordinates and orientation of
+     * the domino with a given label in the tableau
+     * @param label The label
+     * @return Nothing
+     */
     public void printDomino(int label) {
 	if (size == 0) {
 	    System.out.println("The tableau is empty.");
@@ -115,6 +156,11 @@ class Tableau {
 	System.out.println("There is no domino with label " + label + " in the tableau.");
     }
 
+    /**
+     * This method prints the labels, coordinates, and orientation of
+     * the dominos in the tableau
+     * @return Nothing
+     */
     public void printAll() {
 	if (size == 0) {
 	    System.out.println("The tableau is empty.");
@@ -127,6 +173,12 @@ class Tableau {
 	}
     }
 
+    /**
+     * This method finds the location of a domino with a certain label
+     * in the tableau.
+     * @param label The label
+     * @return The index of the domino in the array dominoes
+     */
     public int findLabel(int label) {
 	for (int i = 0; i < size; i++) {
 	    if (dominoes[i].getLabel() == label) {
@@ -136,6 +188,13 @@ class Tableau {
 	return -1;
     }
 
+    /**
+     * This method shuffles a domino with a given label into the
+     * tableau according to Garfinkle's algorithm.  Please see
+     * README.md for more information about Garfinkles algorithms.
+     * @param label The label
+     * @return Nothing
+     */
     public void shuffle(int label) {
 	int position = findLabel(label);
 	Domino current = dominoes[position];
@@ -168,6 +227,13 @@ class Tableau {
 	}
     }
 
+    /**
+     * This method calculates how much a given domino overlapps the
+     * tableau.
+     * @param position The index of the domino in the array dominoes
+     * @return The number of blocks that the domino overlapps the
+     * tableau
+     */
     public int overlap(int position) {
 	int count = 0;
 	for (int i = 0; i < size; i++) {
@@ -178,6 +244,11 @@ class Tableau {
 	return count;
     }
 
+    /**
+     * This method outputs tikz commands to draw the tableau.  See
+     * README.md for more information about tikz.
+     * @return Nothing
+     */
     public void tikzDraw() {
 	System.out.println("\\begin{tikzpicture}[node distance=0 cm,outer sep = 0pt]");
 	System.out.println("\\tikzstyle{ver}=[rectangle, draw, thick, minimum width=1cm, minimum height=2cm]");        
