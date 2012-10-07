@@ -48,6 +48,14 @@ class Tableau {
 	return rank;
     }
 
+    public int maxWidth() {
+	return largestInRow(1);
+    }
+
+    public int maxHeight() {
+	return largestInCol(1);
+    }
+
     /**
      * This method adds a domino to a tableau using Garfinkle's
      * algorithms.  Please see README.md for more information about
