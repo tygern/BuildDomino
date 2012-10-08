@@ -108,6 +108,8 @@ class Tableau {
 	}
 	// If not biggest, use \alpha map.
 	else {
+	    // Take away dominoes with larger labels and repeat
+	    // process above.
 	    if (current.getIsVertical()) {
 		current.moveDomino(1, largestInCol(1, domLabel) + 1);
 	    }
@@ -116,6 +118,8 @@ class Tableau {
 	    }
 	    dominoes[size] = current;
 	    size++;
+
+	    // Shuffle in remaining dominoes.
 	    for (int j = domLabel + 1; j <= maxLabel; j++) {
 		if (findLabel(j) != -1) {
 		    shuffle(j);
@@ -302,6 +306,7 @@ class Tableau {
      * @return Nothing
      */
     public void tikzDraw() {
+	// Beginning TikZ code
 	System.out.println("\\begin{tikzpicture}[node distance=0 cm,outer sep = 0pt]");
 	System.out.println("\\tikzstyle{ver}=[rectangle, draw, thick, minimum width=1cm, minimum height=2cm]");        
 	System.out.println("\\tikzstyle{hor}=[rectangle, draw, thick, minimum width=2cm, minimum height=1cm]");
@@ -313,12 +318,16 @@ class Tableau {
 	    boolean vert = current.getIsVertical();
 	    int label = current.getLabel();
 	    if (vert) {
+		// Start at (0, 4)
 		System.out.println("\\node[ver] at (0 + " + xDom + ", 4 - " + yDom + ") {" + label + "};");	
 	    }
 	    else {
+		// Start at (.5, 4.5)
 		System.out.println("\\node[hor] at (.5 + " + xDom + ", 4.5 - " + yDom + ") {" + label + "};");	
 	    }
 	}
+
+	// Ending TikZ code
 	System.out.println("\\end{tikzpicture}");
     }
 }
