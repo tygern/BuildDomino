@@ -1,5 +1,5 @@
-Build Domino
-============
+BuildDomino
+===========
 
 Introduction
 ------------

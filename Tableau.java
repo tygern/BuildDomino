@@ -13,45 +13,69 @@ class Tableau {
     private int maxLabel = 0; // largest label in the tableau
 
     /**
-     * This constructs an empty tableau of a certain rank
+     * This constructs an empty tableau of a certain rank.
      * @param rank The rank of the tableau
      */
     public Tableau (int rank) {
+	// Create an empty Domino array and set the rank.
 	dominoes = new Domino[rank];
 	this.rank = rank;
     }
 
     /**
-     * This constructs a tableau from an element w of a Coxeter group
+     * This constructs a tableau from an element w of a Coxeter group.
      * @param w The element of the Coxeter group
      */
     public Tableau (Element w) {
 	rank = w.getRank();
 	dominoes = new Domino[rank];
 	Domino temp;
+
+	// Add a domino for each entry in w.
 	for (int i = 0; i < rank; i++) {
 	    temp = new Domino(w.mapsTo(i + 1));
 	    addDomino(temp);
 	}
     }
     
+    /**
+     * This method gets a domino in a certain position in dominoes.
+     * @param position The index in dominoes
+     * @return The domino at position
+     */
     public Domino getDomino(int position) {
 	assert(position < size);
 	return dominoes[position];
     }
 
+    /**
+     * This method returns the current size of the tableau.
+     * @return The size of the tableau
+     */
     public int getSize() {
 	return size;
     }
 
+    /**
+     * This method returns the rank, or maximum size, of the tableau.
+     * @return The rank of the tableau
+     */
     public int getRank() {
 	return rank;
     }
 
+    /**
+     * This method returns the width of the tableau.
+     * @return The width of the tableau
+     */
     public int maxWidth() {
 	return largestInRow(1);
     }
 
+    /**
+     * This method returns the height of the tableau.
+     * @return The height of the tableau
+     */
     public int maxHeight() {
 	return largestInCol(1);
     }
@@ -65,17 +89,24 @@ class Tableau {
      */
     public void addDomino(Domino current) {
 	int domLabel = current.getLabel();
+
+	// If biggest, then add on to end of...
 	if (domLabel > maxLabel) {
+	    // first column if vertical.
 	    if (current.getIsVertical()) {
 		current.moveDomino(1, largestInCol(1) + 1);
 	    }
+	    // first row if horizontal.
 	    else {
 		current.moveDomino(largestInRow(1) + 1, 1);
 	    }
+
+	    // Update tableau information
 	    dominoes[size] = current;
 	    size++;
 	    maxLabel = domLabel;
 	}
+	// If not biggest, use \alpha map.
 	else {
 	    if (current.getIsVertical()) {
 		current.moveDomino(1, largestInCol(1, domLabel) + 1);
