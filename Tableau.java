@@ -1,3 +1,5 @@
+import javax.swing.JFrame;
+
 /**
 * This class stores a tableau of dominoes, and allows a user to add a
 * domino to the tableau using a technique called "shuffling" developed
@@ -330,4 +332,18 @@ class Tableau {
 	// Ending TikZ code
 	System.out.println("\\end{tikzpicture}");
     }
+
+    /**
+     * This method draws the tableau in a graphical window.
+     * @return Nothing
+     */
+    public void screenDraw() {
+	DrawDomino canvas = new DrawDomino(this);
+        JFrame frame = new JFrame();
+        frame.setSize(canvas.width, canvas.height);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(canvas);
+        frame.setVisible(true);
+    }
+
 }
