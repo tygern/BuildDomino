@@ -52,5 +52,5 @@ class CoxeterElement {
 	answer = new Element(permutation);
 	return answer;
     }
-    
+   
 }
