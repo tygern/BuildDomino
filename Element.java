@@ -1,7 +1,7 @@
 class Element {
     private int[] oneLine;
     private int rank;
-
+ 
     public Element(int[] input) {
 	boolean validElement = true;
 	for(int i = 0; i < input.length; i++) {
@@ -26,7 +26,7 @@ class Element {
 	}
     }
 
-    private Element(int rank) {
+   private Element(int rank) {
 	this.rank = rank;
 	oneLine = new int[rank];
     }
@@ -59,5 +59,13 @@ class Element {
 	    inverse.oneLine[Math.abs(this.oneLine[i])-1] = this.getSign(i+1)*(i+1);
     	}
 	return inverse;
+    }
+
+    public void printPerm() {
+	System.out.print("[" + oneLine[0]);
+	for (int i = 1; i < rank; i++) {
+	    System.out.print(", " + oneLine[i]);
+	}
+	System.out.print("]\n");
     }
 }

@@ -308,6 +308,12 @@ class Tableau {
      * @return Nothing
      */
     public void tikzDraw() {
+	System.out.println("");       
+	System.out.println("---------------------------------------------");
+	System.out.println("----------------  TikZ Code  ----------------");
+	System.out.println("---------------------------------------------");
+	System.out.println("");       
+
 	// Beginning TikZ code
 	System.out.println("\\begin{tikzpicture}[node distance=0 cm,outer sep = 0pt]");
 	System.out.println("\\tikzstyle{ver}=[rectangle, draw, thick, minimum width=1cm, minimum height=2cm]");        
@@ -331,6 +337,7 @@ class Tableau {
 
 	// Ending TikZ code
 	System.out.println("\\end{tikzpicture}");
+	System.out.println("");       
     }
 
     /**
@@ -341,7 +348,7 @@ class Tableau {
 	DrawDomino canvas = new DrawDomino(this);
         JFrame frame = new JFrame();
         frame.setSize(canvas.width, canvas.height);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(canvas);
         frame.setVisible(true);
     }
