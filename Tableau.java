@@ -25,7 +25,8 @@ class Tableau {
     }
 
     /**
-     * This constructs a tableau from an element w of a Coxeter group.
+     * This constructs the right tableau from an element w of a
+     * Coxeter group.
      * @param w The element of the Coxeter group
      */
     public Tableau (Element w) {
