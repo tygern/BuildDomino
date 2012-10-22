@@ -51,10 +51,11 @@ branch node for the type D
 
 ### Output
 
-Once you enter your Coxeter Group element, BuildDomino can output the
-domino tableau in two forms.  It can show the tableau in a graphical
-window or can output the tableau in
-[TikZ](http://sourceforge.net/projects/pgf/) code for inclusion in
-[LaTeX](http://www.latex-project.org/) documents.  You also have the
-option of viewing your original element as a signed permutation.  This
-is especially useful if you enter an element in terms of generators.
+Once the user enters a Coxeter group element, BuildDomino can output
+the right and left domino tableau.  The user has two choices for the
+form of the output.  The tableau can be drawn in a graphical window or
+can be written in [TikZ](http://sourceforge.net/projects/pgf/) code
+for inclusion in [LaTeX](http://www.latex-project.org/) documents.
+You also have the option of viewing your original element or its
+inverse as a signed permutation.  This is especially useful if you
+enter an element in terms of generators.
