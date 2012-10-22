@@ -58,7 +58,8 @@ class BuildDomino {
     }
 
     public static void mainMenu() {
-	while (true) {
+	Element w = null;
+	while (w == null) {
 	    System.out.println("");
 	    System.out.println("---------------------------------------------");
 	    System.out.println("----------------  MAIN MENU  ----------------");
@@ -71,26 +72,36 @@ class BuildDomino {
 
 	    int choice = getInt(0, "Make a choice: ");
 	    switch (choice) {
-	    case 0: System.exit(0);
-            case 1: fromRE();
+	    case 0:
+		System.exit(0);
+            case 1:
+		w = fromRE();
 		break;
-            case 2: fromPerm();
+            case 2:
+		w = fromPerm();
 		break;
             default: System.out.println("Wrong choice");
 	    }
 	}
+	secondMenu(w);
     }
 
-    public static void secondMenu(Tableau t, Element w) {
+    public static void secondMenu(Element w) {
+	Tableau tR = new Tableau(w);
+	Element wInv = w.findInverse();
+	Tableau tL = new Tableau(wInv);
 	while (true) {
 	    System.out.println("");
 	    System.out.println("---------------------------------------------");
 	    System.out.println("--------------  TABLEAU MENU  ---------------");
 	    System.out.println("---------------------------------------------");
 	    System.out.println("1: Print the signed permutation");
-	    System.out.println("2: Print tableau in TikZ code");
-	    System.out.println("3: Print tableau on screen");
-	    System.out.println("4: Return to Main Menu");
+	    System.out.println("2: Print the inverse signed permutation");
+	    System.out.println("3: Print right tableau in TikZ code");
+	    System.out.println("4: Print left tableau in TikZ code");
+	    System.out.println("5: Print right tableau on screen");
+	    System.out.println("6: Print left tableau on screen");
+	    System.out.println("7: Return to Main Menu");
 	    System.out.println("0: Quit");
 	    System.out.println("---------------------------------------------");
 	    System.out.println("");
@@ -98,21 +109,34 @@ class BuildDomino {
 	    int choice = getInt(0, "Make a choice: ");
 	    switch (choice) {
 	    case 0: System.exit(0);
-            case 1: w.printPerm();
+            case 1:
+		w.printPerm();
 		break;
-            case 2: t.tikzDraw();
+            case 2:
+		wInv.printPerm();
 		break;
-            case 3: t.screenDraw();
+            case 3:
+		tR.tikzDraw();
 		break;
-            case 4: mainMenu();
+            case 4:
+		tL.tikzDraw();
 		break;
-            default: System.out.println("Wrong choice");
+            case 5:
+		tR.screenDraw();
+		break;
+            case 6:
+		tL.screenDraw();
+		break;
+            case 7:
+		mainMenu();
+		break;
+            default:
+		System.out.println("Wrong choice");
 	    }
-	    secondMenu(t,w);
 	}
     }
 
-    public static void fromRE() {
+    public static Element fromRE() {
 	int rank;
 	
 	System.out.print("Enter an element in terms of generators: ");
@@ -122,20 +146,17 @@ class BuildDomino {
 
 	CoxeterElement wCox = new CoxeterElement(intArray, rank);
 	Element w = wCox.toPermutation();
-	Tableau t = new Tableau(w);
 
-	secondMenu(t,w);
+	return w;
     }
 
-    public static void fromPerm() {
+    public static Element fromPerm() {
 	int rank = -1;
 	
 	System.out.print("Enter a signed permutation: ");
 	int[] intArray = getArray();
 	Element w = new Element(intArray);
-
-	Tableau t = new Tableau(w);
-
-	secondMenu(t,w);
+	
+	return w;
     }
 }
