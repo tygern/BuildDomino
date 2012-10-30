@@ -1,0 +1,32 @@
+This help message is intended to get new users started with the
+program.  We refer the user to the README file for a more detailed
+description of the capabilities and limitations of the program.
+
+The program works with a command interface. The list of available
+commands is the following :
+
+  - generators : Allows the user to enter an element of a Coxeter
+    group in terms of generators.  The generators should be entered as
+    a comma-separated list of positive integers.  The rank of the
+    element must be at least as large as the largest generator.
+
+  - permutation : Allows the user to enter an element of a Coxeter
+    group as a signed permutation.  The permutation should be entered
+    as a comma-separated list of integers.
+
+  - print : Prints the signed permutation of the current element.
+
+  - inverse : Prints the signed permutation of the inverse of the
+    current element.
+
+  - lefttikz : Prints tikz code for the left domino tableau of the
+    current element.
+
+  - righttikz : Prints tikz code for the right domino tableau of the
+    current element.
+
+  - leftdraw : Draws the left domino tableau of the current element in
+    a graphical window.
+
+  - rightdraw : Draws the right domino tableau of the current element in
+    a graphical window.
