@@ -2,9 +2,16 @@ import java.io.*;
 
 class BuildDomino {
     public static int rankBound = 3;
+    public static String inputLine = "> ";
+    public static String notFound = "command not found";
     
     public static void main(String[] args) {
-	mainMenu();
+	//	mainMenu();
+	Element w = null;
+	intro();
+	while(true) {
+	    w = prompt(w);
+	}
     }
 
     public static int[] getArray() {
@@ -57,92 +64,140 @@ class BuildDomino {
 	return answer;
     }
 
-    public static void mainMenu() {
-	Element w = null;
-	while (w == null) {
-	    System.out.println("");
-	    System.out.println("---------------------------------------------");
-	    System.out.println("----------------  MAIN MENU  ----------------");
-	    System.out.println("---------------------------------------------");
-	    System.out.println("1: Enter an element in terms of generators");
-	    System.out.println("2: Enter a signed permutation");
-	    System.out.println("0: Quit");
-	    System.out.println("---------------------------------------------");
-	    System.out.println("");
-
-	    int choice = getInt(0, "Make a choice: ");
-	    switch (choice) {
-	    case 0:
-		System.exit(0);
-            case 1:
-		w = fromRE();
-		break;
-            case 2:
-		w = fromPerm();
-		break;
-            default: System.out.println("Wrong choice");
+    public static String getString(String message) {
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	String userInput = null;
+	
+	while (userInput == null) {
+	    System.out.print(message);
+	    try {
+		userInput = br.readLine();
+	    }
+	    catch (IOException e) {
+		System.out.println("Error!");
+		System.exit(1);
 	    }
 	}
-	secondMenu(w);
+	return userInput;
+    }
+    
+    public static void printHelp() {
+	System.out.println("");
+	try {
+	    FileInputStream fis = new FileInputStream("help.txt");
+	    //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	    int content;
+	    while ((content = fis.read()) != -1) {
+		// convert to char and display it
+		System.out.print((char) content);
+	    }
+	}
+	catch (FileNotFoundException fnfe) { 
+            System.out.println(fnfe.getMessage());
+        } 
+	catch (IOException e) {
+	    e.printStackTrace();
+	}
+	System.out.println("");
     }
 
-    public static void secondMenu(Element w) {
-	Tableau tR = new Tableau(w);
-	Element wInv = w.findInverse();
-	Tableau tL = new Tableau(wInv);
-	while (true) {
-	    System.out.println("");
-	    System.out.println("---------------------------------------------");
-	    System.out.println("--------------  TABLEAU MENU  ---------------");
-	    System.out.println("---------------------------------------------");
-	    System.out.println("1: Print the signed permutation");
-	    System.out.println("2: Print the inverse signed permutation");
-	    System.out.println("3: Print right tableau in TikZ code");
-	    System.out.println("4: Print left tableau in TikZ code");
-	    System.out.println("5: Print right tableau on screen");
-	    System.out.println("6: Print left tableau on screen");
-	    System.out.println("7: Return to Main Menu");
-	    System.out.println("0: Quit");
-	    System.out.println("---------------------------------------------");
-	    System.out.println("");
+    public static void intro() {
+	System.out.println("");
+	System.out.println("BuildDomino version 0.1.");
+	System.out.println("Enter help if you need assistance.");
+	System.out.println("");
+    }
 
-	    int choice = getInt(0, "Make a choice: ");
-	    switch (choice) {
-	    case 0: System.exit(0);
-            case 1:
-		w.printPerm();
-		break;
-            case 2:
-		wInv.printPerm();
-		break;
-            case 3:
-		tR.tikzDraw();
-		break;
-            case 4:
-		tL.tikzDraw();
-		break;
-            case 5:
-		tR.screenDraw();
-		break;
-            case 6:
-		tL.screenDraw();
-		break;
-            case 7:
-		mainMenu();
-		break;
-            default:
-		System.out.println("Wrong choice");
-	    }
+    public static void nullElement() {
+	System.out.println("Please enter an element first.");
+    }
+
+    public static Element prompt(Element w) {
+	Tableau tR = null;
+	Element wInv = null;
+	Tableau tL = null;
+	if (w != null) {
+	    tR = new Tableau(w);
+	    wInv = w.findInverse();
+	    tL = new Tableau(wInv);
 	}
+	String choice = getString(inputLine);
+	switch (choice) {
+	case "generators":
+	    w = fromRE();
+	    break;
+	case "permutation":
+	    w = fromPerm();
+	    break;
+	case "print":
+	    if (w == null) {
+		nullElement();
+	    }
+	    else {
+		w.printPerm();
+	    }
+	    break;
+	case "inverse":
+	    if (wInv == null) {
+		nullElement();
+	    }
+	    else {
+		wInv.printPerm();
+	    }
+	    break;
+	case "righttikz":
+	    if (tR == null) {
+		nullElement();
+	    }
+	    else{
+		tR.tikzDraw();
+	    }
+	    break;
+	case "lefttikz":
+	    if (tL == null) {
+		nullElement();
+	    }
+	    else{
+		tL.tikzDraw();
+	    }
+	    break;
+	case "rightdraw":
+	    if (tR == null) {
+		nullElement();
+	    }
+	    else{
+		tR.screenDraw();
+	    }
+	    break;
+	case "leftdraw":
+	    if (tL == null) {
+		nullElement();
+	    }
+	    else{
+		tL.screenDraw();
+	    }
+	    break;
+	case "help":
+	    printHelp();
+	    break;
+	case "quit": case "q": case "exit":
+	    System.exit(0);
+	    break;
+	default:
+	    System.out.println(choice + " : " + notFound);
+	    break;
+	}
+
+	return w;
     }
 
     public static Element fromRE() {
 	int rank;
 	
-	System.out.print("Enter an element in terms of generators: ");
+	System.out.print("Enter an element in terms of generators: \n" + inputLine);
 	int[] intArray = getArray();
 
-	rank = getInt(rankBound, "Rank: ");
+	rank = getInt(rankBound, "Rank: \n" + inputLine);
 
 	CoxeterElement wCox = new CoxeterElement(intArray, rank);
 	Element w = wCox.toPermutation();
@@ -153,7 +208,7 @@ class BuildDomino {
     public static Element fromPerm() {
 	int rank = -1;
 	
-	System.out.print("Enter a signed permutation: ");
+	System.out.print("Enter a signed permutation: \n" + inputLine);
 	int[] intArray = getArray();
 	Element w = new Element(intArray);
 	
