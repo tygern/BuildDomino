@@ -310,10 +310,6 @@ class Tableau {
      */
     public void tikzDraw() {
 	System.out.println("");       
-	System.out.println("---------------------------------------------");
-	System.out.println("----------------  TikZ Code  ----------------");
-	System.out.println("---------------------------------------------");
-	System.out.println("");       
 
 	// Beginning TikZ code
 	System.out.println("\\begin{tikzpicture}[node distance=0 cm,outer sep = 0pt]");
