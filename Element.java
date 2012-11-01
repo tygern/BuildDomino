@@ -68,4 +68,72 @@ class Element {
 	}
 	System.out.print("]\n");
     }
+
+    public boolean isRightBad() {
+	if (-1*oneLine[1] > oneLine[0] && -1*oneLine[0] > oneLine[2]) return false; // 13
+	if (   oneLine[1] > oneLine[2] && -1*oneLine[2] > oneLine[0]) return false; // 31
+	
+	for(int j = 0; j < rank - 3; j++) {
+	    if (oneLine[  j] > oneLine[j+1] && oneLine[j+1] > oneLine[j+2]) return false; //321
+	    if (oneLine[  j] > oneLine[j+2] && oneLine[j+2] > oneLine[j+1]) return false; //312
+	    if (oneLine[j+1] > oneLine[  j] && oneLine[  j] > oneLine[j+2]) return false; //231
+	}
+
+	return true;
+    }
+
+    public boolean isLeftBad() {
+	return findInverse().isRightBad();
+    }
+
+    public boolean isBad() {
+	if (commutingGenerators()) {
+	    return false;
+	}
+	return (isRightBad() && isLeftBad());
+    }
+
+    public boolean commutingGenerators() {
+	int j = 0;
+	if (oneLine[0] == 1) {
+	    j = 1;
+	}
+	else if (oneLine[0] == -1) {
+	    if (oneLine[1] != -2) {
+		return false;
+	    }
+	    j = 2;
+	}
+	else if (oneLine[0] == 2) {
+	    if (oneLine[1] != 1) {
+		return false;
+	    }
+	    j = 2;
+	}
+	else if (oneLine[0] == -2) {
+	    if (oneLine[1] != -1) {
+		return false;
+	    }
+	    j = 2;
+	}
+	else {
+	    return false;
+	}
+	
+	while (j < rank - 2) {
+	    if (oneLine[j] > j+2) {
+		return false;
+	    }
+	    else if (oneLine[j] == j+1) {
+		j += 1;
+	    }
+	    else { // oneLine[j] = j+2
+		if (oneLine[j+1] != j+1) return false;
+		j += 2;
+	    }
+	}
+	    
+	return true;
+    }
+    
 }

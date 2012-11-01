@@ -177,6 +177,14 @@ class BuildDomino {
 		tL.screenDraw();
 	    }
 	    break;
+	case "bad":
+	    if (tL == null) {
+		nullElement();
+	    }
+	    else{
+		System.out.println(w.isBad());
+	    }
+	    break;
 	case "help":
 	    printHelp();
 	    break;

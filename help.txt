@@ -30,3 +30,6 @@ commands is the following :
 
   - rightdraw : Draws the right domino tableau of the current element in
     a graphical window.
+
+  - bad : Returns "true" if the element is bad and "false" if the
+    element is not bad.
