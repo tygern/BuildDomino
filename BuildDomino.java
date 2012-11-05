@@ -137,6 +137,14 @@ class BuildDomino {
 		w.printPerm();
 	    }
 	    break;
+	case "length":
+	    if (w == null) {
+		nullElement();
+	    }
+	    else {
+		System.out.println(w.length());
+	    }
+	    break;
 	case "inverse":
 	    if (wInv == null) {
 		nullElement();

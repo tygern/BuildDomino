@@ -61,12 +61,58 @@ class Element {
 	return inverse;
     }
 
+    public void invert() {
+	this.oneLine = findInverse().oneLine;
+    }
+
     public void printPerm() {
 	System.out.print("[" + oneLine[0]);
 	for (int i = 1; i < rank; i++) {
 	    System.out.print(", " + oneLine[i]);
 	}
 	System.out.print("]\n");
+    }
+
+    private void rightMultiplyS(int s) {
+	if (s <= rank && s >= 1) {
+	    int temp;
+	    int sign = 1;
+
+	    if (s == 1) {
+		sign = -1;
+	    }
+
+	    temp = oneLine[s-1];
+	    oneLine[s-1] = sign*oneLine[1];
+	    oneLine[s] = sign*temp;
+	}
+    }
+
+    private void leftMultiplyS(int s) {
+	if (s <= rank && s >= 1) {
+	    int val1;
+	    int val2;
+	    int loc1 = 0;
+	    int loc2;
+	    int sign = 1;
+
+	    if (s == 1) {
+		sign = -1;
+	    }
+
+	    while (Math.abs(oneLine[loc1]) != s && Math.abs(oneLine[loc1]) != s+1) {
+		loc1++;
+	    }
+	    val1 = oneLine[loc1];
+	    loc2 = loc1 + 1;
+
+	    while (Math.abs(oneLine[loc2]) != s && Math.abs(oneLine[loc2]) != s+1) {
+		loc2++;
+	    }
+	    val2 = oneLine[loc2];
+	    oneLine[loc1] = sign*val2;
+	    oneLine[loc2] = sign*val1;
+	}
     }
 
     public boolean isRightBad() {
@@ -136,4 +182,47 @@ class Element {
 	return true;
     }
     
+    public int length() {
+	return countInv(1) + countInv(-1);
+    }
+
+    private int countInv() {
+	return countInv(1);
+    }
+
+    private int countInv(int factor) {
+	return countInv(factor, 0, rank);
+    }
+
+    private int countInv(int factor, int start, int end) {
+	if (end - start <= 1) {
+	    return 0;
+	}
+	else if (end - start == 2) {
+	    if (factor*oneLine[start] > oneLine[end-1]) {
+		return 1;
+	    }
+	    return 0;
+	}
+	int middle = (start + end)/2;
+	return countInv(factor, start, middle) + countInv(factor, middle, end) + mergeInv(factor, start, end);
+    }
+
+    private int mergeInv(int factor, int start, int end) {
+	int middle = (start + end)/ 2;
+	int count = 0;
+
+	for (int i = start; i < middle; i++) {
+	    int value = factor*oneLine[i];
+	    for (int j = middle; j < end; j++) {
+		if (value > oneLine[j]) {
+		    //		    System.out.println("[" + factor + "](" + i + "," + j + ")");
+		    count++;
+		}
+	    }
+	}
+
+	return count;
+    }
+
 }
