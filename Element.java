@@ -216,13 +216,29 @@ class Element {
 	    int value = factor*oneLine[i];
 	    for (int j = middle; j < end; j++) {
 		if (value > oneLine[j]) {
-		    //		    System.out.println("[" + factor + "](" + i + "," + j + ")");
 		    count++;
 		}
 	    }
 	}
 
 	return count;
+    }
+
+    public Set rightDescent() {
+	Set right = new Set();
+	if (-1*oneLine[1] > oneLine[0]) {
+	    right.add(1);
+	}
+	for (int i = 1; i < rank; i++) {
+	    if (oneLine[i-1] > oneLine[i]) {
+		right.add(i+1);
+	    }
+	}
+	return right;
+    }
+
+    public Set leftDescent() {
+	return findInverse().rightDescent();
     }
 
 }

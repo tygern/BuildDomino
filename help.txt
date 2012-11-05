@@ -19,6 +19,14 @@ commands is the following :
   - inverse : Prints the signed permutation of the inverse of the
     current element.
 
+  - bad : Returns "true" if the element is bad and "false" if the
+    element is not bad.
+
+  - descent : Prints the right and left descent sets of the current
+    element.
+
+  - length : Calculates the length of the current element.
+
   - lefttikz : Prints tikz code for the left domino tableau of the
     current element.
 
@@ -30,8 +38,3 @@ commands is the following :
 
   - rightdraw : Draws the right domino tableau of the current element in
     a graphical window.
-
-  - bad : Returns "true" if the element is bad and "false" if the
-    element is not bad.
-
-  - length : Calculates the length of the given element.

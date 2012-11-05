@@ -145,6 +145,17 @@ class BuildDomino {
 		System.out.println(w.length());
 	    }
 	    break;
+	case "descent":
+	    if (w == null) {
+		nullElement();
+	    }
+	    else {
+		System.out.print("Right: ");
+		w.rightDescent().print();
+		System.out.print("Left: ");
+		w.leftDescent().print();
+	    }
+	    break;
 	case "inverse":
 	    if (wInv == null) {
 		nullElement();
