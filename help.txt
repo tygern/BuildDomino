@@ -33,3 +33,5 @@ commands is the following :
 
   - bad : Returns "true" if the element is bad and "false" if the
     element is not bad.
+
+  - length : Calculates the length of the given element.
