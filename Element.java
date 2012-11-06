@@ -1,7 +1,19 @@
+/**
+* This class stores an element of a Coxeter group or rank "rank" as a
+* signed permutation, oneLine.  The methods contained in this class
+* can preform elementary operations on the element.
+* @author Tyson Gern
+* @version 0.1
+*/
 class Element {
-    private int[] oneLine;
-    private int rank;
+    private int[] oneLine; // The signed permutation of the element
+    private int rank; // The rank of the Coxeter group containig the
+		      // element
  
+    /**
+     * This constructs an element from a signed permutation.
+     * @param input The signed permutation
+     */
     public Element(int[] input) {
 	boolean validElement = true;
 	for(int i = 0; i < input.length; i++) {
@@ -25,26 +37,50 @@ class Element {
 	    System.out.println("Invalid element");
 	}
     }
-
-   private Element(int rank) {
+    
+    /**
+     * This constructs an empty element of a particular rank.
+     * @param rank The rank of the element
+     */
+    private Element(int rank) {
 	this.rank = rank;
 	oneLine = new int[rank];
     }
 
+    /**
+     * This method gets the rank of the element
+     * @return The rank
+     */
     public int getRank() {
 	return rank;
     }
 
+    /**
+     * This method gets the sign of the signed of the number that
+     * origin maps to.
+     * @param origin The origen number
+     * @return The sign of the element applied to origin
+     */
     public int getSign(int origin) {
 	return Math.abs(oneLine[origin - 1])/oneLine[origin -1];
     }
 
+    /**
+     * This method gets the number that origin maps to.
+     * @param origin The origen number
+     * @return The element applied to origin
+     */
     public int mapsTo(int origin) {
 	if ((origin >= 1) & (origin <= rank))
 	    return oneLine[origin - 1];
 	return 0;
     }
 
+    /**
+     * This method gets the number that maps to target.
+     * @param target The target number
+     * @return The number that element maps to target
+     */
     public int mapsFrom(int target) {
 	for(int i = 0; i < rank; i++) {
 	    if(oneLine[i] == target)
@@ -53,6 +89,10 @@ class Element {
 	return 0;
     }
 
+    /**
+     * This method gets the inverse
+     * @return The inverse of element
+     */
     public Element findInverse() {
 	Element inverse = new Element(this.rank);
 	for(int i = 0; i < rank; i++) {
@@ -61,10 +101,19 @@ class Element {
 	return inverse;
     }
 
+    /**
+     * This method inverts the element
+     * @return Nothing
+     */
     public void invert() {
 	this.oneLine = findInverse().oneLine;
     }
 
+    /**
+     * This method prints the one line signed permutation of the
+     * element.
+     * @return Nothing
+     */
     public void printPerm() {
 	System.out.print("[" + oneLine[0]);
 	for (int i = 1; i < rank; i++) {
@@ -73,6 +122,12 @@ class Element {
 	System.out.print("]\n");
     }
 
+    /**
+     * This method multiplies the element on the right by a generator,
+     * s.
+     * @param s The generator
+     * @return Nothing
+     */
     private void rightMultiplyS(int s) {
 	if (s <= rank && s >= 1) {
 	    int temp;
@@ -88,6 +143,12 @@ class Element {
 	}
     }
 
+    /**
+     * This method multiplies the element on the left by a generator,
+     * s.
+     * @param s The generator
+     * @return Nothing
+     */
     private void leftMultiplyS(int s) {
 	if (s <= rank && s >= 1) {
 	    int val1;
@@ -115,6 +176,11 @@ class Element {
 	}
     }
 
+    /**
+     * This method tells if an element has a reduced expression ending
+     * in two noncommution generators.
+     * @return true if the element is right bad
+     */
     public boolean isRightBad() {
 	if (-1*oneLine[1] > oneLine[0] && -1*oneLine[0] > oneLine[2]) return false; // 13
 	if (   oneLine[1] > oneLine[2] && -1*oneLine[2] > oneLine[0]) return false; // 31
@@ -128,10 +194,21 @@ class Element {
 	return true;
     }
 
+    /**
+     * This method tells if an element has a reduced expression
+     * beginning in two noncommution generators.
+     * @return true if the element is left bad
+     */
     public boolean isLeftBad() {
 	return findInverse().isRightBad();
     }
 
+    /**
+     * This method tells if an element has a reduced expression
+     * beginning or ending in two noncommution generators, or if the
+     * element is a product of commuting generators.
+     * @return true if the element is bad
+     */
     public boolean isBad() {
 	if (commutingGenerators()) {
 	    return false;
@@ -139,6 +216,12 @@ class Element {
 	return (isRightBad() && isLeftBad());
     }
 
+    /**
+     * This method tells if an element is a product of commuting
+     * generators.
+     * @return true if the element is a product of commuting
+     * generators
+     */
     public boolean commutingGenerators() {
 	int j = 0;
 	if (oneLine[0] == 1) {
@@ -182,18 +265,42 @@ class Element {
 	return true;
     }
     
+    /**
+     * This method gets the length of the element
+     * @return the length of the element.
+     */
     public int length() {
 	return countInv(1) + countInv(-1);
     }
 
+    /**
+     * This method counts the number of inversions in the signed
+     * permutation of the element.
+     * @return the number of inversions
+     */
     private int countInv() {
 	return countInv(1);
     }
 
+    /**
+     * This method counts the number of inversions in the signed
+     * permutation of the element, allowing for the multiplication of
+     * factor (usually -1).
+     * @return the number of inversions, taking the factor into
+     * account.
+     */
     private int countInv(int factor) {
 	return countInv(factor, 0, rank);
     }
 
+    /**
+     * This is a helper method for countInv(int).  It counts the
+     * number of inversions between start and end in the signed
+     * permutation of the element, allowing for the multiplication of
+     * factor (usually -1).
+     * @return the number of inversions, taking the factor into
+     * account.
+     */
     private int countInv(int factor, int start, int end) {
 	if (end - start <= 1) {
 	    return 0;
@@ -208,6 +315,14 @@ class Element {
 	return countInv(factor, start, middle) + countInv(factor, middle, end) + mergeInv(factor, start, end);
     }
 
+    /**
+     * This method counts the number of inversions between start and
+     * end in the signed permutation of the element tha happen between
+     * the first and second half of the array, allowing for the
+     * multiplication of factor (usually -1).
+     * @return the number of inversions, taking the factor into
+     * account.
+     */
     private int mergeInv(int factor, int start, int end) {
 	int middle = (start + end)/ 2;
 	int count = 0;
@@ -224,6 +339,10 @@ class Element {
 	return count;
     }
 
+    /**
+     * This method gets the right descent set of the element.
+     * @return the right descent set.
+     */
     public Set rightDescent() {
 	Set right = new Set();
 	if (-1*oneLine[1] > oneLine[0]) {
@@ -237,6 +356,10 @@ class Element {
 	return right;
     }
 
+    /**
+     * This method gets the left descent set of the element.
+     * @return the left descent set.
+     */
     public Set leftDescent() {
 	return findInverse().rightDescent();
     }
