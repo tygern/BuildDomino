@@ -1,5 +1,11 @@
 import java.awt.*;
 import javax.swing.*;
+
+/**
+* This class draws a tableau of dominoes.
+* @author Tyson Gern
+* @version 0.1
+*/
 public class DrawDomino extends Canvas
 {
     Tableau dominoTableau;
