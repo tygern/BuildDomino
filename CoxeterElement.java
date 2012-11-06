@@ -1,9 +1,23 @@
 import java.util.*; 
+
+/**
+* This class stores an element of a Coxeter group of type D and rank
+* "rank" as a product of generators.  We use "2" as our branch node.
+* @author Tyson Gern
+* @version 0.1
+*/
 class CoxeterElement {
     private int[] expression;
     private int rank = 0;
     private int length;
 
+    /**
+     * This constructs an element of a Coxeter group of rank "rank"
+     * given a list of generators.
+     * @param input The element of the Coxeter group as a product of
+     * generators
+     * @param rank The rank of the Coxeter group
+     */
     public CoxeterElement(int[] input, int rank) {
 	boolean validElement = true;
 	
@@ -27,6 +41,11 @@ class CoxeterElement {
 	}
     }
 
+    /**
+     * This method converts an element of a Coxeter group given as a
+     * product of commuting generators to a signed permutation.
+     * @return Nothing
+     */
     public Element toPermutation() {
 	int[] permutation = new int[rank];
 	int temp;
