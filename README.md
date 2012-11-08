@@ -6,11 +6,13 @@ Introduction
 
 ### Coxeter Groups
 
-This program was developed to construct domino tableaux from elements
-of type D
-[Coxeter groups](http://en.wikipedia.org/wiki/Coxeter_group). Devra
-Garfinkle developed an algorithm similar to the
-[Robinson--Schensted correspondence](http://en.wikipedia.org/wiki/Robinson%E2%80%93Schensted_correspondence)
+This program was developed to preform elementary operation on elements
+of type D [Coxeter
+groups](http://en.wikipedia.org/wiki/Coxeter_group).  It is also able
+to construct domino tableaux from elements of type D Coxeter
+groups. Devra Garfinkle developed an algorithm similar to the
+[Robinson--Schensted
+correspondence](http://en.wikipedia.org/wiki/Robinson%E2%80%93Schensted_correspondence)
 to associate a signed permutations to a pair of domino tableaux. This
 pair of tableaux are difficult to compute by hand but are very
 useful. Like the Robinson--Schensted correspondence, this pair can be
@@ -50,6 +52,18 @@ branch node for the type D
 [Coxeter diagram](http://en.wikipedia.org/wiki/Coxeter%E2%80%93Dynkin_diagram).
 
 ### Output
+
+#### Elementary Calculations
+
+BuildDomino is able to compute the length, descent sets, and inverse
+of an element.  It can also tell whether a particular element is a
+*bad* element.  We define a bad element to be an element that has no
+reduced expressions beginning or ending in two noncommuting generators
+that is not a product of commuting generators.  Each of these
+computations is conducted using the signed permutation corresponding
+to the element.
+
+#### Domino Tableaux
 
 Once the user enters a Coxeter group element, BuildDomino can output
 the right and left domino tableau.  The user has two choices for the
