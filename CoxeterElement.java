@@ -72,6 +72,10 @@ class CoxeterElement {
 	return answer;
     }
 
+    public CoxeterElement reduce() {
+	return toPermutation().findRE();
+    }
+
     /**
      * This method prints the given reduced expression.
      * @return Nothing
