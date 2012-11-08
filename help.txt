@@ -22,6 +22,8 @@ commands is the following :
   - bad : Returns "true" if the element is bad and "false" if the
     element is not bad.
 
+  - reduced : Prints a reduced expression for the current element
+
   - descent : Prints the right and left descent sets of the current
     element.
 
