@@ -137,6 +137,14 @@ class BuildDomino {
 		w.printPerm();
 	    }
 	    break;
+	case "reduced":
+	    if (w == null) {
+		nullElement();
+	    }
+	    else {
+		w.findRE().print();
+	    }
+	    break;
 	case "length":
 	    if (w == null) {
 		nullElement();

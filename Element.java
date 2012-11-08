@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
 * This class stores an element of a Coxeter group of rank "rank" as a
 * signed permutation, oneLine.  The methods contained in this class
@@ -135,11 +137,12 @@ class Element {
 
 	    if (s == 1) {
 		sign = -1;
+		s = 2;
 	    }
 
-	    temp = oneLine[s-1];
-	    oneLine[s-1] = sign*oneLine[1];
-	    oneLine[s] = sign*temp;
+	    temp = oneLine[s-2];
+	    oneLine[s-2] = sign*oneLine[s-1];
+	    oneLine[s-1] = sign*temp;
 	}
     }
 
@@ -345,15 +348,29 @@ class Element {
      */
     public Set rightDescent() {
 	Set right = new Set();
-	if (-1*oneLine[1] > oneLine[0]) {
-	    right.add(1);
-	}
-	for (int i = 1; i < rank; i++) {
-	    if (oneLine[i-1] > oneLine[i]) {
-		right.add(i+1);
+
+	for (int i = 1; i <= rank; i++) {
+	    if (isRightDescent(i)) {
+		right.add(i);
 	    }
 	}
+
 	return right;
+    }
+
+    /**
+     * This method returns true if s is in the right descent set of
+     * the elemtent, false otherwise.
+     * @return true is s is a descent of the element
+     */
+    private boolean isRightDescent(int s) {
+	if (s == 1) {
+	    return (-1*oneLine[1] > oneLine[0]);
+	}
+	if (s >= 2 && s <= rank) {
+	    return (oneLine[s-2] > oneLine[s-1]);
+	}
+	return false;
     }
 
     /**
@@ -364,4 +381,42 @@ class Element {
 	return findInverse().rightDescent();
     }
 
+    /**
+     * This method creates a CoxeterElement reduced expression from a
+     * signed permutation.
+     * @return a reduced expression
+     */
+    public CoxeterElement findRE() {
+	ArrayList<Integer> generator = new ArrayList<Integer> ();
+	Element permutation = new Element(oneLine);
+	
+	while (permutation.length() != 0) {
+	    for (int i = 1; i <= permutation.rank; i++) {
+		if (permutation.isRightDescent(i)) {
+		    generator.add(i);
+		    permutation.rightMultiplyS(i);
+		}
+	    }/*
+	    if (-1*permutation.oneLine[1] > permutation.oneLine[0]) {
+		generator.add(1);
+		permutation.rightMultiplyS(1);
+	    }
+	    for (int i = 1; i < permutation.rank; i++) {
+		if (permutation.oneLine[i-1] > permutation.oneLine[i]) {
+		    generator.add(i+1);
+		    permutation.rightMultiplyS(i+1);
+		}
+		}*/
+	}
+
+	int length = generator.size();
+	int[] genArray = new int[length];
+	for (int i = 0; i < length; i++) {
+	    genArray[length-1-i] = generator.get(i).intValue();
+	}
+
+	CoxeterElement redExp = new CoxeterElement(genArray, permutation.rank);
+	return redExp;
+	
+    }
 }
