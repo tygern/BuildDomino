@@ -396,17 +396,7 @@ class Element {
 		    generator.add(i);
 		    permutation.rightMultiplyS(i);
 		}
-	    }/*
-	    if (-1*permutation.oneLine[1] > permutation.oneLine[0]) {
-		generator.add(1);
-		permutation.rightMultiplyS(1);
 	    }
-	    for (int i = 1; i < permutation.rank; i++) {
-		if (permutation.oneLine[i-1] > permutation.oneLine[i]) {
-		    generator.add(i+1);
-		    permutation.rightMultiplyS(i+1);
-		}
-		}*/
 	}
 
 	int length = generator.size();
