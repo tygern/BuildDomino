@@ -18,26 +18,20 @@ class CoxeterElement {
      * generators
      * @param rank The rank of the Coxeter group
      */
-    public CoxeterElement(int[] input, int rank) {
-	boolean validElement = true;
-	
+    public CoxeterElement(int[] input, int rank) throws NumberFormatException{
+
 	// Check all generators are legal
 	for(int i = 0; i < input.length; i++) {
 	    if ((input[i] > rank) | (input[i] < 1)) {
-		validElement = false;
+		throw new NumberFormatException();
 	    }
 	}
 	
-	if (validElement) {
-	    this.rank = rank;
-	    this.length = input.length;
-	    this.expression = new int[length];
-	    for(int i = 0; i < input.length; i++) {
-		expression[i] = input[i];
-	    }
-	}
-	else {
-	    System.out.println("Invalid element");
+	this.rank = rank;
+	this.length = input.length;
+	this.expression = new int[length];
+	for(int i = 0; i < input.length; i++) {
+	    expression[i] = input[i];
 	}
     }
 
@@ -72,12 +66,26 @@ class CoxeterElement {
 	return answer;
     }
 
+    /**
+     * This method prints the a reduced expression for the given
+     * element.
+     * @return a reduced expression
+     */
     public CoxeterElement reduce() {
 	return toPermutation().findRE();
     }
 
     /**
-     * This method prints the given reduced expression.
+     * This method tells if an expression is reduced
+     * element.
+     * @return true if the expression is reduced.
+     */
+    public boolean isReduced() {
+	return (length == toPermutation().findRE().length);
+    }
+
+    /**
+     * This method prints the given expression.
      * @return Nothing
      */
     public void print() {

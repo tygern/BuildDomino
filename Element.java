@@ -36,7 +36,7 @@ class Element {
 	    }
 	}
 	else {
-	    System.out.println("Invalid element");
+	    throw new IllegalArgumentException("Invalid element");
 	}
     }
     

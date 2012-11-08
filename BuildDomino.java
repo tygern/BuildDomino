@@ -3,10 +3,10 @@ import java.io.*;
 class BuildDomino {
     public static int rankBound = 3;
     public static String inputLine = "> ";
+    public static String secondaryInputLine = ">> ";
     public static String notFound = "command not found";
     
     public static void main(String[] args) {
-	//	mainMenu();
 	Element w = null;
 	intro();
 	while(true) {
@@ -14,14 +14,17 @@ class BuildDomino {
 	}
     }
 
-    public static int[] getArray() {
+    public static int[] getArray() throws NumberFormatException {
 	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	String userInput = null;
-	try {
-	    userInput = br.readLine();
-	} catch (IOException e) {
-	    System.out.println("Error!");
-	    System.exit(1);
+
+	while (userInput == null) {
+	    try {
+		userInput = br.readLine();
+	    }
+	    catch (IOException e) {
+		System.out.println("Error, try again.");
+	    }
 	}
 
 	String[] items = userInput.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
@@ -29,12 +32,7 @@ class BuildDomino {
 	int[] results = new int[items.length];
 	
 	for (int i = 0; i < items.length; i++) {
-	    try {
-		results[i] = Integer.parseInt(items[i]);
-	    } catch (NumberFormatException nfe) {
-		System.out.println("Error.  Please input a list of integers separated by commas");
-		System.exit(1);
-	    };
+	    results[i] = Integer.parseInt(items[i]);
 	}
 	
 	return results;
@@ -228,13 +226,32 @@ class BuildDomino {
 
     public static Element fromRE() {
 	int rank;
-	
-	System.out.print("Enter an element in terms of generators: \n" + inputLine);
-	int[] intArray = getArray();
+	int[] intArray = null;
+	int highGenerator = 0;
+	CoxeterElement wCox = null;
 
-	rank = getInt(rankBound, "Rank: \n" + inputLine);
+	while (wCox == null) {
+	    while (intArray == null) {
+		System.out.print("Enter an element in terms of generators: \n" + secondaryInputLine);
+		try {
+		    intArray = getArray();
+		}
+		catch (NumberFormatException nfe) {
+		    System.out.println("Please input a list of positive integers separated by commas.");
+		}
+	    }
+	    
+	    rank = getInt(rankBound, "Rank: \n" + secondaryInputLine);
+	    
+	    try {
+		wCox = new CoxeterElement(intArray, rank);
+	    }
+	    catch (NumberFormatException nfe) {
+		System.out.println("Invalid element");
+		intArray = null;
+	    }
+	}
 
-	CoxeterElement wCox = new CoxeterElement(intArray, rank);
 	Element w = wCox.toPermutation();
 
 	return w;
@@ -242,11 +259,28 @@ class BuildDomino {
 
     public static Element fromPerm() {
 	int rank = -1;
-	
-	System.out.print("Enter a signed permutation: \n" + inputLine);
-	int[] intArray = getArray();
-	Element w = new Element(intArray);
-	
+	Element w = null;
+	int[] intArray = null;
+
+	while (w == null) {
+	    System.out.print("Enter a signed permutation: \n" + secondaryInputLine);	    
+
+	    try {
+		intArray = getArray();
+	    }
+	    catch (NumberFormatException nfe) {
+		System.out.println("Please input a list of integers separated by commas.");
+	    }
+
+	    if (intArray != null) {
+		try {
+		    w = new Element(intArray);
+		}
+		catch (IllegalArgumentException iae) {
+		    System.out.println("Please use a valid signed permutation.");
+		}
+	    }
+	}
 	return w;
     }
 }
