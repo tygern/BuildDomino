@@ -44,7 +44,7 @@ class CoxeterElement {
     /**
      * This method converts an element of a Coxeter group given as a
      * product of commuting generators to a signed permutation.
-     * @return Nothing
+     * @return the corresponding signed permutation
      */
     public Element toPermutation() {
 	int[] permutation = new int[rank];
@@ -71,5 +71,19 @@ class CoxeterElement {
 	answer = new Element(permutation);
 	return answer;
     }
-   
+
+    /**
+     * This method prints the given reduced expression.
+     * @return Nothing
+     */
+    public void print() {
+	System.out.print("(");
+	if (length > 0) {
+	    for (int i = 0; i < length - 1; i++) {
+		System.out.print(expression[i] + ", ");
+	    }
+	    System.out.print(expression[length - 1]);
+	}
+	System.out.println(")");
+    }   
 }
