@@ -16,16 +16,16 @@ class Set {
      * @return Nothing
      */
     public void add(int other) {
-	if (elements.isEmpty()) {
-	    elements.add(other);
-	}
-	if (!elements.contains(other)) {
-	    int index = 0;
-	    while (index < elements.size() && elements.get(index).intValue() < other ) {
-		index++;
-	    }
-	    elements.add(index, other);
-	}
+        if (elements.isEmpty()) {
+            elements.add(other);
+        }
+        if (!elements.contains(other)) {
+            int index = 0;
+            while (index < elements.size() && elements.get(index).intValue() < other ) {
+                index++;
+            }
+            elements.add(index, other);
+        }
     }
 
     /**
@@ -35,9 +35,9 @@ class Set {
      * @return Nothing
      */
     public void remove(int other) {
-	if (elements.contains(other)) {
-	    elements.remove(elements.indexOf(other));
-	}
+        if (elements.contains(other)) {
+            elements.remove(elements.indexOf(other));
+        }
     }
 
     /**
@@ -45,7 +45,7 @@ class Set {
      * @return The size of the set
      */
     public int getSize() {
-	return elements.size();
+        return elements.size();
     }
 
     /**
@@ -53,7 +53,7 @@ class Set {
      * @return true if the set is empty
      */
     public boolean isEmpty() {
-	return elements.isEmpty();
+        return elements.isEmpty();
     }
     
     /**
@@ -63,9 +63,9 @@ class Set {
      * @return Nothing
      */
     private void addSet(Set other) {
-	for (int i = 0; i < other.elements.size(); i++) {
-	    add(other.elements.get(i));
-	}
+        for (int i = 0; i < other.elements.size(); i++) {
+            add(other.elements.get(i));
+        }
     }
 
     /**
@@ -74,10 +74,10 @@ class Set {
      * @return The union of this and other
      */
     public Set union(Set other) {
-	Set result = new Set();
-	result.addSet(this);
-	result.addSet(other);
-	return result;
+        Set result = new Set();
+        result.addSet(this);
+        result.addSet(other);
+        return result;
     }
     
     /**
@@ -87,13 +87,13 @@ class Set {
      * @return The intersection of this and other
      */
     public Set intersection(Set other) {
-	Set result = new Set();
-	for (int i = 0; i < elements.size(); i++) {
-	    if (other.elements.contains(elements.get(i))) {
-		result.add(elements.get(i));
-	    }
-	}
-	return result;
+        Set result = new Set();
+        for (int i = 0; i < elements.size(); i++) {
+            if (other.elements.contains(elements.get(i))) {
+                result.add(elements.get(i));
+            }
+        }
+        return result;
     }
     
     /**
@@ -101,16 +101,16 @@ class Set {
      * @return Nothing
      */
     public void print() {
-	System.out.print("{");
-	if (!isEmpty()) {
-	    int i = 0;
-	    while (i < elements.size() - 1) {
-		System.out.print(elements.get(i) + ", ");
-		i++;
-	    }
-	    System.out.print(elements.get(i));
-	}
-	System.out.println("}");
+        System.out.print("{");
+        if (!isEmpty()) {
+            int i = 0;
+            while (i < elements.size() - 1) {
+                System.out.print(elements.get(i) + ", ");
+                i++;
+            }
+            System.out.print(elements.get(i));
+        }
+        System.out.println("}");
     }
 
 }
