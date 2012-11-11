@@ -82,7 +82,7 @@ class BuildDomino {
     public static void printHelp() {
 	System.out.println("");
 	try {
-	    FileInputStream fis = new FileInputStream("help.txt");
+	    FileInputStream fis = new FileInputStream("../resources/help.txt");
 	    //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	    int content;
 	    while ((content = fis.read()) != -1) {

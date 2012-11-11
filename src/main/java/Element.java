@@ -9,8 +9,9 @@ import java.util.*;
 */
 class Element {
     private int[] oneLine; // The signed permutation of the element
-    private int rank; // The rank of the Coxeter group containig the
+    private int rank; // The rank of the Coxeter group containing the
 		      // element
+    private String type; // The type of the containing Coxeter group
  
     /**
      * This constructs an element from a signed permutation.
@@ -55,6 +56,14 @@ class Element {
      */
     public int getRank() {
 	return rank;
+    }
+
+    /**
+     * This method gets the type of the element
+     * @return The type
+     */
+    public String getType() {
+	return type;
     }
 
     /**
