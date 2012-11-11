@@ -13,8 +13,8 @@ class Coordinate {
      * @param yVal The y-coordinate
      */
     public Coordinate(int xVal, int yVal) {
-	this.xVal = xVal;
-	this.yVal = yVal;
+        this.xVal = xVal;
+        this.yVal = yVal;
     }
 
     /**
@@ -23,10 +23,10 @@ class Coordinate {
      * @return true if they are equal, otherwise false.
      */
     public boolean equals(Coordinate other) {
-	if ((this.xVal == other.xVal) & (this.yVal == other.yVal)) {
-	    return true;
-	}
-	return false;
+        if ((this.xVal == other.xVal) & (this.yVal == other.yVal)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -35,7 +35,7 @@ class Coordinate {
      * @return Nothing.
      */
     public void setXVal(int xVal) {
-	this.xVal = xVal;
+        this.xVal = xVal;
     }
 
     /**
@@ -44,7 +44,7 @@ class Coordinate {
      * @return Nothing.
      */
     public void setYVal(int yVal) {
-	this.yVal = yVal;
+        this.yVal = yVal;
     }
 
     /**
@@ -52,7 +52,7 @@ class Coordinate {
      * @return The x-coordinate for a coordinate pair.
      */
     public int getXVal() {
-	return this.xVal;
+        return this.xVal;
     }
 
     /**
@@ -60,7 +60,7 @@ class Coordinate {
      * @return The y-coordinate for a coordinate pair.
      */
     public int getYVal() {
-	return this.yVal;
+        return this.yVal;
     }
 
     /**
@@ -68,7 +68,7 @@ class Coordinate {
      * @return Nothing.
      */
     public void print() {
-	System.out.println("(" + xVal + "," + yVal + ")");
+        System.out.println("(" + xVal + "," + yVal + ")");
     }
 
 }

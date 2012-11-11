@@ -20,19 +20,19 @@ class CoxeterElement {
      */
     public CoxeterElement(int[] input, int rank) throws NumberFormatException{
 
-	// Check all generators are legal
-	for(int i = 0; i < input.length; i++) {
-	    if ((input[i] > rank) | (input[i] < 1)) {
-		throw new NumberFormatException();
-	    }
-	}
-	
-	this.rank = rank;
-	this.length = input.length;
-	this.expression = new int[length];
-	for(int i = 0; i < input.length; i++) {
-	    expression[i] = input[i];
-	}
+        // Check all generators are legal
+        for(int i = 0; i < input.length; i++) {
+            if ((input[i] > rank) | (input[i] < 1)) {
+                throw new NumberFormatException();
+            }
+        }
+        
+        this.rank = rank;
+        this.length = input.length;
+        this.expression = new int[length];
+        for(int i = 0; i < input.length; i++) {
+            expression[i] = input[i];
+        }
     }
 
     /**
@@ -41,29 +41,29 @@ class CoxeterElement {
      * @return the corresponding signed permutation
      */
     public Element toPermutation() {
-	int[] permutation = new int[rank];
-	int temp;
-	int generator;
-	Element answer;
+        int[] permutation = new int[rank];
+        int temp;
+        int generator;
+        Element answer;
 
-	for (int i = 0; i < rank; i++) {
-	    permutation[i] = i + 1;
-	}
-	for (int i = 0; i < length; i++) {
-	    generator = expression[i];
-	    if (generator > 1) {
-		temp = permutation[generator - 2];
-		permutation[generator - 2] = permutation[generator - 1];
-		permutation[generator - 1] = temp;
-	    }
-	    else {
-		temp = permutation[0];
-		permutation[0] = -1 * permutation[1];
-		permutation[1] = -1 * temp;
-	    }
-	}
-	answer = new Element(permutation);
-	return answer;
+        for (int i = 0; i < rank; i++) {
+            permutation[i] = i + 1;
+        }
+        for (int i = 0; i < length; i++) {
+            generator = expression[i];
+            if (generator > 1) {
+                temp = permutation[generator - 2];
+                permutation[generator - 2] = permutation[generator - 1];
+                permutation[generator - 1] = temp;
+            }
+            else {
+                temp = permutation[0];
+                permutation[0] = -1 * permutation[1];
+                permutation[1] = -1 * temp;
+            }
+        }
+        answer = new Element(permutation);
+        return answer;
     }
 
     /**
@@ -72,7 +72,7 @@ class CoxeterElement {
      * @return a reduced expression
      */
     public CoxeterElement reduce() {
-	return toPermutation().findRE();
+        return toPermutation().findRE();
     }
 
     /**
@@ -81,7 +81,7 @@ class CoxeterElement {
      * @return true if the expression is reduced.
      */
     public boolean isReduced() {
-	return (length == toPermutation().findRE().length);
+        return (length == toPermutation().findRE().length);
     }
 
     /**
@@ -89,13 +89,13 @@ class CoxeterElement {
      * @return Nothing
      */
     public void print() {
-	System.out.print("(");
-	if (length > 0) {
-	    for (int i = 0; i < length - 1; i++) {
-		System.out.print(expression[i] + ", ");
-	    }
-	    System.out.print(expression[length - 1]);
-	}
-	System.out.println(")");
+        System.out.print("(");
+        if (length > 0) {
+            for (int i = 0; i < length - 1; i++) {
+                System.out.print(expression[i] + ", ");
+            }
+            System.out.print(expression[length - 1]);
+        }
+        System.out.println(")");
     }   
 }

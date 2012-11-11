@@ -10,7 +10,7 @@ import java.util.*;
 class Element {
     private int[] oneLine; // The signed permutation of the element
     private int rank; // The rank of the Coxeter group containing the
-		      // element
+                      // element
     private String type; // The type of the containing Coxeter group
  
     /**
@@ -18,27 +18,27 @@ class Element {
      * @param input The signed permutation
      */
     public Element(int[] input) {
-	boolean validElement = true;
-	for(int i = 0; i < input.length; i++) {
-	    if (Math.abs(i) > input.length) {
-		validElement = false;
-	    }
-	    for(int j = i + 1; j < input.length; j++) {
-		if (Math.abs(input[j]) == Math.abs(input[i])) {
-		    validElement = false;
-		}
-	    }
-	}
-	if (validElement) {
-	    this.oneLine = new int[input.length];
-	    this.rank = input.length;
-	    for(int i = 0; i < input.length; i++) {
-		oneLine[i] = input[i];
-	    }
-	}
-	else {
-	    throw new IllegalArgumentException("Invalid element");
-	}
+        boolean validElement = true;
+        for(int i = 0; i < input.length; i++) {
+            if (Math.abs(i) > input.length) {
+                validElement = false;
+            }
+            for(int j = i + 1; j < input.length; j++) {
+                if (Math.abs(input[j]) == Math.abs(input[i])) {
+                    validElement = false;
+                }
+            }
+        }
+        if (validElement) {
+            this.oneLine = new int[input.length];
+            this.rank = input.length;
+            for(int i = 0; i < input.length; i++) {
+                oneLine[i] = input[i];
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Invalid element");
+        }
     }
     
     /**
@@ -46,8 +46,8 @@ class Element {
      * @param rank The rank of the element
      */
     private Element(int rank) {
-	this.rank = rank;
-	oneLine = new int[rank];
+        this.rank = rank;
+        oneLine = new int[rank];
     }
 
     /**
@@ -55,7 +55,7 @@ class Element {
      * @return The rank
      */
     public int getRank() {
-	return rank;
+        return rank;
     }
 
     /**
@@ -63,7 +63,7 @@ class Element {
      * @return The type
      */
     public String getType() {
-	return type;
+        return type;
     }
 
     /**
@@ -73,7 +73,7 @@ class Element {
      * @return The sign of the element applied to origin
      */
     public int getSign(int origin) {
-	return Math.abs(oneLine[origin - 1]) / oneLine[origin -1];
+        return Math.abs(oneLine[origin - 1]) / oneLine[origin -1];
     }
 
     /**
@@ -82,9 +82,9 @@ class Element {
      * @return The element applied to origin
      */
     public int mapsTo(int origin) {
-	if ((origin >= 1) & (origin <= rank))
-	    return oneLine[origin - 1];
-	return 0;
+        if ((origin >= 1) & (origin <= rank))
+            return oneLine[origin - 1];
+        return 0;
     }
 
     /**
@@ -93,11 +93,11 @@ class Element {
      * @return The number that element maps to target
      */
     public int mapsFrom(int target) {
-	for(int i = 0; i < rank; i++) {
-	    if(oneLine[i] == target)
-		return i + 1;
-	}
-	return 0;
+        for(int i = 0; i < rank; i++) {
+            if(oneLine[i] == target)
+                return i + 1;
+        }
+        return 0;
     }
 
     /**
@@ -105,11 +105,11 @@ class Element {
      * @return The inverse of element
      */
     public Element findInverse() {
-	Element inverse = new Element(this.rank);
-	for(int i = 0; i < rank; i++) {
-	    inverse.oneLine[Math.abs(this.oneLine[i]) - 1] = this.getSign(i + 1) * (i + 1);
-    	}
-	return inverse;
+        Element inverse = new Element(this.rank);
+        for(int i = 0; i < rank; i++) {
+            inverse.oneLine[Math.abs(this.oneLine[i]) - 1] = this.getSign(i + 1) * (i + 1);
+        }
+        return inverse;
     }
 
     /**
@@ -117,7 +117,7 @@ class Element {
      * @return Nothing
      */
     public void invert() {
-	this.oneLine = findInverse().oneLine;
+        this.oneLine = findInverse().oneLine;
     }
 
     /**
@@ -126,11 +126,11 @@ class Element {
      * @return Nothing
      */
     public void printPerm() {
-	System.out.print("[" + oneLine[0]);
-	for (int i = 1; i < rank; i++) {
-	    System.out.print(", " + oneLine[i]);
-	}
-	System.out.print("]\n");
+        System.out.print("[" + oneLine[0]);
+        for (int i = 1; i < rank; i++) {
+            System.out.print(", " + oneLine[i]);
+        }
+        System.out.print("]\n");
     }
 
     /**
@@ -140,19 +140,19 @@ class Element {
      * @return Nothing
      */
     private void rightMultiplyS(int s) {
-	if (s <= rank && s >= 1) {
-	    int temp;
-	    int sign = 1;
+        if (s <= rank && s >= 1) {
+            int temp;
+            int sign = 1;
 
-	    if (s == 1) {
-		sign = -1;
-		s = 2;
-	    }
+            if (s == 1) {
+                sign = -1;
+                s = 2;
+            }
 
-	    temp = oneLine[s-2];
-	    oneLine[s-2] = sign * oneLine[s-1];
-	    oneLine[s-1] = sign * temp;
-	}
+            temp = oneLine[s-2];
+            oneLine[s-2] = sign * oneLine[s-1];
+            oneLine[s-1] = sign * temp;
+        }
     }
 
     /**
@@ -162,30 +162,30 @@ class Element {
      * @return Nothing
      */
     private void leftMultiplyS(int s) {
-	if (s <= rank && s >= 1) {
-	    int val1;
-	    int val2;
-	    int loc1 = 0;
-	    int loc2;
-	    int sign = 1;
+        if (s <= rank && s >= 1) {
+            int val1;
+            int val2;
+            int loc1 = 0;
+            int loc2;
+            int sign = 1;
 
-	    if (s == 1) {
-		sign = -1;
-	    }
+            if (s == 1) {
+                sign = -1;
+            }
 
-	    while (Math.abs(oneLine[loc1]) != s && Math.abs(oneLine[loc1]) != s + 1) {
-		loc1++;
-	    }
-	    val1 = oneLine[loc1];
-	    loc2 = loc1 + 1;
+            while (Math.abs(oneLine[loc1]) != s && Math.abs(oneLine[loc1]) != s + 1) {
+                loc1++;
+            }
+            val1 = oneLine[loc1];
+            loc2 = loc1 + 1;
 
-	    while (Math.abs(oneLine[loc2]) != s && Math.abs(oneLine[loc2]) != s + 1) {
-		loc2++;
-	    }
-	    val2 = oneLine[loc2];
-	    oneLine[loc1] = sign * val2;
-	    oneLine[loc2] = sign * val1;
-	}
+            while (Math.abs(oneLine[loc2]) != s && Math.abs(oneLine[loc2]) != s + 1) {
+                loc2++;
+            }
+            val2 = oneLine[loc2];
+            oneLine[loc1] = sign * val2;
+            oneLine[loc2] = sign * val1;
+        }
     }
 
     /**
@@ -194,16 +194,16 @@ class Element {
      * @return true if the element is right bad
      */
     public boolean isRightBad() {
-	if (-1 * oneLine[1] > oneLine[0] && -1 * oneLine[0] > oneLine[2]) return false; // 13
-	if (oneLine[1] > oneLine[2] && -1 * oneLine[2] > oneLine[0]) return false; // 31
-	
-	for(int j = 0; j < rank - 3; j++) {
-	    if (oneLine[j] > oneLine[j + 1] && oneLine[j + 1] > oneLine[j + 2]) return false; //321
-	    if (oneLine[j] > oneLine[j + 2] && oneLine[j + 2] > oneLine[j + 1]) return false; //312
-	    if (oneLine[j + 1] > oneLine[j] && oneLine[j] > oneLine[j + 2]) return false; //231
-	}
+        if (-1 * oneLine[1] > oneLine[0] && -1 * oneLine[0] > oneLine[2]) return false; // 13
+        if (oneLine[1] > oneLine[2] && -1 * oneLine[2] > oneLine[0]) return false; // 31
+        
+        for(int j = 0; j < rank - 3; j++) {
+            if (oneLine[j] > oneLine[j + 1] && oneLine[j + 1] > oneLine[j + 2]) return false; //321
+            if (oneLine[j] > oneLine[j + 2] && oneLine[j + 2] > oneLine[j + 1]) return false; //312
+            if (oneLine[j + 1] > oneLine[j] && oneLine[j] > oneLine[j + 2]) return false; //231
+        }
 
-	return true;
+        return true;
     }
 
     /**
@@ -212,7 +212,7 @@ class Element {
      * @return true if the element is left bad
      */
     public boolean isLeftBad() {
-	return findInverse().isRightBad();
+        return findInverse().isRightBad();
     }
 
     /**
@@ -222,10 +222,10 @@ class Element {
      * @return true if the element is bad
      */
     public boolean isBad() {
-	if (commutingGenerators()) {
-	    return false;
-	}
-	return (isRightBad() && isLeftBad());
+        if (commutingGenerators()) {
+            return false;
+        }
+        return (isRightBad() && isLeftBad());
     }
 
     /**
@@ -235,46 +235,46 @@ class Element {
      * generators
      */
     public boolean commutingGenerators() {
-	int j = 0;
-	if (oneLine[0] == 1) {
-	    j = 1;
-	}
-	else if (oneLine[0] == -1) {
-	    if (oneLine[1] != -2) {
-		return false;
-	    }
-	    j = 2;
-	}
-	else if (oneLine[0] == 2) {
-	    if (oneLine[1] != 1) {
-		return false;
-	    }
-	    j = 2;
-	}
-	else if (oneLine[0] == -2) {
-	    if (oneLine[1] != -1) {
-		return false;
-	    }
-	    j = 2;
-	}
-	else {
-	    return false;
-	}
-	
-	while (j < rank - 2) {
-	    if (oneLine[j] > j + 2) {
-		return false;
-	    }
-	    else if (oneLine[j] == j + 1) {
-		j += 1;
-	    }
-	    else { // oneLine[j] = j + 2
-		if (oneLine[j + 1] != j + 1) return false;
-		j += 2;
-	    }
-	}
-	    
-	return true;
+        int j = 0;
+        if (oneLine[0] == 1) {
+            j = 1;
+        }
+        else if (oneLine[0] == -1) {
+            if (oneLine[1] != -2) {
+                return false;
+            }
+            j = 2;
+        }
+        else if (oneLine[0] == 2) {
+            if (oneLine[1] != 1) {
+                return false;
+            }
+            j = 2;
+        }
+        else if (oneLine[0] == -2) {
+            if (oneLine[1] != -1) {
+                return false;
+            }
+            j = 2;
+        }
+        else {
+            return false;
+        }
+        
+        while (j < rank - 2) {
+            if (oneLine[j] > j + 2) {
+                return false;
+            }
+            else if (oneLine[j] == j + 1) {
+                j += 1;
+            }
+            else { // oneLine[j] = j + 2
+                if (oneLine[j + 1] != j + 1) return false;
+                j += 2;
+            }
+        }
+            
+        return true;
     }
     
     /**
@@ -282,7 +282,7 @@ class Element {
      * @return the length of the element.
      */
     public int length() {
-	return countInv(1) + countInv(-1);
+        return countInv(1) + countInv(-1);
     }
 
     /**
@@ -291,7 +291,7 @@ class Element {
      * @return the number of inversions
      */
     private int countInv() {
-	return countInv(1);
+        return countInv(1);
     }
 
     /**
@@ -302,7 +302,7 @@ class Element {
      * account.
      */
     private int countInv(int factor) {
-	return countInv(factor, 0, rank);
+        return countInv(factor, 0, rank);
     }
 
     /**
@@ -314,17 +314,17 @@ class Element {
      * account.
      */
     private int countInv(int factor, int start, int end) {
-	if (end - start <= 1) {
-	    return 0;
-	}
-	else if (end - start == 2) {
-	    if (factor * oneLine[start] > oneLine[end - 1]) {
-		return 1;
-	    }
-	    return 0;
-	}
-	int middle = (start + end) / 2;
-	return countInv(factor, start, middle) + countInv(factor, middle, end) + mergeInv(factor, start, end);
+        if (end - start <= 1) {
+            return 0;
+        }
+        else if (end - start == 2) {
+            if (factor * oneLine[start] > oneLine[end - 1]) {
+                return 1;
+            }
+            return 0;
+        }
+        int middle = (start + end) / 2;
+        return countInv(factor, start, middle) + countInv(factor, middle, end) + mergeInv(factor, start, end);
     }
 
     /**
@@ -336,19 +336,19 @@ class Element {
      * account.
      */
     private int mergeInv(int factor, int start, int end) {
-	int middle = (start + end) / 2;
-	int count = 0;
+        int middle = (start + end) / 2;
+        int count = 0;
 
-	for (int i = start; i < middle; i++) {
-	    int value = factor*oneLine[i];
-	    for (int j = middle; j < end; j++) {
-		if (value > oneLine[j]) {
-		    count++;
-		}
-	    }
-	}
+        for (int i = start; i < middle; i++) {
+            int value = factor*oneLine[i];
+            for (int j = middle; j < end; j++) {
+                if (value > oneLine[j]) {
+                    count++;
+                }
+            }
+        }
 
-	return count;
+        return count;
     }
 
     /**
@@ -356,15 +356,15 @@ class Element {
      * @return the right descent set.
      */
     public Set rightDescent() {
-	Set right = new Set();
+        Set right = new Set();
 
-	for (int i = 1; i <= rank; i++) {
-	    if (isRightDescent(i)) {
-		right.add(i);
-	    }
-	}
+        for (int i = 1; i <= rank; i++) {
+            if (isRightDescent(i)) {
+                right.add(i);
+            }
+        }
 
-	return right;
+        return right;
     }
 
     /**
@@ -373,13 +373,13 @@ class Element {
      * @return true is s is a descent of the element
      */
     private boolean isRightDescent(int s) {
-	if (s == 1) {
-	    return (-1 * oneLine[1] > oneLine[0]);
-	}
-	if (s >= 2 && s <= rank) {
-	    return (oneLine[s - 2] > oneLine[s - 1]);
-	}
-	return false;
+        if (s == 1) {
+            return (-1 * oneLine[1] > oneLine[0]);
+        }
+        if (s >= 2 && s <= rank) {
+            return (oneLine[s - 2] > oneLine[s - 1]);
+        }
+        return false;
     }
 
     /**
@@ -387,7 +387,7 @@ class Element {
      * @return the left descent set.
      */
     public Set leftDescent() {
-	return findInverse().rightDescent();
+        return findInverse().rightDescent();
     }
 
     /**
@@ -396,26 +396,26 @@ class Element {
      * @return a reduced expression
      */
     public CoxeterElement findRE() {
-	ArrayList<Integer> generator = new ArrayList<Integer> ();
-	Element permutation = new Element(oneLine);
-	
-	while (permutation.length() != 0) {
-	    for (int i = permutation.rank; i >= 1; i--) {
-		if (permutation.isRightDescent(i)) {
-		    generator.add(i);
-		    permutation.rightMultiplyS(i);
-		}
-	    }
-	}
+        ArrayList<Integer> generator = new ArrayList<Integer> ();
+        Element permutation = new Element(oneLine);
+        
+        while (permutation.length() != 0) {
+            for (int i = permutation.rank; i >= 1; i--) {
+                if (permutation.isRightDescent(i)) {
+                    generator.add(i);
+                    permutation.rightMultiplyS(i);
+                }
+            }
+        }
 
-	int length = generator.size();
-	int[] genArray = new int[length];
-	for (int i = 0; i < length; i++) {
-	    genArray[length - 1 - i] = generator.get(i).intValue();
-	}
+        int length = generator.size();
+        int[] genArray = new int[length];
+        for (int i = 0; i < length; i++) {
+            genArray[length - 1 - i] = generator.get(i).intValue();
+        }
 
-	CoxeterElement redExp = new CoxeterElement(genArray, permutation.rank);
-	return redExp;
-	
+        CoxeterElement redExp = new CoxeterElement(genArray, permutation.rank);
+        return redExp;
+        
     }
 }

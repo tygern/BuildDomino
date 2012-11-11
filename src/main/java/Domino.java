@@ -19,10 +19,10 @@ class Domino {
      * @param isVertical The orientation of the domino
      */
     public Domino(int label, int xVal, int yVal, boolean isVertical) {
-	this.label = label;
-	firstBlock = new Coordinate(xVal, yVal);
-	this.isVertical = isVertical;
-	this.placeSecondBlock();
+        this.label = label;
+        firstBlock = new Coordinate(xVal, yVal);
+        this.isVertical = isVertical;
+        this.placeSecondBlock();
     }
 
     /**
@@ -34,15 +34,15 @@ class Domino {
      * @param signedLabel The label of the domino
      */
     public Domino(int signedLabel) {
-	label = Math.abs(signedLabel);
-	if (signedLabel > 0) {
-	    isVertical = false;
-	}
-	else {
-	    isVertical = true;
-	}
-	firstBlock  = new Coordinate(0, 0);
-	this.placeSecondBlock();
+        label = Math.abs(signedLabel);
+        if (signedLabel > 0) {
+            isVertical = false;
+        }
+        else {
+            isVertical = true;
+        }
+        firstBlock  = new Coordinate(0, 0);
+        this.placeSecondBlock();
     }
 
     /**
@@ -52,17 +52,17 @@ class Domino {
      * @return Nothing
      */
     private void placeSecondBlock() {
-	int secondX;
-	int secondY;
-	if (isVertical) {
-	    secondX = firstBlock.getXVal();
-	    secondY = firstBlock.getYVal() + 1;
-	}
-	else {
-	    secondX = firstBlock.getXVal() + 1;
-	    secondY = firstBlock.getYVal() ;
-	}
-	secondBlock = new Coordinate(secondX, secondY);
+        int secondX;
+        int secondY;
+        if (isVertical) {
+            secondX = firstBlock.getXVal();
+            secondY = firstBlock.getYVal() + 1;
+        }
+        else {
+            secondX = firstBlock.getXVal() + 1;
+            secondY = firstBlock.getYVal() ;
+        }
+        secondBlock = new Coordinate(secondX, secondY);
     }
 
     /**
@@ -71,8 +71,8 @@ class Domino {
      * @return Nothing
      */
     public void flipDomino() {
-	this.isVertical = !(this.isVertical);
-	this.placeSecondBlock();
+        this.isVertical = !(this.isVertical);
+        this.placeSecondBlock();
     }
 
     /**
@@ -83,9 +83,9 @@ class Domino {
      * @return Nothing
      */
     public void moveDomino(int xVal, int yVal) {
-	firstBlock.setXVal(xVal);
-	firstBlock.setYVal(yVal);
-	placeSecondBlock();
+        firstBlock.setXVal(xVal);
+        firstBlock.setYVal(yVal);
+        placeSecondBlock();
     }
 
     /**
@@ -93,7 +93,7 @@ class Domino {
      * @return The coordinates pair of the first block
      */
     public Coordinate getFirstBlock() {
-	return firstBlock;
+        return firstBlock;
     }
 
     /**
@@ -101,7 +101,7 @@ class Domino {
      * @return The coordinates pair of the second block
      */
     public Coordinate getSecondBlock() {
-	return secondBlock;
+        return secondBlock;
     }
 
     /**
@@ -109,7 +109,7 @@ class Domino {
      * @return The label of the domino
      */
     public int getLabel() {
-	return label;
+        return label;
     }
 
     /**
@@ -117,7 +117,7 @@ class Domino {
      * @return true if the domino if vertical, otherwise false
      */
     public boolean getIsVertical() {
-	return isVertical;
+        return isVertical;
     }
 
     /**
@@ -127,16 +127,16 @@ class Domino {
      * @return The number of blocks the dominoes have in common
      */
     public int overlap(Domino other) {
-	int count = 0;
-	if (this.firstBlock.equals(other.firstBlock))
-	    count++;
-	if (this.firstBlock.equals(other.secondBlock))
-	    count++;
-	if (this.secondBlock.equals(other.firstBlock))
-	    count++;
-	if (this.secondBlock.equals(other.secondBlock))
-	    count++;
-	return count;
+        int count = 0;
+        if (this.firstBlock.equals(other.firstBlock))
+            count++;
+        if (this.firstBlock.equals(other.secondBlock))
+            count++;
+        if (this.secondBlock.equals(other.firstBlock))
+            count++;
+        if (this.secondBlock.equals(other.secondBlock))
+            count++;
+        return count;
     }
     
     /**
@@ -147,10 +147,10 @@ class Domino {
      * the label of other.
      */
     public boolean biggerLabel(Domino other) {
-	if (this.label > other.label) {
-	    return true;
-	}
-	return false;
+        if (this.label > other.label) {
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -159,15 +159,15 @@ class Domino {
      * @return Nothing
      */
     public void printInfo() {
-	System.out.println("Label: " + label);
-	System.out.println("First block at (" + firstBlock.getXVal() + "," + firstBlock.getYVal() + ")");	
-	System.out.println("Second block at (" + secondBlock.getXVal() + "," + secondBlock.getYVal() + ")");
-	if (isVertical) {
-	    System.out.println("Vertical");
-	}
-	else {
-	    System.out.println("Horizontal");
-	}
+        System.out.println("Label: " + label);
+        System.out.println("First block at (" + firstBlock.getXVal() + "," + firstBlock.getYVal() + ")");       
+        System.out.println("Second block at (" + secondBlock.getXVal() + "," + secondBlock.getYVal() + ")");
+        if (isVertical) {
+            System.out.println("Vertical");
+        }
+        else {
+            System.out.println("Horizontal");
+        }
     }
 
 }
