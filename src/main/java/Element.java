@@ -400,7 +400,7 @@ class Element {
 	Element permutation = new Element(oneLine);
 	
 	while (permutation.length() != 0) {
-	    for (int i = 1; i <= permutation.rank; i++) {
+	    for (int i = permutation.rank; i >= 1; i--) {
 		if (permutation.isRightDescent(i)) {
 		    generator.add(i);
 		    permutation.rightMultiplyS(i);
