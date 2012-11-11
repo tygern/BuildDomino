@@ -83,8 +83,8 @@ class BuildDomino {
 	System.out.println("");
 	try {
 	    FileInputStream fis = new FileInputStream("../resources/help.txt");
-	    //BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	    int content;
+
 	    while ((content = fis.read()) != -1) {
 		// convert to char and display it
 		System.out.print((char) content);

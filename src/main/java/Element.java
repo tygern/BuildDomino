@@ -73,7 +73,7 @@ class Element {
      * @return The sign of the element applied to origin
      */
     public int getSign(int origin) {
-	return Math.abs(oneLine[origin - 1])/oneLine[origin -1];
+	return Math.abs(oneLine[origin - 1]) / oneLine[origin -1];
     }
 
     /**
@@ -107,7 +107,7 @@ class Element {
     public Element findInverse() {
 	Element inverse = new Element(this.rank);
 	for(int i = 0; i < rank; i++) {
-	    inverse.oneLine[Math.abs(this.oneLine[i])-1] = this.getSign(i+1)*(i+1);
+	    inverse.oneLine[Math.abs(this.oneLine[i]) - 1] = this.getSign(i + 1) * (i + 1);
     	}
 	return inverse;
     }
@@ -150,8 +150,8 @@ class Element {
 	    }
 
 	    temp = oneLine[s-2];
-	    oneLine[s-2] = sign*oneLine[s-1];
-	    oneLine[s-1] = sign*temp;
+	    oneLine[s-2] = sign * oneLine[s-1];
+	    oneLine[s-1] = sign * temp;
 	}
     }
 
@@ -173,18 +173,18 @@ class Element {
 		sign = -1;
 	    }
 
-	    while (Math.abs(oneLine[loc1]) != s && Math.abs(oneLine[loc1]) != s+1) {
+	    while (Math.abs(oneLine[loc1]) != s && Math.abs(oneLine[loc1]) != s + 1) {
 		loc1++;
 	    }
 	    val1 = oneLine[loc1];
 	    loc2 = loc1 + 1;
 
-	    while (Math.abs(oneLine[loc2]) != s && Math.abs(oneLine[loc2]) != s+1) {
+	    while (Math.abs(oneLine[loc2]) != s && Math.abs(oneLine[loc2]) != s + 1) {
 		loc2++;
 	    }
 	    val2 = oneLine[loc2];
-	    oneLine[loc1] = sign*val2;
-	    oneLine[loc2] = sign*val1;
+	    oneLine[loc1] = sign * val2;
+	    oneLine[loc2] = sign * val1;
 	}
     }
 
@@ -194,13 +194,13 @@ class Element {
      * @return true if the element is right bad
      */
     public boolean isRightBad() {
-	if (-1*oneLine[1] > oneLine[0] && -1*oneLine[0] > oneLine[2]) return false; // 13
-	if (   oneLine[1] > oneLine[2] && -1*oneLine[2] > oneLine[0]) return false; // 31
+	if (-1 * oneLine[1] > oneLine[0] && -1 * oneLine[0] > oneLine[2]) return false; // 13
+	if (oneLine[1] > oneLine[2] && -1 * oneLine[2] > oneLine[0]) return false; // 31
 	
 	for(int j = 0; j < rank - 3; j++) {
-	    if (oneLine[  j] > oneLine[j+1] && oneLine[j+1] > oneLine[j+2]) return false; //321
-	    if (oneLine[  j] > oneLine[j+2] && oneLine[j+2] > oneLine[j+1]) return false; //312
-	    if (oneLine[j+1] > oneLine[  j] && oneLine[  j] > oneLine[j+2]) return false; //231
+	    if (oneLine[j] > oneLine[j + 1] && oneLine[j + 1] > oneLine[j + 2]) return false; //321
+	    if (oneLine[j] > oneLine[j + 2] && oneLine[j + 2] > oneLine[j + 1]) return false; //312
+	    if (oneLine[j + 1] > oneLine[j] && oneLine[j] > oneLine[j + 2]) return false; //231
 	}
 
 	return true;
@@ -262,14 +262,14 @@ class Element {
 	}
 	
 	while (j < rank - 2) {
-	    if (oneLine[j] > j+2) {
+	    if (oneLine[j] > j + 2) {
 		return false;
 	    }
-	    else if (oneLine[j] == j+1) {
+	    else if (oneLine[j] == j + 1) {
 		j += 1;
 	    }
-	    else { // oneLine[j] = j+2
-		if (oneLine[j+1] != j+1) return false;
+	    else { // oneLine[j] = j + 2
+		if (oneLine[j + 1] != j + 1) return false;
 		j += 2;
 	    }
 	}
@@ -318,12 +318,12 @@ class Element {
 	    return 0;
 	}
 	else if (end - start == 2) {
-	    if (factor*oneLine[start] > oneLine[end-1]) {
+	    if (factor * oneLine[start] > oneLine[end - 1]) {
 		return 1;
 	    }
 	    return 0;
 	}
-	int middle = (start + end)/2;
+	int middle = (start + end) / 2;
 	return countInv(factor, start, middle) + countInv(factor, middle, end) + mergeInv(factor, start, end);
     }
 
@@ -336,7 +336,7 @@ class Element {
      * account.
      */
     private int mergeInv(int factor, int start, int end) {
-	int middle = (start + end)/ 2;
+	int middle = (start + end) / 2;
 	int count = 0;
 
 	for (int i = start; i < middle; i++) {
@@ -374,10 +374,10 @@ class Element {
      */
     private boolean isRightDescent(int s) {
 	if (s == 1) {
-	    return (-1*oneLine[1] > oneLine[0]);
+	    return (-1 * oneLine[1] > oneLine[0]);
 	}
 	if (s >= 2 && s <= rank) {
-	    return (oneLine[s-2] > oneLine[s-1]);
+	    return (oneLine[s - 2] > oneLine[s - 1]);
 	}
 	return false;
     }
@@ -411,7 +411,7 @@ class Element {
 	int length = generator.size();
 	int[] genArray = new int[length];
 	for (int i = 0; i < length; i++) {
-	    genArray[length-1-i] = generator.get(i).intValue();
+	    genArray[length - 1 - i] = generator.get(i).intValue();
 	}
 
 	CoxeterElement redExp = new CoxeterElement(genArray, permutation.rank);

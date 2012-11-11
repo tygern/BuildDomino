@@ -20,7 +20,7 @@ class Domino {
      */
     public Domino(int label, int xVal, int yVal, boolean isVertical) {
 	this.label = label;
-	firstBlock  = new Coordinate(xVal, yVal);
+	firstBlock = new Coordinate(xVal, yVal);
 	this.isVertical = isVertical;
 	this.placeSecondBlock();
     }

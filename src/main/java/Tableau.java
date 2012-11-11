@@ -344,8 +344,8 @@ class Tableau {
     public void screenDraw() {
 	DrawDomino canvas = new DrawDomino(this);
         JFrame frame = new JFrame();
+
         frame.setSize(canvas.width, canvas.height);
-	//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(canvas);
         frame.setVisible(true);
     }

@@ -58,8 +58,8 @@ class CoxeterElement {
 	    }
 	    else {
 		temp = permutation[0];
-		permutation[0] = -1*permutation[1];
-		permutation[1] = -1*temp;
+		permutation[0] = -1 * permutation[1];
+		permutation[1] = -1 * temp;
 	    }
 	}
 	answer = new Element(permutation);

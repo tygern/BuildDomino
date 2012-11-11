@@ -63,7 +63,7 @@ class Set {
      * @return Nothing
      */
     private void addSet(Set other) {
-	for (int i=0; i < other.elements.size(); i++) {
+	for (int i = 0; i < other.elements.size(); i++) {
 	    add(other.elements.get(i));
 	}
     }
