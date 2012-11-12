@@ -1,7 +1,7 @@
 import java.io.*;
  
 class AccessFile {
-    String location;
+    private String location;
 
     public AccessFile(String input) {
         location = input;
