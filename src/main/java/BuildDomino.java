@@ -80,23 +80,10 @@ class BuildDomino {
     }
     
     public static void printHelp() {
-        System.out.println("");
-        try {
-            FileInputStream fis = new FileInputStream("../resources/help.txt");
-            int content;
-
-            while ((content = fis.read()) != -1) {
-                // convert to char and display it
-                System.out.print((char) content);
-            }
-        }
-        catch (FileNotFoundException fnfe) { 
-            System.out.println(fnfe.getMessage());
-        } 
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("");
+        AccessFile message = new AccessFile("help.txt");
+        System.out.println();
+        message.show();
+        System.out.println();
     }
 
     public static void intro() {
