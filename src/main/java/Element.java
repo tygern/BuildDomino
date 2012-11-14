@@ -355,8 +355,8 @@ class Element {
      * This method gets the right descent set of the element.
      * @return the right descent set.
      */
-    public Set rightDescent() {
-        Set right = new Set();
+    public BoundedSet rightDescent() {
+        BoundedSet right = new BoundedSet(1, rank);
 
         for (int i = 1; i <= rank; i++) {
             if (isRightDescent(i)) {
@@ -386,7 +386,7 @@ class Element {
      * This method gets the left descent set of the element.
      * @return the left descent set.
      */
-    public Set leftDescent() {
+    public BoundedSet leftDescent() {
         return findInverse().rightDescent();
     }
 
