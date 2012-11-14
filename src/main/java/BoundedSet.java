@@ -20,6 +20,16 @@ class BoundedSet {
         }
     }
 
+    public BoundedSet(int max) {
+        this.max = max;
+        this.min = 1;
+        elements = new boolean[max - min + 1];
+        
+        for (int i = 0; i < max - min + 1; i++) {
+            elements[i] = false;
+        }
+    }
+
     /**
      * This method determines if an element is in the set.
      * @param other The element in question
