@@ -11,7 +11,6 @@ class Element {
     private int[] oneLine; // The signed permutation of the element
     private int rank; // The rank of the Coxeter group containing the
                       // element
-    private String type; // The type of the containing Coxeter group
  
     /**
      * This constructs an element from a signed permutation.
@@ -59,11 +58,20 @@ class Element {
     }
 
     /**
-     * This method gets the type of the element
-     * @return The type
+     * This method decides if two elements of a Coxeter group are
+     * equal.
+     * @param other The other element
+     * @return true if the two elements are equal
      */
-    public String getType() {
-        return type;
+    public boolean equals(Element other) {
+        if (rank != other.rank) return false;
+
+        for (int i = 0; i < rank; i++) {
+            if (oneLine[i] != other.oneLine[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
