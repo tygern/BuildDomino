@@ -52,6 +52,7 @@ class BoundedSet {
      * @return Nothing
      */
     public void add(int other) {
+        checkRange(other);
         if (!elements[other - min]) {
             size++;
             elements[other - min] = true;
@@ -65,9 +66,16 @@ class BoundedSet {
      * @return Nothing
      */
     public void remove(int other) {
+        checkRange(other);
         if (elements[other - min]) {
             size--;
             elements[other - min] = false;
+        }
+    }
+
+    public void checkRange(int other) throws IllegalArgumentException {
+        if (other < min || other > max) {
+            throw new IllegalArgumentException("Out of Range");
         }
     }
 
