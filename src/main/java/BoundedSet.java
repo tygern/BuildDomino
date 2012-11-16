@@ -73,7 +73,7 @@ class BoundedSet {
         }
     }
 
-    public void checkRange(int other) throws IllegalArgumentException {
+    private void checkRange(int other) throws IllegalArgumentException {
         if (other < min || other > max) {
             throw new IllegalArgumentException("Out of Range");
         }
