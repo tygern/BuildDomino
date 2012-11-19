@@ -73,7 +73,7 @@ class Domino {
     public boolean equals(Domino other) {
         if (label != other.label) return false;
         if (!firstBlock.equals(other.firstBlock)) return false;
-        if (!secondBlock.equals(other.secondBlock)) return false;
+        if (isVertical != other.isVertical) return false;
         return true;
     }
 
