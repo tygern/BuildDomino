@@ -60,10 +60,7 @@ public class BoundedSetTest{
 
     @Test
     public void testRemove() {
-        medSet.add(2);
-        medSet.add(-2);
-        medSet.add(4);
-        medSet.add(8);
+        medSet.add(2).add(-2).add(4).add(8);
 
         medSet.remove(2);
         assertEquals(3, medSet.getSize());
@@ -87,15 +84,15 @@ public class BoundedSetTest{
     public void testEquals() {
         medSet.add(2); medSet.add(4); medSet.add(6);
 
-        medSetsl.add(2);medSetsl.add(4);medSetsl.add(6);
-        medSetss.add(2);medSetss.add(4);medSetss.add(6);
-        medSetse.add(2);medSetse.add(4);medSetse.add(6);
-        medSetll.add(2);medSetll.add(4);medSetll.add(6);
-        medSetls.add(2);medSetls.add(4);medSetls.add(6);
-        medSetle.add(2);medSetle.add(4);medSetle.add(6);
-        medSetel.add(2);medSetel.add(4);medSetel.add(6);
-        medSetes.add(2);medSetes.add(4);medSetes.add(6);
-        medSetee.add(2);medSetee.add(4);medSetee.add(6);
+        medSetsl.add(2).add(4).add(6);
+        medSetss.add(2).add(4).add(6);
+        medSetse.add(2).add(4).add(6);
+        medSetll.add(2).add(4).add(6);
+        medSetls.add(2).add(4).add(6);
+        medSetle.add(2).add(4).add(6);
+        medSetel.add(2).add(4).add(6);
+        medSetes.add(2).add(4).add(6);
+        medSetee.add(2).add(4).add(6);
 
         assertTrue(medSet.equals(medSetsl));
         assertTrue(medSet.equals(medSetss));
@@ -167,4 +164,14 @@ public class BoundedSetTest{
         assertFalse(medSet.equals(medSetes));
         assertFalse(medSet.equals(medSetee));
     }
+
+    @Test
+    public void testContains() {
+        medSet.add(-2).add(0).add(7);
+        assertTrue(medSet.contains(-2));
+        assertFalse(medSet.contains(-1));
+        assertTrue(medSet.contains(7));
+        assertFalse(medSet.contains(3));
+    }
+
 }
