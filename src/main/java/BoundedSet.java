@@ -49,28 +49,30 @@ class BoundedSet {
      * This method adds an element to a set if it is not already
      * contained in the set.
      * @param other The new element
-     * @return Nothing
+     * @return The set
      */
-    public void add(int other) {
+    public BoundedSet add(int other) {
         checkRange(other);
         if (!elements[other - min]) {
             size++;
             elements[other - min] = true;
         }
+        return this;
     }
 
     /**
      * This method removes an element from a set if it is contained in
      * the set.
      * @param other The element to be removed
-     * @return Nothing
+     * @return The set
      */
-    public void remove(int other) {
+    public BoundedSet remove(int other) {
         checkRange(other);
         if (elements[other - min]) {
             size--;
             elements[other - min] = false;
         }
+        return this;
     }
 
     private void checkRange(int other) throws IllegalArgumentException {
