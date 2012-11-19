@@ -26,22 +26,24 @@ public class DrawDomino extends Canvas
     public void paint(Graphics graphics) {
         int longSide = 2 * scale;
         int shortSide = scale;
-        for (int i = 0; i < dominoTableau.getSize(); i++) {
-            Domino current = dominoTableau.getDomino(i);
-            int xVal = current.getFirstBlock().getXVal();
-            int yVal = current.getFirstBlock().getYVal();
-            int labelInt = current.getLabel();
-            String labelSt = Integer.toString(labelInt);
-            int xCoord = scale * (xVal - 1) + offset;
-            int yCoord = scale * (yVal - 1) + offset;
-
-            if (dominoTableau.getDomino(i).getIsVertical()) {
-                graphics.drawRect(xCoord, yCoord, shortSide, longSide);
-                graphics.drawString(labelSt, xCoord + scale / 2 - xLabelOffset, yCoord + scale + yLabelOffset);
-            }
-            else {
-                graphics.drawRect(xCoord, yCoord, longSide, shortSide);
-                graphics.drawString(labelSt, xCoord + scale - xLabelOffset, yCoord + scale / 2 + yLabelOffset);
+        for (int i = 1; i <= dominoTableau.getRank(); i++) {
+            if (dominoTableau.inTableau(i)) {
+                Domino current = dominoTableau.getDomino(i);
+                int xVal = current.getFirstBlock().getXVal();
+                int yVal = current.getFirstBlock().getYVal();
+                int labelInt = i;
+                String labelSt = Integer.toString(labelInt);
+                int xCoord = scale * (xVal - 1) + offset;
+                int yCoord = scale * (yVal - 1) + offset;
+                
+                if (current.getIsVertical()) {
+                    graphics.drawRect(xCoord, yCoord, shortSide, longSide);
+                    graphics.drawString(labelSt, xCoord + scale / 2 - xLabelOffset, yCoord + scale + yLabelOffset);
+                }
+                else {
+                    graphics.drawRect(xCoord, yCoord, longSide, shortSide);
+                    graphics.drawString(labelSt, xCoord + scale - xLabelOffset, yCoord + scale / 2 + yLabelOffset);
+                }
             }
         }
     }
