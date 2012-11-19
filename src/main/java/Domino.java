@@ -66,6 +66,18 @@ class Domino {
     }
 
     /**
+     * This method determines whether two dominoes are equal.
+     * @param other The other domino
+     * @return true if the two dominoes are equal
+     */
+    public boolean equals(Domino other) {
+        if (label != other.label) return false;
+        if (!firstBlock.equals(other.firstBlock)) return false;
+        if (!secondBlock.equals(other.secondBlock)) return false;
+        return true;
+    }
+
+    /**
      * This method changes the orientation of the domino and moves the
      * second block accordingly.
      * @return Nothing
