@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 class Tableau {
     private int rank; // The rank (max size) of a tableau
     private Domino[] dominoes; // array of dominoes in a tableau
-    private int size = 0; // number of dominoes in a tableau
     private int maxLabel = 0; // largest label in the tableau
 
     /**
@@ -42,13 +41,22 @@ class Tableau {
     }
     
     /**
-     * This method gets a domino in a certain position in dominoes.
-     * @param position The index in dominoes
-     * @return The domino at position
+     * This method gets a domino with a certain label.
+     * @param label The label of the domino
+     * @return The domino with the label
      */
-    public Domino getDomino(int position) {
-        assert(position < size);
-        return dominoes[position];
+    public Domino getDomino(int label) {
+        return dominoes[label - 1];
+    }
+
+    /**
+     * This method determines whether the tableau has a domino with a
+     * particular label/
+     * @param label The label in question
+     * @return true if there is a domino with the given label
+     */
+    public boolean inTableau(int label) {
+        return dominoes[label - 1] != null;
     }
 
     /**
@@ -56,7 +64,13 @@ class Tableau {
      * @return The size of the tableau
      */
     public int getSize() {
-        return size;
+        int count = 0;
+        for (int i = 1; i <= rank; i++) {
+            if (inTableau(i)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /**
@@ -105,8 +119,7 @@ class Tableau {
             }
 
             // Update tableau information
-            dominoes[size] = current;
-            size++;
+            dominoes[domLabel - 1] = current;
             maxLabel = domLabel;
         }
         // If not biggest, use \alpha map.
@@ -119,12 +132,11 @@ class Tableau {
             else {
                 current.moveDomino(largestInRow(1, domLabel) + 1, 1);
             }
-            dominoes[size] = current;
-            size++;
+            dominoes[domLabel - 1] = current;
 
             // Shuffle in remaining dominoes.
-            for (int j = domLabel + 1; j <= maxLabel; j++) {
-                if (findLabel(j) != -1) {
+            for (int j = domLabel + 1; j <= rank; j++) {
+                if (dominoes[j - 1] != null) {
                     shuffle(j);
                 }
             }
@@ -150,13 +162,13 @@ class Tableau {
      */
     public int largestInRow(int row, int bound) {
         int column = 0;
-        for(int i = 0; i < size; i++) {
-            if (dominoes[i].getLabel() < bound) {
-                if (dominoes[i].getFirstBlock().getYVal() == row) {
-                    column = Math.max(dominoes[i].getFirstBlock().getXVal(), column);
+        for(int i = 1; i < bound; i++) {
+            if (inTableau(i)) {
+                if (dominoes[i - 1].getFirstBlock().getYVal() == row) {
+                    column = Math.max(dominoes[i - 1].getFirstBlock().getXVal(), column);
                 }
-                if (dominoes[i].getSecondBlock().getYVal() == row) {
-                    column = Math.max(dominoes[i].getSecondBlock().getXVal(), column);
+                if (dominoes[i - 1].getSecondBlock().getYVal() == row) {
+                    column = Math.max(dominoes[i - 1].getSecondBlock().getXVal(), column);
                 }
             }
         }
@@ -182,13 +194,13 @@ class Tableau {
      */
     public int largestInCol(int column, int bound) {
         int row = 0;
-        for(int i = 0; i < size; i++) {
-            if (dominoes[i].getLabel() < bound) {
-                if (dominoes[i].getFirstBlock().getXVal() == column) {
-                    row = Math.max(dominoes[i].getFirstBlock().getYVal(), row);
+        for(int i = 1; i < bound; i++) {
+            if (inTableau(i)) {
+                if (dominoes[i - 1].getFirstBlock().getXVal() == column) {
+                    row = Math.max(dominoes[i - 1].getFirstBlock().getYVal(), row);
                 }
-                if (dominoes[i].getSecondBlock().getXVal() == column) {
-                    row = Math.max(dominoes[i].getSecondBlock().getYVal(), row);
+                if (dominoes[i - 1].getSecondBlock().getXVal() == column) {
+                    row = Math.max(dominoes[i - 1].getSecondBlock().getYVal(), row);
                 }
             }
         }
@@ -202,17 +214,12 @@ class Tableau {
      * @return Nothing
      */
     public void printDomino(int label) {
-        if (size == 0) {
-            System.out.println("The tableau is empty.");
-            return;
+        if (inTableau(label)) {
+            dominoes[label - 1].printInfo();
         }
-        for(int i = 0; i < size; i++) {
-            if (dominoes[i].getLabel() == label) {
-                dominoes[i].printInfo();
-                return;
-            }
+        else {
+            System.out.println("There is no domino with label " + label + " in the tableau.");
         }
-        System.out.println("There is no domino with label " + label + " in the tableau.");
     }
 
     /**
@@ -221,17 +228,15 @@ class Tableau {
      * @return Nothing
      */
     public void printAll() {
-        if (size == 0) {
-            System.out.println("The tableau is empty.");
-            return;
-        }
         System.out.println("----------------------");
-        for(int i = 0; i < size; i++) {
-            dominoes[i].printInfo();
-            System.out.println("----------------------");
+        for(int i = 1; i <= rank; i++) {
+            if (inTableau(i)) {
+                dominoes[i - 1].printInfo();
+                System.out.println("----------------------");
+            }
         }
     }
-
+    
     /**
      * This method finds the location of a domino with a certain label
      * in the tableau.
@@ -239,10 +244,8 @@ class Tableau {
      * @return The index of the domino in the array dominoes
      */
     public int findLabel(int label) {
-        for (int i = 0; i < size; i++) {
-            if (dominoes[i].getLabel() == label) {
-                return i;
-            }
+        if (inTableau(label)) {
+            return label - 1;
         }
         return -1;
     }
@@ -255,15 +258,14 @@ class Tableau {
      * @return Nothing
      */
     public void shuffle(int label) {
-        int position = findLabel(label);
-        Domino current = dominoes[position];
+        Domino current = dominoes[label - 1];
         int row = current.getFirstBlock().getYVal();
         int col = current.getFirstBlock().getXVal();
-        if (position != -1) {
-            if (overlap(position) == 0) {
+        if (inTableau(label)) {
+            if (overlap(label) == 0) {
                 // do nothing
             }
-            else if (overlap(position) == 1) {
+            else if (overlap(label) == 1) {
                 // twist
                 if (current.getIsVertical()) {
                     current.flipDomino();
@@ -289,15 +291,15 @@ class Tableau {
     /**
      * This method calculates how much a given domino overlapps the
      * tableau.
-     * @param position The index of the domino in the array dominoes
+     * @param label The label of the domino
      * @return The number of blocks that the domino overlapps the
      * tableau
      */
-    public int overlap(int position) {
+    public int overlap(int label) {
         int count = 0;
-        for (int i = 0; i < size; i++) {
-            if (i != position) {
-                count += dominoes[i].overlap(dominoes[position]);
+        for (int i = 1; i <= rank; i++) {
+            if (inTableau(i) && i != label) {
+                count += dominoes[i - 1].overlap(dominoes[label - 1]);
             }
         }
         return count;
@@ -316,19 +318,21 @@ class Tableau {
         System.out.println("\\tikzstyle{ver}=[rectangle, draw, thick, minimum width=1cm, minimum height=2cm]");        
         System.out.println("\\tikzstyle{hor}=[rectangle, draw, thick, minimum width=2cm, minimum height=1cm]");
         
-        for (int i = 0; i < size; i++) {
-            Domino current = dominoes[i];
-            int xDom = current.getFirstBlock().getXVal();
-            int yDom = current.getFirstBlock().getYVal();
-            boolean vert = current.getIsVertical();
-            int label = current.getLabel();
-            if (vert) {
-                // Start at (0, 4)
-                System.out.println("\\node[ver] at (0 + " + xDom + ", 4 - " + yDom + ") {" + label + "};");     
-            }
-            else {
-                // Start at (.5, 4.5)
-                System.out.println("\\node[hor] at (.5 + " + xDom + ", 4.5 - " + yDom + ") {" + label + "};");  
+        for (int i = 1; i <= rank; i++) {
+            if (inTableau(i)) {
+                Domino current = dominoes[i-1];
+                int xDom = current.getFirstBlock().getXVal();
+                int yDom = current.getFirstBlock().getYVal();
+                boolean vert = current.getIsVertical();
+
+                if (vert) {
+                    // Start at (0, 4)
+                    System.out.println("\\node[ver] at (0 + " + xDom + ", 4 - " + yDom + ") {" + i + "};");     
+                }
+                else {
+                    // Start at (.5, 4.5)
+                    System.out.println("\\node[hor] at (.5 + " + xDom + ", 4.5 - " + yDom + ") {" + i + "};");  
+                }
             }
         }
 
@@ -348,6 +352,18 @@ class Tableau {
         frame.setSize(canvas.width, canvas.height);
         frame.getContentPane().add(canvas);
         frame.setVisible(true);
+    }
+
+    public boolean equals(Tableau other) {
+        if (this.rank != other.rank) return false;
+        for (int i = 1; i <= rank; i++) {
+            if (inTableau(i) && !other.inTableau(i)) return false;
+            if (!inTableau(i) && other.inTableau(i)) return false;
+            if (inTableau(i) && other.inTableau(i)) {
+                if (!getDomino(i).equals(other.getDomino(i))) return false;
+            }
+        }
+        return true;
     }
 
 }
