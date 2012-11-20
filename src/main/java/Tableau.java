@@ -354,6 +354,11 @@ class Tableau {
         frame.setVisible(true);
     }
 
+    /**
+     * This method determines whether two tableaux are equal.
+     * @param other The other tableau
+     * @return true if the two tableaux are equal
+     */
     public boolean equals(Tableau other) {
         if (this.rank != other.rank) return false;
         for (int i = 1; i <= rank; i++) {

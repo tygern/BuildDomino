@@ -2,19 +2,9 @@ import org.junit.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class BoundedSetTest{
+public class BoundedSetTest {
 
-    BoundedSet smallSet;
-    BoundedSet medSet;
-    BoundedSet medSetsl;
-    BoundedSet medSetss;
-    BoundedSet medSetse;
-    BoundedSet medSetll;
-    BoundedSet medSetls;
-    BoundedSet medSetle;
-    BoundedSet medSetel;
-    BoundedSet medSetes;
-    BoundedSet medSetee;
+    BoundedSet smallSet, medSet, medSetsl, medSetss, medSetse, medSetll, medSetls, medSetle, medSetel, medSetes, medSetee;
 
     @Before public void setUp() {
         smallSet = new BoundedSet(1,3);
@@ -29,7 +19,6 @@ public class BoundedSetTest{
         medSetel = new BoundedSet(-4,9);
         medSetes = new BoundedSet(-4,7);
         medSetee = new BoundedSet(-4,8);
-
     }
     
     @After public void tearDown() {

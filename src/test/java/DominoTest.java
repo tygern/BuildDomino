@@ -4,12 +4,7 @@ import static org.junit.Assert.*;
 
 public class DominoTest{
 
-    Domino dominoA;
-    Domino dominoB;
-    Domino dominoC;
-    Domino dominoD;
-    Domino dominoE;
-    Domino dominoF;
+    Domino dominoA, dominoB, dominoC, dominoD, dominoE, dominoF;
 
     @Before public void setUp() {
         dominoA = new Domino(2,1,1,true);
