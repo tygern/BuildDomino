@@ -76,11 +76,11 @@ class Element {
     /**
      * This method gets the sign of the signed of the number that
      * origin maps to.
-     * @param origin The origen number
+     * @param origin The origin number
      * @return The sign of the element applied to origin
      */
     public int getSign(int origin) {
-        return Math.abs(oneLine[origin - 1]) / oneLine[origin -1];
+        return Math.abs(oneLine[origin - 1]) / oneLine[origin - 1];
     }
 
     /**
