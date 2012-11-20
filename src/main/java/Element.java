@@ -17,26 +17,25 @@ class Element {
      * @param input The signed permutation
      */
     public Element(int[] input) {
-        boolean validElement = true;
-        for(int i = 0; i < input.length; i++) {
-            if (Math.abs(i) > input.length) {
-                validElement = false;
+        rank = input.length;
+        oneLine = new int[rank];
+        int sign = 1;
+
+        boolean[] number = new boolean[rank];
+        for (int i = 0; i < rank; i++) number[i] = false;
+        
+        for(int i = 0; i < rank; i++) {
+            if (Math.abs(input[i]) > rank || input[i] == 0 || number[Math.abs(input[i]) - 1]) {
+                throw new IllegalArgumentException("Invalid permutation");
             }
-            for(int j = i + 1; j < input.length; j++) {
-                if (Math.abs(input[j]) == Math.abs(input[i])) {
-                    validElement = false;
-                }
+            oneLine[i] = input[i];
+            number[Math.abs(input[i]) - 1] = true;
+            if (oneLine[i] < 0) {
+                sign *= -1;
             }
         }
-        if (validElement) {
-            this.oneLine = new int[input.length];
-            this.rank = input.length;
-            for(int i = 0; i < input.length; i++) {
-                oneLine[i] = input[i];
-            }
-        }
-        else {
-            throw new IllegalArgumentException("Invalid element");
+        if (sign == -1) {
+            throw new IllegalArgumentException("Invalid type");
         }
     }
     
