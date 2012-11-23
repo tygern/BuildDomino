@@ -104,7 +104,7 @@ class Tableau {
      * @param current The domino to add
      * @return Nothing
      */
-    public void addDomino(Domino current) {
+    private void addDomino(Domino current) {
         int domLabel = current.getLabel();
 
         // If biggest, then add on to end of...
@@ -149,7 +149,7 @@ class Tableau {
      * @param row The row
      * @return The largest x-coordinate in row
      */
-    public int largestInRow(int row) {
+    private int largestInRow(int row) {
         return largestInRow(row, rank + 1);
     }
 
@@ -160,7 +160,7 @@ class Tableau {
      * @param bound The bound
      * @return The largest x-coordinate in row, given the bound
      */
-    public int largestInRow(int row, int bound) {
+    private int largestInRow(int row, int bound) {
         int column = 0;
         for(int i = 1; i < bound; i++) {
             if (inTableau(i)) {
@@ -181,7 +181,7 @@ class Tableau {
      * @param column The column
      * @return The largest y-coordinate in column
      */
-    public int largestInCol(int column) {
+    private int largestInCol(int column) {
         return largestInCol(column, rank + 1);
     }
 
@@ -192,7 +192,7 @@ class Tableau {
      * @param bound The bound
      * @return The largest y-coordinate in column, given the bound
      */
-    public int largestInCol(int column, int bound) {
+    private int largestInCol(int column, int bound) {
         int row = 0;
         for(int i = 1; i < bound; i++) {
             if (inTableau(i)) {
@@ -257,7 +257,7 @@ class Tableau {
      * @param label The label
      * @return Nothing
      */
-    public void shuffle(int label) {
+    private void shuffle(int label) {
         Domino current = dominoes[label - 1];
         int row = current.getFirstBlock().getYVal();
         int col = current.getFirstBlock().getXVal();
@@ -295,7 +295,7 @@ class Tableau {
      * @return The number of blocks that the domino overlapps the
      * tableau
      */
-    public int overlap(int label) {
+    private int overlap(int label) {
         int count = 0;
         for (int i = 1; i <= rank; i++) {
             if (inTableau(i) && i != label) {
