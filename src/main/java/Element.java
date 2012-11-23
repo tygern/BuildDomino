@@ -103,6 +103,8 @@ class Element {
         for(int i = 0; i < rank; i++) {
             if(oneLine[i] == target)
                 return i + 1;
+            if(-1 * oneLine[i] == target)
+                return -1 * (i + 1);
         }
         return 0;
     }
@@ -146,7 +148,7 @@ class Element {
      * @param s The generator
      * @return Nothing
      */
-    private void rightMultiplyS(int s) {
+    private Element rightMultiplyS(int s) {
         if (s <= rank && s >= 1) {
             int temp;
             int sign = 1;
@@ -160,6 +162,7 @@ class Element {
             oneLine[s-2] = sign * oneLine[s-1];
             oneLine[s-1] = sign * temp;
         }
+        return this;
     }
 
     /**
@@ -168,7 +171,7 @@ class Element {
      * @param s The generator
      * @return Nothing
      */
-    private void leftMultiplyS(int s) {
+    private Element leftMultiplyS(int s) {
         if (s <= rank && s >= 1) {
             int val1;
             int val2;
@@ -193,6 +196,8 @@ class Element {
             oneLine[loc1] = sign * val2;
             oneLine[loc2] = sign * val1;
         }
+
+        return this;
     }
 
     /**
@@ -200,7 +205,7 @@ class Element {
      * in two noncommution generators.
      * @return true if the element is right bad
      */
-    public boolean isRightBad() {
+    private boolean isRightBad() {
         if (-1 * oneLine[1] > oneLine[0] && -1 * oneLine[0] > oneLine[2]) return false; // 13
         if (oneLine[1] > oneLine[2] && -1 * oneLine[2] > oneLine[0]) return false; // 31
         
@@ -218,7 +223,7 @@ class Element {
      * beginning in two noncommution generators.
      * @return true if the element is left bad
      */
-    public boolean isLeftBad() {
+    private boolean isLeftBad() {
         return findInverse().isRightBad();
     }
 
@@ -241,7 +246,7 @@ class Element {
      * @return true if the element is a product of commuting
      * generators
      */
-    public boolean commutingGenerators() {
+    private boolean commutingGenerators() {
         int j = 0;
         if (oneLine[0] == 1) {
             j = 1;
