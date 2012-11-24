@@ -5,4 +5,5 @@ target/resources
 target/test
 target/output
 *.html
+reports
 
