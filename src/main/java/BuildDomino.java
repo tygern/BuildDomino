@@ -100,6 +100,7 @@ class BuildDomino {
     public static Element prompt(Element w) {
         Tableau tR = null;
         Element wInv = null;
+        Element x = null;
         Tableau tL = null;
         if (w != null) {
             tR = new Tableau(w);
@@ -115,33 +116,33 @@ class BuildDomino {
             w = fromPerm();
             break;
         case "print":
-            if (w == null) {
-                nullElement();
-            }
+            if (w == null) nullElement();
+            else w.printPerm();
+            break;
+        case "rightmultiply":
+            if (w == null) nullElement();
             else {
-                w.printPerm();
+                x = fromPerm();
+                w.rightMultiply(x).printPerm();
+            }
+            break;
+        case "leftmultiply":
+            if (w == null) nullElement();
+            else {
+                x = fromPerm();
+                w.leftMultiply(x).printPerm();
             }
             break;
         case "reduced":
-            if (w == null) {
-                nullElement();
-            }
-            else {
-                w.findRE().print();
-            }
+            if (w == null) nullElement();
+            else w.findRE().print();
             break;
         case "length":
-            if (w == null) {
-                nullElement();
-            }
-            else {
-                System.out.println(w.length());
-            }
+            if (w == null) nullElement();
+            else System.out.println(w.length());
             break;
         case "descent":
-            if (w == null) {
-                nullElement();
-            }
+            if (w == null) nullElement();
             else {
                 System.out.print("Right: ");
                 w.rightDescent().print();
@@ -150,52 +151,28 @@ class BuildDomino {
             }
             break;
         case "inverse":
-            if (wInv == null) {
-                nullElement();
-            }
-            else {
-                wInv.printPerm();
-            }
+            if (wInv == null) nullElement();
+            else wInv.printPerm();
             break;
         case "righttikz":
-            if (tR == null) {
-                nullElement();
-            }
-            else{
-                tR.tikzDraw();
-            }
+            if (tR == null) nullElement();
+            else tR.tikzDraw();
             break;
         case "lefttikz":
-            if (tL == null) {
-                nullElement();
-            }
-            else{
-                tL.tikzDraw();
-            }
+            if (tL == null) nullElement();
+            else tL.tikzDraw();
             break;
         case "rightdraw":
-            if (tR == null) {
-                nullElement();
-            }
-            else{
-                tR.screenDraw();
-            }
+            if (tR == null) nullElement();
+            else tR.screenDraw();
             break;
         case "leftdraw":
-            if (tL == null) {
-                nullElement();
-            }
-            else{
-                tL.screenDraw();
-            }
+            if (tL == null) nullElement();
+            else tL.screenDraw();
             break;
         case "bad":
-            if (tL == null) {
-                nullElement();
-            }
-            else{
-                System.out.println(w.isBad());
-            }
+            if (tL == null) nullElement();
+            else System.out.println(w.isBad());
             break;
         case "help":
             printHelp();

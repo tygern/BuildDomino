@@ -19,6 +19,12 @@ commands is the following :
   - inverse : Prints the signed permutation of the inverse of the
     current element.
 
+  - rightmultiply : Prints the current element multiplied by a new
+    element on the right.
+
+  - leftmultiply : Prints the current element multiplied by a new
+    element on the left.
+
   - bad : Returns "true" if the element is bad and "false" if the
     element is not bad.
 

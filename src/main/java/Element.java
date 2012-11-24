@@ -89,8 +89,12 @@ class Element {
      * @return The element applied to origin
      */
     public int mapsTo(int origin) {
-        if ((origin >= 1) & (origin <= rank))
-            return oneLine[origin - 1];
+        if ((Math.abs(origin) <= rank) && (origin != 0)) {
+            if (origin > 0) {
+                return oneLine[origin - 1];
+            }
+            return -1 * oneLine[-1 * origin - 1];
+        }
         return 0;
     }
 
@@ -429,5 +433,25 @@ class Element {
         CoxeterElement redExp = new CoxeterElement(genArray, permutation.rank);
         return redExp;
         
+    }
+
+    public Element rightMultiply(Element other) {
+        if (other.rank != rank) {
+            return null;
+        }
+        
+        Element result;
+        int[] resultPerm = new int[rank];
+
+        for (int i = 1; i <= rank; i++) {
+            resultPerm[i - 1] = mapsTo(other.mapsTo(i));
+        }
+
+        result = new Element(resultPerm);
+        return result;
+    }
+
+    public Element leftMultiply(Element other) {
+        return other.rightMultiply(this);
     }
 }

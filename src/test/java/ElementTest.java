@@ -73,9 +73,11 @@ public class ElementTest {
     
     @Test public void testMapsTo() {
         assertEquals(3,v.mapsTo(3));
+        assertEquals(-3,v.mapsTo(-3));
         assertEquals(-2,w.mapsTo(4));
+        assertEquals(2,w.mapsTo(-4));
         assertEquals(0,w.mapsTo(5));
-        assertEquals(0,w.mapsTo(-3));
+        assertEquals(4,y.mapsTo(-3));
     } 
     
     @Test public void testMapsFrom() {
@@ -139,5 +141,20 @@ public class ElementTest {
         assertTrue(y.findRE().toPermutation().equals(y));
         assertTrue(z.findRE().toPermutation().equals(z));
     } 
+
+    @Test public void testRightMultiply() {
+        int[] yyww = {1, 2, -4, -3};
+        Element yw = new Element(yyww);
+        
+        assertTrue(u.rightMultiply(v).equals(u));
+        assertTrue(w.rightMultiply(y).equals(z));
+        assertTrue(y.rightMultiply(w).equals(yw));
+        assertTrue(u.rightMultiply(x) == null);
+    }
+    @Test public void testLeftMultiply() {
+        assertTrue(u.leftMultiply(v).equals(u));
+        assertTrue(u.leftMultiply(x) == null);
+        assertTrue(y.leftMultiply(w).equals(z));
+    }
 
 }
