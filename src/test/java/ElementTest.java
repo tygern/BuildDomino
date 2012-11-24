@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2011 by Tyson Gern
+ * Licensed under the MIT License 
+ */
+
 import org.junit.*;
 import org.junit.Test;
 import static org.junit.Assert.*;

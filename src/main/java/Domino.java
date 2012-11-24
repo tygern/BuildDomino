@@ -1,9 +1,11 @@
 /**
-* This class stores information about individual dominoes and gives
-* operations to preform elementary calculus on dominoes.
-* @author Tyson Gern
-* @version 0.1
-*/
+ * Copyright (c) 2011 by Tyson Gern
+ * Licensed under the MIT License 
+ *
+ * This class stores information about individual dominoes and gives
+ * operations to preform elementary calculus on dominoes.
+ * @author Tyson Gern (tygern@gmail.com)
+ */
 class Domino {
     private int label; // Positive label of domino
     private Coordinate firstBlock; // Location of top or left block

@@ -1,8 +1,10 @@
 /**
+ * Copyright (c) 2011 by Tyson Gern
+ * Licensed under the MIT License 
+ *
  * This class stores a bounded set of integers.  The methods contained
  * in this class can preform elementary operations on sets.
- * @author Tyson Gern
- * @version 0.1
+ * @author Tyson Gern (tygern@gmail.com)
  */
 class BoundedSet {
     private boolean[] elements;

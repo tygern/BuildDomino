@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2011 by Tyson Gern
+ * Licensed under the MIT License 
+ */
+
 import javax.swing.JFrame;
 
 /**
@@ -5,8 +10,7 @@ import javax.swing.JFrame;
 * domino to the tableau using a technique called "shuffling" developed
 * by Devra Garfinkle.  Please see README.md for more information about
 * Garfinkle's techniques.
-* @author Tyson Gern
-* @version 0.1
+* @author Tyson Gern (tygern@gmail.com)
 */
 class Tableau {
     private int rank; // The rank (max size) of a tableau

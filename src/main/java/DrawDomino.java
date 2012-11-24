@@ -1,10 +1,14 @@
+/**
+ * Copyright (c) 2011 by Tyson Gern
+ * Licensed under the MIT License 
+ */
+
 import java.awt.*;
 import javax.swing.*;
 
 /**
 * This class draws a tableau of dominoes.
-* @author Tyson Gern
-* @version 0.1
+* @author Tyson Gern (tygern@gmail.com)
 */
 public class DrawDomino extends Canvas
 {

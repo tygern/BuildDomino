@@ -1,8 +1,10 @@
 /**
-* This class keeps track of coordinates in the Cartesian plane.
-* @author Tyson Gern
-* @version 0.1
-*/
+ * Copyright (c) 2011 by Tyson Gern
+ * Licensed under the MIT License 
+ *
+ * This class keeps track of coordinates in the Cartesian plane.
+ * @author Tyson Gern (tygern@gmail.com)
+ */
 class Coordinate {
     private int xVal; // x-coordinate
     private int yVal; // y-coordinate
@@ -23,7 +25,7 @@ class Coordinate {
      * @return true if they are equal, otherwise false.
      */
     public boolean equals(Coordinate other) {
-        if ((this.xVal == other.xVal) & (this.yVal == other.yVal)) {
+        if ((this.xVal == other.xVal) && (this.yVal == other.yVal)) {
             return true;
         }
         return false;

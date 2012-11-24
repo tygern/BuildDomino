@@ -1,10 +1,14 @@
+/**
+ * Copyright (c) 2011 by Tyson Gern
+ * Licensed under the MIT License 
+ */
+
 import java.util.*; 
 
 /**
 * This class stores an element of a Coxeter group of type D and rank
 * "rank" as a product of generators.  We use "2" as our branch node.
-* @author Tyson Gern
-* @version 0.1
+* @author Tyson Gern (tygern@gmail.com)
 */
 class CoxeterElement {
     private int[] expression;
