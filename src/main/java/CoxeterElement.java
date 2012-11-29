@@ -137,17 +137,18 @@ class CoxeterElement {
     }
 
     /**
-     * This method prints the given expression.
-     * @return Nothing
+     * This method returns a string representing the given expression.
+     * @return A string of the expression
      */
-    public void print() {
-        System.out.print("(");
+    public String toString() {
+        String output = "(";
         if (length > 0) {
             for (int i = 0; i < length - 1; i++) {
-                System.out.print(expression[i] + ", ");
+                output += (expression[i] + ", ");
             }
-            System.out.print(expression[length - 1]);
+            output += expression[length - 1];
         }
-        System.out.println(")");
+        
+        return output += ")";
     }   
 }

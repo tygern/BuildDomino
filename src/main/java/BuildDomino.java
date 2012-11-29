@@ -133,7 +133,7 @@ class BuildDomino {
             break;
         case "print":
             if (w == null) nullElement();
-            else w.printPerm();
+            else System.out.println(w);
             break;
         case "rightmultiply":
             if (w == null) {
@@ -145,11 +145,11 @@ class BuildDomino {
             switch (form) {
             case "permutation":
                 x = fromPerm();
-                w.rightMultiply(x).printPerm();
+                System.out.println(w.rightMultiply(x));
                 break;
             case "expression":
                 x = fromRE(w.getRank());
-                w.findRE().rightMultiply(x.findRE()).print();
+                System.out.println(w.findRE().rightMultiply(x.findRE()));
                 break;
             default:
                 badInput(form);
@@ -166,11 +166,11 @@ class BuildDomino {
             switch (form) {
             case "permutation":
                 x = fromPerm();
-                w.leftMultiply(x).printPerm();
+                System.out.println(w.leftMultiply(x));
                 break;
             case "expression":
                 x = fromRE(w.getRank());
-                w.findRE().leftMultiply(x.findRE()).print();
+                System.out.println(w.findRE().leftMultiply(x.findRE()));
                 break;
             default:
                 badInput(form);
@@ -179,7 +179,7 @@ class BuildDomino {
             break;
         case "reduced":
             if (w == null) nullElement();
-            else w.findRE().print();
+            else System.out.println(w.findRE());
             break;
         case "length":
             if (w == null) nullElement();
@@ -188,15 +188,13 @@ class BuildDomino {
         case "descent":
             if (w == null) nullElement();
             else {
-                System.out.print("Right: ");
-                w.rightDescent().print();
-                System.out.print("Left: ");
-                w.leftDescent().print();
+                System.out.println("Right: " + w.rightDescent());
+                System.out.println("Left: " + w.leftDescent());
             }
             break;
         case "inverse":
             if (wInv == null) nullElement();
-            else wInv.printPerm();
+            else System.out.println(wInv);
             break;
         case "righttikz":
             if (tR == null) nullElement();

@@ -148,4 +148,22 @@ class BoundedSet {
         System.out.println("}");
     }
 
+    /**
+     * This returns a string of the elements of the current set in
+     * {braces}.
+     * @return The elements contained in the set
+     */
+    public String toString() {
+        String output = "{";
+
+        for (int i = 0; i < max - min + 1; i++) {
+            if (elements[i]) {
+                output += ((min + i) + ", ");
+            }
+        }
+
+        if (!isEmpty()) output += "\b\b";
+        return output += "}";
+    }
+
 }

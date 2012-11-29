@@ -168,20 +168,21 @@ class Domino {
     }
     
     /**
-     * This method prints the label, coordinates, and orientation of
-     * the given domino to the terminal.
-     * @return Nothing
+     * This method returns a string with the label, coordinates, and
+     * orientation of the given domino.
+     * @return A string with information about the domino
      */
-    public void printInfo() {
-        System.out.println("Label: " + label);
-        System.out.println("First block at (" + firstBlock.getXVal() + "," + firstBlock.getYVal() + ")");       
-        System.out.println("Second block at (" + secondBlock.getXVal() + "," + secondBlock.getYVal() + ")");
+    public String toString() {
+        String output = ("Label: " + label + "\n");
+        output += ("First block at (" + firstBlock.getXVal() + "," + firstBlock.getYVal() + ")\n");       
+        output += ("Second block at (" + secondBlock.getXVal() + "," + secondBlock.getYVal() + ")\n");
         if (isVertical) {
-            System.out.println("Vertical");
+            output += "Vertical";
         }
         else {
-            System.out.println("Horizontal");
+            output += "Horizontal";
         }
+        return output;
     }
 
 }

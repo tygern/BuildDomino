@@ -138,16 +138,20 @@ class Element {
     }
 
     /**
-     * This method prints the one line signed permutation of the
-     * element.
-     * @return Nothing
+     * This method returns a string of the one line signed permutation
+     * of the element.
+     * @return A string that describes the element
      */
-    public void printPerm() {
-        System.out.print("[" + oneLine[0]);
+    public String toString() {
+        String output;
+        
+        output = "[" + oneLine[0];
         for (int i = 1; i < rank; i++) {
-            System.out.print(", " + oneLine[i]);
+            output += (", " + oneLine[i]);
         }
-        System.out.print("]\n");
+        output += "]";
+
+        return output;
     }
 
     /**

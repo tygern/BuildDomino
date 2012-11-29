@@ -219,7 +219,7 @@ class Tableau {
      */
     public void printDomino(int label) {
         if (inTableau(label)) {
-            dominoes[label - 1].printInfo();
+            System.out.println(dominoes[label - 1]);
         }
         else {
             System.out.println("There is no domino with label " + label + " in the tableau.");
@@ -227,18 +227,21 @@ class Tableau {
     }
 
     /**
-     * This method prints the labels, coordinates, and orientation of
-     * the dominos in the tableau
-     * @return Nothing
+     * This method returns a string of the labels, coordinates, and
+     * orientation of the dominos in the tableau
+     * @return A sting with the dominoes in the tableau
      */
-    public void printAll() {
-        System.out.println("----------------------");
+    public String toString() {
+        String output = "----------------------\n";
+
         for(int i = 1; i <= rank; i++) {
             if (inTableau(i)) {
-                dominoes[i - 1].printInfo();
-                System.out.println("----------------------");
+                output += (dominoes[i - 1].toString() + "\n");
+                output += "----------------------\n";
             }
         }
+
+        return output;
     }
     
     /**

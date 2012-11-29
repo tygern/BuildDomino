@@ -66,11 +66,12 @@ class Coordinate {
     }
 
     /**
-     * This method prints the (x,y)-pair for the set of coordinates.
-     * @return Nothing.
+     * This method returns a string of the (x,y)-pair for the set of
+     * coordinates.
+     * @return a string of the coordinate pair
      */
-    public void print() {
-        System.out.println("(" + xVal + "," + yVal + ")");
+    public String toString() {
+        return ("(" + xVal + "," + yVal + ")");
     }
 
 }
