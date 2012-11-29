@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 by Tyson Gern
+ * Copyright (c) 2012 by Tyson Gern
  * Licensed under the MIT License 
  *
  * This class stores a bounded set of integers.  The methods contained
