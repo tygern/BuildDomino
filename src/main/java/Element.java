@@ -439,6 +439,12 @@ class Element {
         
     }
 
+    /**
+     * This method multiplies a signed permutation on the right by
+     * another signed permutation.
+     * @param the other element
+     * @return the product of this and other
+     */
     public Element rightMultiply(Element other) {
         if (other.rank != rank) {
             return null;
@@ -455,6 +461,12 @@ class Element {
         return result;
     }
 
+    /**
+     * This method multiplies a signed permutation on the left by
+     * another signed permutation.
+     * @param the other element
+     * @return the product of this and other
+     */
     public Element leftMultiply(Element other) {
         return other.rightMultiply(this);
     }

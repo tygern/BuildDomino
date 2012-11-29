@@ -53,4 +53,23 @@ public class CoxeterElementTest {
         assertFalse(v.isReduced());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testRightMultiplyRank() throws Exception {
+        int[] ww = {1, 2, 3, 4, 2, 1, 3, 4};
+        CoxeterElement w = new CoxeterElement(ww, 6);
+        u.rightMultiply(w);
+    }
+
+    @Test public void testRightMultiply() {
+        int[] ww = {1, 2, 3, 4, 2, 1, 3, 4};
+        CoxeterElement w = new CoxeterElement(ww, 4);
+        assertTrue(u.rightMultiply(v).equals(w));
+    }
+
+    @Test public void testLeftMultiply() {
+        int[] ww = {1, 2, 3, 4, 2, 1, 3, 4};
+        CoxeterElement w = new CoxeterElement(ww, 4);
+        assertTrue(v.rightMultiply(u).equals(w));
+    }
+
 }

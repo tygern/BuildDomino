@@ -10,6 +10,10 @@ class BuildDomino {
     public static String inputLine = "> ";
     public static String secondaryInputLine = ">> ";
     public static String notFound = "command not found";
+    public static String permLeft = "\\[";
+    public static String permRight = "\\]";
+    public static String exprLeft = "\\(";
+    public static String exprRight = "\\)";
     
     public static void main(String[] args) {
         Element w = null;
@@ -19,7 +23,7 @@ class BuildDomino {
         }
     }
 
-    public static int[] getArray() throws NumberFormatException {
+    public static int[] getArray(String left, String right) throws NumberFormatException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String userInput = null;
 
@@ -32,7 +36,7 @@ class BuildDomino {
             }
         }
 
-        String[] items = userInput.replaceAll("\\[", "").replaceAll("\\]", "").split(",");
+        String[] items = userInput.replaceAll(left, "").replaceAll(right, "").split(",");
         
         int[] results = new int[items.length];
         
@@ -98,6 +102,10 @@ class BuildDomino {
         System.out.println("");
     }
 
+    public static void badInput(String choice) {
+        System.out.println(choice + " : " + notFound);
+    }
+
     public static void nullElement() {
         System.out.println("Please enter an element first.");
     }
@@ -107,14 +115,17 @@ class BuildDomino {
         Element wInv = null;
         Element x = null;
         Tableau tL = null;
+        String choice, form;
+        
         if (w != null) {
             tR = new Tableau(w);
             wInv = w.findInverse();
             tL = new Tableau(wInv);
         }
-        String choice = getString(inputLine);
+
+        choice = getString(inputLine);
         switch (choice) {
-        case "generators":
+        case "expression":
             w = fromRE();
             break;
         case "permutation":
@@ -125,17 +136,45 @@ class BuildDomino {
             else w.printPerm();
             break;
         case "rightmultiply":
-            if (w == null) nullElement();
-            else {
+            if (w == null) {
+                nullElement();
+                break;
+            }
+            System.out.println("permutation or expression?");
+            form = getString(secondaryInputLine);
+            switch (form) {
+            case "permutation":
                 x = fromPerm();
                 w.rightMultiply(x).printPerm();
+                break;
+            case "expression":
+                x = fromRE(w.getRank());
+                w.findRE().rightMultiply(x.findRE()).print();
+                break;
+            default:
+                badInput(form);
+                break;
             }
             break;
         case "leftmultiply":
-            if (w == null) nullElement();
-            else {
+            if (w == null) {
+                nullElement();
+                break;
+            }
+            System.out.println("Permutation or expression?");
+            form = getString(secondaryInputLine);
+            switch (form) {
+            case "permutation":
                 x = fromPerm();
                 w.leftMultiply(x).printPerm();
+                break;
+            case "expression":
+                x = fromRE(w.getRank());
+                w.findRE().leftMultiply(x.findRE()).print();
+                break;
+            default:
+                badInput(form);
+                break;
             }
             break;
         case "reduced":
@@ -186,7 +225,7 @@ class BuildDomino {
             System.exit(0);
             break;
         default:
-            System.out.println(choice + " : " + notFound);
+            badInput(choice);
             break;
         }
 
@@ -203,7 +242,7 @@ class BuildDomino {
             while (intArray == null) {
                 System.out.print("Enter an element in terms of generators: \n" + secondaryInputLine);
                 try {
-                    intArray = getArray();
+                    intArray = getArray(exprLeft, exprRight);
                 }
                 catch (NumberFormatException nfe) {
                     System.out.println("Please input a list of positive integers separated by commas.");
@@ -211,6 +250,35 @@ class BuildDomino {
             }
             
             rank = getInt(rankBound, "Rank: \n" + secondaryInputLine);
+            
+            try {
+                wCox = new CoxeterElement(intArray, rank);
+            }
+            catch (NumberFormatException nfe) {
+                System.out.println("Invalid element");
+                intArray = null;
+            }
+        }
+
+        Element w = wCox.toPermutation();
+
+        return w;
+    }
+    public static Element fromRE(int rank) {
+        int[] intArray = null;
+        int highGenerator = 0;
+        CoxeterElement wCox = null;
+
+        while (wCox == null) {
+            while (intArray == null) {
+                System.out.print("Enter an element of rank " + rank + " in terms of generators: \n" + secondaryInputLine);
+                try {
+                    intArray = getArray(exprLeft, exprRight);
+                }
+                catch (NumberFormatException nfe) {
+                    System.out.println("Please input a list of positive integers separated by commas.");
+                }
+            }
             
             try {
                 wCox = new CoxeterElement(intArray, rank);
@@ -235,7 +303,7 @@ class BuildDomino {
             System.out.print("Enter a signed permutation: \n" + secondaryInputLine);        
 
             try {
-                intArray = getArray();
+                intArray = getArray(permLeft, permRight);
             }
             catch (NumberFormatException nfe) {
                 System.out.println("Please input a list of integers separated by commas.");

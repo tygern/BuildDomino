@@ -100,6 +100,43 @@ class CoxeterElement {
     }
 
     /**
+     * This method multiplies a element given in terms of generators
+     * on the right by another signed permutation and reduces the
+     * product.
+     * @param the other experssion
+     * @return a reduced expression for the product of this and other
+     */
+    public CoxeterElement rightMultiply(CoxeterElement other) {
+        if (rank != other.rank) {
+            throw new IllegalArgumentException("Invalid rank");
+        }
+        CoxeterElement result;
+        int[] newExpression = new int[length + other.length];
+        int i = 0;
+        while (i < length) {
+            newExpression[i] = expression[i];
+            i++;
+        }
+        while (i < length + other.length) {
+            newExpression[i] = other.expression[i - length];
+            i++;
+        }
+        result = new CoxeterElement(newExpression, rank);
+        return result.reduce();
+    }
+
+    /**
+     * This method multiplies a element given in terms of generators
+     * on the right by another signed permutation and reduces the
+     * product.
+     * @param the other experssion
+     * @return a reduced expression for the product of this and other
+     */
+    public CoxeterElement leftMultiply(CoxeterElement other) {
+        return other.rightMultiply(this);
+    }
+
+    /**
      * This method prints the given expression.
      * @return Nothing
      */

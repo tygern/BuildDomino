@@ -5,10 +5,11 @@ description of the capabilities and limitations of the program.
 The program works with a command interface. The list of available
 commands is the following :
 
-  - generators : Allows the user to enter an element of a Coxeter
-    group in terms of generators.  The generators should be entered as
-    a comma-separated list of positive integers.  The rank of the
-    element must be at least as large as the largest generator.
+  - expression : Allows the user to enter an expression for an element
+    of a Coxeter group in terms of generators.  The generators should
+    be entered as a comma-separated list of positive integers.  The
+    rank of the element must be at least as large as the largest
+    generator.
 
   - permutation : Allows the user to enter an element of a Coxeter
     group as a signed permutation.  The permutation should be entered
@@ -20,10 +21,12 @@ commands is the following :
     current element.
 
   - rightmultiply : Prints the current element multiplied by a new
-    element on the right.
+    element on the right. The user may choose to enter the element as
+    either an expression or a permutation.
 
   - leftmultiply : Prints the current element multiplied by a new
-    element on the left.
+    element on the left. The user may choose to enter the element as
+    either an expression or a permutation.
 
   - bad : Returns "true" if the element is bad and "false" if the
     element is not bad.
