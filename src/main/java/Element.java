@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 by Tyson Gern
+ * Copyright (c) 2012 by Tyson Gern
  * Licensed under the MIT License 
  */
 
@@ -89,7 +89,7 @@ class Element {
 
     /**
      * This method gets the number that origin maps to.
-     * @param origin The origen number
+     * @param origin The origin number
      * @return The element applied to origin
      */
     public int mapsTo(int origin) {
