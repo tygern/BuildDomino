@@ -17,6 +17,7 @@ Installation
 
 4. Run the BuildDomino jar in the target directory.
 
+        cd BuildDomino/target/
         java -jar build-domino-x.y.z.jar
         
 **Note:** Requires java JDK 7
