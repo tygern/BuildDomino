@@ -10,8 +10,9 @@ Installation
 
 2. *(Optional)* Install [buildr](http://buildr.apache.org/)
 
-3. *(Optional)* Run buildr package in the BuildDomino folder.
+3. *(Optional)* Build the jar package.
 
+        cd BuildDomino/
         buildr package
 
 4. Run the BuildDomino jar in the target directory.
