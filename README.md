@@ -1,6 +1,25 @@
 BuildDomino
 ===========
 
+Installation
+------------
+
+1.  Clone the BuildDomino repository:
+
+        git clone git@github.com/tygern/BuildDomino.git
+
+2. *(Optional)* Install [buildr](http://buildr.apache.org/)
+
+3. *(Optional)* Run buildr package in the BuildDomino folder.
+
+        buildr package
+
+4. Run the BuildDomino jar in the target directory.
+
+        java -jar build-domino-x.y.z.jar
+        
+**Note:** Requires java JDK 7
+
 Introduction
 ------------
 
