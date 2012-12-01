@@ -25,10 +25,7 @@ class Coordinate {
      * @return true if they are equal, otherwise false.
      */
     public boolean equals(Coordinate other) {
-        if ((this.xVal == other.xVal) && (this.yVal == other.yVal)) {
-            return true;
-        }
-        return false;
+        return ((this.xVal == other.xVal) && (this.yVal == other.yVal));
     }
 
     /**
