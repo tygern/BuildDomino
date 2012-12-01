@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Build Domino by tygern</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Build Domino</h1>
+        <p>Creates domino tableaux of elements of Coxeter groups of type D.</p>
+
+        <p class="view"><a href="https://github.com/tygern/BuildDomino">View the Project on GitHub <small>tygern/BuildDomino</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/tygern/BuildDomino/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/tygern/BuildDomino/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/tygern/BuildDomino">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>BuildDomino</h1>
+
+<h2>Installation</h2>
+
+<ol>
+<li>
+<p>Clone the BuildDomino repository:</p>
+
+<pre><code>git clone git@github.com/tygern/BuildDomino.git
+</code></pre>
+</li>
+<li><p><em>(Optional)</em> Install <a href="http://buildr.apache.org/">buildr</a></p></li>
+<li>
+<p><em>(Optional)</em> Build the jar package.</p>
+
+<pre><code>cd BuildDomino/
+buildr package
+</code></pre>
+</li>
+<li>
+<p>Run the BuildDomino jar in the target directory.</p>
+
+<pre><code>cd BuildDomino/target/
+java -jar build-domino-x.y.z.jar
+</code></pre>
+</li>
+</ol><p><strong>Note:</strong> Requires java JDK 7</p>
+
+<h2>Introduction</h2>
+
+<h3>Coxeter Groups</h3>
+
+<p>This program was developed to preform elementary operation on elements
+of type D <a href="http://en.wikipedia.org/wiki/Coxeter_group">Coxeter
+groups</a>.  It is also able
+to construct domino tableaux from elements of type D Coxeter
+groups. Devra Garfinkle developed an algorithm similar to the
+<a href="http://en.wikipedia.org/wiki/Robinson%E2%80%93Schensted_correspondence">Robinson--Schensted
+correspondence</a>
+to associate a signed permutations to a pair of domino tableaux. This
+pair of tableaux are difficult to compute by hand but are very
+useful. Like the Robinson--Schensted correspondence, this pair can be
+used to calculate the Kazhdan--Lusztig cells of the Coxeter group.
+The computation of these cells, as described in Garfinkle's papers,
+<em>On the classification of primitive ideals for complex classical Lie
+algebras</em> <a href="http://www.numdam.org/item?id=CM_1990__75_2_135_0">I</a>,
+<a href="http://www.numdam.org/item?id=CM_1992__81_3_307_0">II</a>, and
+<a href="http://www.numdam.org/item?id=CM_1993__88_2_187_0">III</a>, involves
+moving tableaux through sets called <em>cycles</em>.  I hope to add these
+calculations to a future version of BuildDomino.</p>
+
+<h3>Signed Permutations</h3>
+
+<p>A
+<a href="http://en.wikipedia.org/wiki/Hyperoctahedral_group">signed permutation</a>
+is a map from the set {-n, -(n-1), ... , -1, 1, ... , n-1, n} to
+itself such that x maps to y if and only if -x maps to -y. The set of
+signed permutations can be represented as permutations of n coins
+where flipping is allowed.  As with regular permutations, each signed
+permutation can be written in <em>one line notation</em>.  A Coxeter group of
+type B is isomorphic to the group of signed permutations, and a
+Coxeter group of type D is isomorphic to an index 2 subgroup.</p>
+
+<h2>Use</h2>
+
+<h3>Input</h3>
+
+<p>You may input an element either as a signed permutation or as a
+expression in terms of generators.  In either case, you must enter
+your element as a list of integers separated by commas.  For example,
+I would input the signed permutation that fixes 2 and 4, sends 1 to -3
+and 3 to -1 as [-3, 2, -1, 4]. I would enter the element
+(s1)(s2)(s3)(s4)(s3) as [1,2,3,4,3].  I use (s_3) as my
+branch node for the type D
+<a href="http://en.wikipedia.org/wiki/Coxeter%E2%80%93Dynkin_diagram">Coxeter diagram</a>.</p>
+
+<h3>Output</h3>
+
+<h4>Elementary Calculations</h4>
+
+<p>BuildDomino is able to compute the length, descent sets, and inverse
+of an element.  It can also tell whether a particular element is a
+<em>bad</em> element.  We define a bad element to be an element that has no
+reduced expressions beginning or ending in two noncommuting generators
+that is not a product of commuting generators.  Each of these
+computations is conducted using the signed permutation corresponding
+to the element.</p>
+
+<h4>Domino Tableaux</h4>
+
+<p>Once the user enters a Coxeter group element, BuildDomino can output
+the right and left domino tableau.  The user has two choices for the
+form of the output.  The tableau can be drawn in a graphical window or
+can be written in <a href="http://sourceforge.net/projects/pgf/">TikZ</a> code
+for inclusion in <a href="http://www.latex-project.org/">LaTeX</a> documents.
+You also have the option of viewing your original element or its
+inverse as a signed permutation.  This is especially useful if you
+enter an element in terms of generators.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/tygern">tygern</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
