@@ -1,8 +1,5 @@
-BuildDomino
-===========
-
 Installation
-------------
+============
 
 1.  Clone the BuildDomino repository:
 
@@ -23,9 +20,10 @@ Installation
 **Note:** Requires java JDK 7
 
 Introduction
-------------
+============
 
-### Coxeter Groups
+Coxeter Groups
+--------------
 
 This program was developed to preform elementary operation on elements
 of type D [Coxeter
@@ -46,7 +44,8 @@ algebras* [I](http://www.numdam.org/item?id=CM_1990__75_2_135_0),
 moving tableaux through sets called *cycles*.  I hope to add these
 calculations to a future version of BuildDomino.
 
-### Signed Permutations
+Signed Permutations
+-------------------
 
 A
 [signed permutation](http://en.wikipedia.org/wiki/Hyperoctahedral_group)
@@ -59,9 +58,10 @@ type B is isomorphic to the group of signed permutations, and a
 Coxeter group of type D is isomorphic to an index 2 subgroup.
 
 Use
----
+===
 
-### Input
+Input
+-----
 
 You may input an element either as a signed permutation or as a
 expression in terms of generators.  In either case, you must enter
@@ -72,9 +72,10 @@ and 3 to -1 as \[\-3, 2, \-1, 4\]. I would enter the element
 branch node for the type D
 [Coxeter diagram](http://en.wikipedia.org/wiki/Coxeter%E2%80%93Dynkin_diagram).
 
-### Output
+Output
+------
 
-#### Elementary Calculations
+### Elementary Calculations
 
 BuildDomino is able to compute the length, descent sets, and inverse
 of an element.  It can also tell whether a particular element is a
@@ -84,7 +85,7 @@ that is not a product of commuting generators.  Each of these
 computations is conducted using the signed permutation corresponding
 to the element.
 
-#### Domino Tableaux
+### Domino Tableaux
 
 Once the user enters a Coxeter group element, BuildDomino can output
 the right and left domino tableau.  The user has two choices for the
