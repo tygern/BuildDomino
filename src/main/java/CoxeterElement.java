@@ -40,6 +40,22 @@ class CoxeterElement {
     }
 
     /**
+     * This method gets the rank of the CoxeterElement
+     * @return The rank
+     */
+    public int getRank() {
+        return rank;
+    }
+
+    /**
+     * This method gets the length of the CoxeterElement
+     * @return The length
+     */
+    public int getLength() {
+        return length;
+    }
+
+    /**
      * This method decides if two elements of a Coxeter group are
      * equal.
      * @param other The other element
@@ -48,6 +64,19 @@ class CoxeterElement {
     public boolean equals(CoxeterElement other) {
         if (rank != other.rank) return false;
         return (toPermutation().equals(other.toPermutation()));
+    }
+
+    /**
+     * This method returns the nth generator in the given expression
+     * for the CoxeterElement.
+     * @param n The place of the desired generator
+     * @return The label of the generator
+     */
+    public int nthGenerator(int n) {
+        if ((n >= 0) && (n < length)) {
+            return expression[n];
+        }
+        return 0;
     }
 
     /**

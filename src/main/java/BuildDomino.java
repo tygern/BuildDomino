@@ -115,10 +115,12 @@ class BuildDomino {
         Element wInv = null;
         Element x = null;
         Tableau tL = null;
+        Heap wHeap = null;
         String choice, form;
         
         if (w != null) {
             tR = new Tableau(w);
+            wHeap = new Heap(w);
             wInv = w.findInverse();
             tL = new Tableau(wInv);
         }
@@ -203,6 +205,10 @@ class BuildDomino {
         case "lefttikz":
             if (tL == null) nullElement();
             else tL.tikzDraw();
+            break;
+        case "heaptikz":
+            if (wHeap == null) nullElement();
+            else wHeap.tikzDraw();
             break;
         case "rightdraw":
             if (tR == null) nullElement();

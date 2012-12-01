@@ -49,3 +49,5 @@ commands is the following :
 
   - rightdraw : Draws the right domino tableau of the current element in
     a graphical window.
+
+  - heaptikz : Prints tikz code for a heap of the current element.
