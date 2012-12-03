@@ -25,13 +25,18 @@ Introduction
 Coxeter Groups
 --------------
 
-This program was developed to preform elementary operation on elements
-of type D [Coxeter
-groups](http://en.wikipedia.org/wiki/Coxeter_group).  It is also able
-to construct domino tableaux from elements of type D Coxeter
-groups. Devra Garfinkle developed an algorithm similar to the
-[Robinson--Schensted
-correspondence](http://en.wikipedia.org/wiki/Robinson%E2%80%93Schensted_correspondence)
+This program was developed to preform operations on elements of type D
+[Coxeter groups](http://en.wikipedia.org/wiki/Coxeter_group).  For
+more information on Coxeter Groups see James E. Humphreys'
+[Reflection Groups and Coxeter Groups](http://books.google.com/books/about/Reflection_Groups_and_Coxeter_Groups.html?id=ODfjmOeNLMUC).
+
+Domino Tableaux
+---------------
+
+Build Domino is able to construct domino tableaux from elements of
+type D Coxeter groups. Devra Garfinkle developed an algorithm similar
+to the
+[Robinson--Schensted correspondence](http://en.wikipedia.org/wiki/Robinson%E2%80%93Schensted_correspondence)
 to associate a signed permutations to a pair of domino tableaux. This
 pair of tableaux are difficult to compute by hand but are very
 useful. Like the Robinson--Schensted correspondence, this pair can be
@@ -43,6 +48,19 @@ algebras* [I](http://www.numdam.org/item?id=CM_1990__75_2_135_0),
 [III](http://www.numdam.org/item?id=CM_1993__88_2_187_0), involves
 moving tableaux through sets called *cycles*.  I hope to add these
 calculations to a future version of BuildDomino.
+
+Heaps
+-----
+
+A heap is a useful tool in visualizing reduced expressions of an
+element of a Coxeter group.  To construct a heap, we imagine dropping
+wide blocks on the Coxeter graph corresponding to our group.  When we
+try to place adjacent blocks there is not enough room, so they must
+stack on top of each other.  A heap of an element of a Coxeter group
+of type D is difficult to draw in two dimensions.  In the heaps
+created by BuildDomino, it appears as if blocks labeled with 1 and 2
+may occupy the same space, when actually they must sit beside each
+other.
 
 Signed Permutations
 -------------------
@@ -81,9 +99,16 @@ BuildDomino is able to compute the length, descent sets, and inverse
 of an element.  It can also tell whether a particular element is a
 *bad* element.  We define a bad element to be an element that has no
 reduced expressions beginning or ending in two noncommuting generators
-that is not a product of commuting generators.  Each of these
-computations is conducted using the signed permutation corresponding
-to the element.
+that is not a product of commuting generators.
+
+The user also has the option of viewing your original element or its
+inverse as a signed permutation or reduced expression.  This is
+especially useful if you enter an element in terms of generators, or
+when attempting to find reduced expressions corresponding to signed
+permutations.
+
+Each of these computations is conducted using the signed permutation
+corresponding to the element.
 
 ### Domino Tableaux
 
@@ -92,6 +117,10 @@ the right and left domino tableau.  The user has two choices for the
 form of the output.  The tableau can be drawn in a graphical window or
 can be written in [TikZ](http://sourceforge.net/projects/pgf/) code
 for inclusion in [LaTeX](http://www.latex-project.org/) documents.
-You also have the option of viewing your original element or its
-inverse as a signed permutation.  This is especially useful if you
-enter an element in terms of generators.
+
+### Heaps
+
+Once the user enters a Coxeter group element, BuildDomino can output a
+heap corresponding to a reduced expression for the current element.  As
+above, the user has two choices for the form of the output.  The heap
+can be drawn in a graphical window or can be written in TikZ code.
