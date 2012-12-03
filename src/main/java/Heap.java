@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 class Heap {
     private int size; // The number of blocks in the heap.
     private int rank; // The rank of the Coxeter Group.
+    private int tall; // The height of the heap
+    private int wide; // The width of the heap
     private int height[]; // The height of the heap at a given row.
     private Domino[] blocks; // array of dominoes representing blocks.
     private boolean[] firstBlock; // Does the first block in the row
@@ -26,14 +28,21 @@ class Heap {
         rank = wRE.getRank();
         height = new int[rank];
 
-        firstBlock = new boolean[size]; 
+        firstBlock = new boolean[size + 1]; 
         for (int i = 0; i < size; i++) firstBlock[i] = false;
 
         for (int i = 0; i < size; i++) {
             drop(wRE.nthGenerator(i), i);
         }
+        if (wide == 1) wide = 2;
     }
 
+    /**
+     * This method adds a block with label "label" to a heap.
+     * @param label The label of the domino to add
+     * @param index The index of the domino to add
+     * @return Nothing
+     */
     private void drop(int label, int index) {
         int col;
         int row;
@@ -56,7 +65,26 @@ class Heap {
             height[col + 1] = row + 1;
         }
 
+        if (row + 1 > tall) tall = row + 1;
+        if (label > wide) wide = label;
+
         blocks[index] = new Domino(label, col, row, false); 
+    }
+
+    /**
+     * This method returns the width of the heap.
+     * @return The width of the heap
+     */
+    public int maxWidth() {
+        return wide;
+    }
+
+    /**
+     * This method returns the height of the heap.
+     * @return The height of the heap
+     */
+    public int maxHeight() {
+        return tall;
     }
 
     /**
