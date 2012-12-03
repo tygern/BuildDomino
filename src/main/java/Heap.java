@@ -72,6 +72,31 @@ class Heap {
     }
 
     /**
+     * This method returns the number of blocks in the heap.
+     * @return The size of the heap
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * This method returns the rank of the Coxeter group
+     * @return The rank of the Coxeter group
+     */
+    public int getRank() {
+        return rank;
+    }
+
+    /**
+     * This method returns block in a given index
+     * @param index The index of the block
+     * @return The size of the heap
+     */
+    public Domino getBlock(int index) {
+        return blocks[index];
+    }
+
+    /**
      * This method returns the width of the heap.
      * @return The width of the heap
      */
@@ -119,5 +144,18 @@ class Heap {
         // Ending TikZ code
         System.out.println("\\end{tikzpicture}");
         System.out.println("");       
+    }
+
+    /**
+     * This method draws the heap in a graphical window.
+     * @return Nothing
+     */
+    public void screenDraw() {
+        DrawHeap canvas = new DrawHeap(this);
+        JFrame frame = new JFrame();
+
+        frame.setSize(canvas.width, canvas.height);
+        frame.getContentPane().add(canvas);
+        frame.setVisible(true);
     }
 }

@@ -97,7 +97,7 @@ class BuildDomino {
 
     public static void intro() {
         System.out.println("");
-        System.out.println("BuildDomino version 0.1.");
+        System.out.println("BuildDomino version 0.2.");
         System.out.println("Enter help if you need assistance.");
         System.out.println("");
     }
@@ -217,6 +217,10 @@ class BuildDomino {
         case "leftdraw":
             if (tL == null) nullElement();
             else tL.screenDraw();
+            break;
+        case "heapdraw":
+            if (wHeap == null) nullElement();
+            else wHeap.screenDraw();
             break;
         case "bad":
             if (tL == null) nullElement();
