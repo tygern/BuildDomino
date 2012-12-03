@@ -1,42 +1,37 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Build Domino : Creates domino tableaux of elements of Coxeter groups of type D." />
 
-  <title>Build Domino</title>
-  <meta name="description" content="Creates domino tableaux of elements of Coxeter groups of type D.">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Build Domino</title>
+  </head>
 
-</head>
+  <body>
 
-<body>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/tygern/BuildDomino">View on GitHub</a>
 
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Build Domino</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">Creates domino tableaux of elements of Coxeter groups of type D.</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/tygern/BuildDomino/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/tygern/BuildDomino/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/tygern/BuildDomino" class="code">View Build Domino on GitHub</a>
-        </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
-          <h1>Installation</h1>
+          <h1 id="project_title">Build Domino</h1>
+          <h2 id="project_tagline">Creates domino tableaux of elements of Coxeter groups of type D.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/tygern/BuildDomino/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/tygern/BuildDomino/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Installation</h1>
 
 <ol>
 <li>
@@ -60,19 +55,23 @@ buildr package
 java -jar build-domino-x.y.z.jar
 </code></pre>
 </li>
-</ol><p><strong>Note:</strong> Requires java JDK 7</p>
+</ol><p><strong>Note:</strong> Requires java JRE 7</p>
 
 <h1>Introduction</h1>
 
 <h2>Coxeter Groups</h2>
 
-<p>This program was developed to preform elementary operation on elements
-of type D <a href="http://en.wikipedia.org/wiki/Coxeter_group">Coxeter
-groups</a>.  It is also able
-to construct domino tableaux from elements of type D Coxeter
-groups. Devra Garfinkle developed an algorithm similar to the
-<a href="http://en.wikipedia.org/wiki/Robinson%E2%80%93Schensted_correspondence">Robinson--Schensted
-correspondence</a>
+<p>This program was developed to preform operations on elements of type D
+<a href="http://en.wikipedia.org/wiki/Coxeter_group">Coxeter groups</a>.  For
+more information on Coxeter Groups see James E. Humphreys'
+<a href="http://books.google.com/books/about/Reflection_Groups_and_Coxeter_Groups.html?id=ODfjmOeNLMUC">Reflection Groups and Coxeter Groups</a>.</p>
+
+<h2>Domino Tableaux</h2>
+
+<p>Build Domino is able to construct domino tableaux from elements of
+type D Coxeter groups. Devra Garfinkle developed an algorithm similar
+to the
+<a href="http://en.wikipedia.org/wiki/Robinson%E2%80%93Schensted_correspondence">Robinson--Schensted correspondence</a>
 to associate a signed permutations to a pair of domino tableaux. This
 pair of tableaux are difficult to compute by hand but are very
 useful. Like the Robinson--Schensted correspondence, this pair can be
@@ -84,6 +83,18 @@ algebras</em> <a href="http://www.numdam.org/item?id=CM_1990__75_2_135_0">I</a>,
 <a href="http://www.numdam.org/item?id=CM_1993__88_2_187_0">III</a>, involves
 moving tableaux through sets called <em>cycles</em>.  I hope to add these
 calculations to a future version of BuildDomino.</p>
+
+<h2>Heaps</h2>
+
+<p>A heap is a useful tool in visualizing reduced expressions of an
+element of a Coxeter group.  To construct a heap, we imagine dropping
+wide blocks on the Coxeter graph corresponding to our group.  When we
+try to place adjacent blocks there is not enough room, so they must
+stack on top of each other.  A heap of an element of a Coxeter group
+of type D is difficult to draw in two dimensions.  In the heaps
+created by BuildDomino, it appears as if blocks labeled with 1 and 2
+may occupy the same space, when actually they must sit beside each
+other.</p>
 
 <h2>Signed Permutations</h2>
 
@@ -118,9 +129,16 @@ branch node for the type D
 of an element.  It can also tell whether a particular element is a
 <em>bad</em> element.  We define a bad element to be an element that has no
 reduced expressions beginning or ending in two noncommuting generators
-that is not a product of commuting generators.  Each of these
-computations is conducted using the signed permutation corresponding
-to the element.</p>
+that is not a product of commuting generators.</p>
+
+<p>The user also has the option of viewing your original element or its
+inverse as a signed permutation or reduced expression.  This is
+especially useful if you enter an element in terms of generators, or
+when attempting to find reduced expressions corresponding to signed
+permutations.</p>
+
+<p>Each of these computations is conducted using the signed permutation
+corresponding to the element.</p>
 
 <h3>Domino Tableaux</h3>
 
@@ -128,31 +146,26 @@ to the element.</p>
 the right and left domino tableau.  The user has two choices for the
 form of the output.  The tableau can be drawn in a graphical window or
 can be written in <a href="http://sourceforge.net/projects/pgf/">TikZ</a> code
-for inclusion in <a href="http://www.latex-project.org/">LaTeX</a> documents.
-You also have the option of viewing your original element or its
-inverse as a signed permutation.  This is especially useful if you
-enter an element in terms of generators.</p>
-        </article>
-      </div>
+for inclusion in <a href="http://www.latex-project.org/">LaTeX</a> documents.</p>
+
+<h3>Heaps</h3>
+
+<p>Once the user enters a Coxeter group element, BuildDomino can output a
+heap corresponding to a reduced expression for the current element.  As
+above, the user has two choices for the form of the output.  The heap
+can be drawn in a graphical window or can be written in TikZ code.</p>
+      </section>
     </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/tygern" class="avatar"><img src="https://secure.gravatar.com/avatar/e0f8dcd13722c13ac14478053eb0f152?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/tygern">tygern</a> maintains <a href="https://github.com/tygern/BuildDomino">Build Domino</a></p>
 
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Build Domino maintained by <a href="https://github.com/tygern">tygern</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
 
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/tygern/BuildDomino/tarball/master" class="tar">tar</a><a href="https://github.com/tygern/BuildDomino/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
-
-            <script type="text/javascript">
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -163,5 +176,6 @@ enter an element in terms of generators.</p>
             } catch(err) {}
           </script>
 
-</body>
+
+  </body>
 </html>
