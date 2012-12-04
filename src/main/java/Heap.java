@@ -20,6 +20,11 @@ class Heap {
     private boolean[] firstBlock; // Does the first block in the row
                                   // have a 1 or 2?
     
+    /**
+     * This constructs a heap from a reduced expression of an element
+     * w of a Coxeter group.
+     * @param w The element of the Coxeter group
+     */
     public Heap (Element w) {
         CoxeterElement wRE = w.findRE(); // Note that this will always be reduced.
         
