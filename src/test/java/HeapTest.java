@@ -17,7 +17,7 @@ public class HeapTest {
     int[] ww6 = {-1, -6, 3, -4, 5, -2};
 
 
-    Heap hw4, hv4, hx4, hu4, hw46, hw6;
+    Heap hw4, hv4, hx4, hu4, hw46, hw6, cehw4;
     Element w4, v4, x4, u4, w46, w6;
 
     @Before public void setUp() {
@@ -34,6 +34,7 @@ public class HeapTest {
         hu4 = new Heap(u4);
         hw46 = new Heap(w46);
         hw6 = new Heap(w6);
+        cehw4 = new Heap(w4.findRE());
     }
     
     @After public void tearDown() {

@@ -22,7 +22,7 @@ class Heap {
     
     /**
      * This constructs a heap from a reduced expression of an element
-     * w of a Coxeter group.
+     * w of a Coxeter group given as a signed permutation.
      * @param w The element of the Coxeter group
      */
     public Heap (Element w) {
@@ -40,6 +40,16 @@ class Heap {
             drop(wRE.nthGenerator(i), i);
         }
         if (wide == 1) wide = 2;
+    }
+
+    /**
+     * This constructs a heap from a reduced expression of an element
+     * w of a Coxeter group given as a (not necessarily reduced)
+     * product of generators.
+     * @param w The element of the Coxeter group
+     */
+    public Heap (CoxeterElement w) {
+        this(w.toPermutation());
     }
 
     /**
