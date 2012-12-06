@@ -1,5 +1,7 @@
+THIS_VERSION = "0.2.0-SNAPSHOT"
+
 define 'build-domino' do
-  project.version = '0.2.0'
+  project.version = THIS_VERSION
   package(:jar).with :manifest=>{
     'Copyright'=>'Tyson Gern, 2012',
     'Main-Class'=>'BuildDomino'
