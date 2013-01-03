@@ -7,9 +7,9 @@ import org.junit.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class ElementTest {
+public class TypeDTest {
 
-    Element u, v, w, x, y, z;
+    TypeD u, v, w, x, y, z;
 
     int[] uu = {1, 2, 3, 4};
     int[] vv = {1, 2, 3, 4};
@@ -19,12 +19,12 @@ public class ElementTest {
     int[] zz = {1, 3, 2, 4};
 
     @Before public void setUp() {
-        u = new Element(uu);
-        v = new Element(vv);
-        w = new Element(ww);
-        x = new Element(xx);
-        y = new Element(yy);
-        z = new Element(zz);
+        u = new TypeD(uu);
+        v = new TypeD(vv);
+        w = new TypeD(ww);
+        x = new TypeD(xx);
+        y = new TypeD(yy);
+        z = new TypeD(zz);
     }
     
     @After public void tearDown() {
@@ -45,25 +45,25 @@ public class ElementTest {
     @Test(expected = IllegalArgumentException.class)
     public void testRangeBig() throws Exception {
         int[] big = {-7,1,-2,3};
-        Element bigElm = new Element(big);
+        TypeD bigElm = new TypeD(big);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testRangeZero() throws Exception {
         int[] zero = {-4,0,-2,3};
-        Element zeroElm = new Element(zero);
+        TypeD zeroElm = new TypeD(zero);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testRepeat() throws Exception {
         int[] repeat = {2,1,-2,3};
-        Element repeatElm = new Element(repeat);
+        TypeD repeatElm = new TypeD(repeat);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSign() throws Exception {
         int[] sign = {-4,1,2,3};
-        Element signElm = new Element(sign);
+        TypeD signElm = new TypeD(sign);
     }
 
     @Test public void testGetSign() {
@@ -94,7 +94,7 @@ public class ElementTest {
     
     @Test public void testFindInverse() {
         int[] yi = {1, -4, 2, -3};
-        Element yInv = new Element(yi);
+        TypeD yInv = new TypeD(yi);
         
         assertTrue(v.findInverse().equals(v));
         assertTrue(w.findInverse().equals(w));
@@ -107,9 +107,9 @@ public class ElementTest {
         int[] ww6 = {-1, -6, 3, -4, 5, -2};
         int[] ww8 = {1, -8, 3, -6, 5, -4, 7, -2};
 
-        Element w4 = new Element(ww4);
-        Element w6 = new Element(ww6);
-        Element w8 = new Element(ww8);
+        TypeD w4 = new TypeD(ww4);
+        TypeD w6 = new TypeD(ww6);
+        TypeD w8 = new TypeD(ww8);
         
         assertTrue(w4.isBad());
         assertTrue(w6.isBad());
@@ -149,7 +149,7 @@ public class ElementTest {
 
     @Test public void testRightMultiply() {
         int[] yyww = {1, 2, -4, -3};
-        Element yw = new Element(yyww);
+        TypeD yw = new TypeD(yyww);
         
         assertTrue(u.rightMultiply(v).equals(u));
         assertTrue(w.rightMultiply(y).equals(z));

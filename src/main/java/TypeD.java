@@ -11,7 +11,7 @@ import java.util.*;
  * can preform elementary operations on the element.
  * @author Tyson Gern (tygern@gmail.com)
  */
-class Element {
+class TypeD {
     private int[] oneLine; // The signed permutation of the element
     private int rank; // The rank of the Coxeter group containing the
                       // element
@@ -20,7 +20,7 @@ class Element {
      * This constructs an element from a signed permutation.
      * @param input The signed permutation
      */
-    public Element(int[] input) {
+    public TypeD(int[] input) {
         rank = input.length;
         oneLine = new int[rank];
         int sign = 1;
@@ -47,7 +47,7 @@ class Element {
      * This constructs an empty element of a particular rank.
      * @param rank The rank of the element
      */
-    private Element(int rank) {
+    private TypeD(int rank) {
         this.rank = rank;
         oneLine = new int[rank];
     }
@@ -66,7 +66,7 @@ class Element {
      * @param other The other element
      * @return true if the two elements are equal
      */
-    public boolean equals(Element other) {
+    public boolean equals(TypeD other) {
         if (rank != other.rank) return false;
 
         for (int i = 0; i < rank; i++) {
@@ -121,8 +121,8 @@ class Element {
      * This method gets the inverse
      * @return The inverse of element
      */
-    public Element findInverse() {
-        Element inverse = new Element(this.rank);
+    public TypeD findInverse() {
+        TypeD inverse = new TypeD(this.rank);
         for(int i = 0; i < rank; i++) {
             inverse.oneLine[Math.abs(this.oneLine[i]) - 1] = this.getSign(i + 1) * (i + 1);
         }
@@ -160,7 +160,7 @@ class Element {
      * @param s The generator
      * @return Nothing
      */
-    private Element rightMultiplyS(int s) {
+    private TypeD rightMultiplyS(int s) {
         if (s <= rank && s >= 1) {
             int temp;
             int sign = 1;
@@ -183,7 +183,7 @@ class Element {
      * @param s The generator
      * @return Nothing
      */
-    private Element leftMultiplyS(int s) {
+    private TypeD leftMultiplyS(int s) {
         if (s <= rank && s >= 1) {
             int val1;
             int val2;
@@ -421,7 +421,7 @@ class Element {
      */
     public CoxeterElement findRE() {
         ArrayList<Integer> generator = new ArrayList<Integer> ();
-        Element permutation = new Element(oneLine);
+        TypeD permutation = new TypeD(oneLine);
         
         while (permutation.length() != 0) {
             for (int i = permutation.rank; i >= 1; i--) {
@@ -449,19 +449,19 @@ class Element {
      * @param the other element
      * @return the product of this and other
      */
-    public Element rightMultiply(Element other) {
+    public TypeD rightMultiply(TypeD other) {
         if (other.rank != rank) {
             return null;
         }
         
-        Element result;
+        TypeD result;
         int[] resultPerm = new int[rank];
 
         for (int i = 1; i <= rank; i++) {
             resultPerm[i - 1] = mapsTo(other.mapsTo(i));
         }
 
-        result = new Element(resultPerm);
+        result = new TypeD(resultPerm);
         return result;
     }
 
@@ -471,7 +471,7 @@ class Element {
      * @param the other element
      * @return the product of this and other
      */
-    public Element leftMultiply(Element other) {
+    public TypeD leftMultiply(TypeD other) {
         return other.rightMultiply(this);
     }
 }

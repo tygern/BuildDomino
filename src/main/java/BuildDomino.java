@@ -16,7 +16,7 @@ class BuildDomino {
     public static String exprRight = "\\)";
     
     public static void main(String[] args) {
-        Element w = null;
+        TypeD w = null;
         intro();
         while(true) {
             w = prompt(w);
@@ -110,10 +110,10 @@ class BuildDomino {
         System.out.println("Please enter an element first.");
     }
 
-    public static Element prompt(Element w) {
+    public static TypeD prompt(TypeD w) {
         Tableau tR = null;
-        Element wInv = null;
-        Element x = null;
+        TypeD wInv = null;
+        TypeD x = null;
         Tableau tL = null;
         Heap wHeap = null;
         String choice, form;
@@ -240,7 +240,7 @@ class BuildDomino {
         return w;
     }
 
-    public static Element fromRE() {
+    public static TypeD fromRE() {
         int rank;
         int[] intArray = null;
         int highGenerator = 0;
@@ -268,11 +268,11 @@ class BuildDomino {
             }
         }
 
-        Element w = wCox.toPermutation();
+        TypeD w = wCox.toPermutation();
 
         return w;
     }
-    public static Element fromRE(int rank) {
+    public static TypeD fromRE(int rank) {
         int[] intArray = null;
         int highGenerator = 0;
         CoxeterElement wCox = null;
@@ -297,14 +297,14 @@ class BuildDomino {
             }
         }
 
-        Element w = wCox.toPermutation();
+        TypeD w = wCox.toPermutation();
 
         return w;
     }
 
-    public static Element fromPerm() {
+    public static TypeD fromPerm() {
         int rank = -1;
-        Element w = null;
+        TypeD w = null;
         int[] intArray = null;
 
         while (w == null) {
@@ -319,7 +319,7 @@ class BuildDomino {
 
             if (intArray != null) {
                 try {
-                    w = new Element(intArray);
+                    w = new TypeD(intArray);
                 }
                 catch (IllegalArgumentException iae) {
                     System.out.println("Please use a valid signed permutation.");

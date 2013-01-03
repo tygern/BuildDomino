@@ -32,7 +32,7 @@ class Tableau {
      * Coxeter group.
      * @param w The element of the Coxeter group
      */
-    public Tableau (Element w) {
+    public Tableau (TypeD w) {
         rank = w.getRank();
         dominoes = new Domino[rank];
         Domino temp;

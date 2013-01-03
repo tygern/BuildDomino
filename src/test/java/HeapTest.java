@@ -18,15 +18,15 @@ public class HeapTest {
 
 
     Heap hw4, hv4, hx4, hu4, hw46, hw6, cehw4;
-    Element w4, v4, x4, u4, w46, w6;
+    TypeD w4, v4, x4, u4, w46, w6;
 
     @Before public void setUp() {
-        w4 = new Element(ww4);
-        v4 = new Element(vv4);
-        x4 = new Element(xx4);
-        u4 = new Element(uu4);
-        w46 = new Element(ww46);
-        w6 = new Element(ww6);
+        w4 = new TypeD(ww4);
+        v4 = new TypeD(vv4);
+        x4 = new TypeD(xx4);
+        u4 = new TypeD(uu4);
+        w46 = new TypeD(ww46);
+        w6 = new TypeD(ww6);
 
         hw4 = new Heap(w4);
         hv4 = new Heap(v4);

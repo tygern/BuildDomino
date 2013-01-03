@@ -17,15 +17,15 @@ public class TableauTest {
     int[] vv6 = {-6, -1, 3, -4, -2, 5};
 
     Tableau tw4, tv4, tu4, tw46, tw6, tv6;
-    Element w4, v4, u4, w46, w6, v6;
+    TypeD w4, v4, u4, w46, w6, v6;
 
     @Before public void setUp() {
-        w4 = new Element(ww4);
-        v4 = new Element(vv4);
-        u4 = new Element(uu4);
-        w46 = new Element(ww46);
-        w6 = new Element(ww6);
-        v6 = new Element(vv6);
+        w4 = new TypeD(ww4);
+        v4 = new TypeD(vv4);
+        u4 = new TypeD(uu4);
+        w46 = new TypeD(ww46);
+        w6 = new TypeD(ww6);
+        v6 = new TypeD(vv6);
 
         tw4 = new Tableau(w4);
         tv4 = new Tableau(v4);

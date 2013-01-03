@@ -84,11 +84,11 @@ class CoxeterElement {
      * product of commuting generators to a signed permutation.
      * @return the corresponding signed permutation
      */
-    public Element toPermutation() {
+    public TypeD toPermutation() {
         int[] permutation = new int[rank];
         int temp;
         int generator;
-        Element answer;
+        TypeD answer;
 
         for (int i = 0; i < rank; i++) {
             permutation[i] = i + 1;
@@ -106,7 +106,7 @@ class CoxeterElement {
                 permutation[1] = -1 * temp;
             }
         }
-        answer = new Element(permutation);
+        answer = new TypeD(permutation);
         return answer;
     }
 

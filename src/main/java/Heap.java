@@ -25,7 +25,7 @@ class Heap {
      * w of a Coxeter group given as a signed permutation.
      * @param w The element of the Coxeter group
      */
-    public Heap (Element w) {
+    public Heap (TypeD w) {
         CoxeterElement wRE = w.findRE(); // Note that this will always be reduced.
         
         size = wRE.getLength();

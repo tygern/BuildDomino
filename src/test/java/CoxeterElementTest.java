@@ -38,7 +38,7 @@ public class CoxeterElementTest {
 
     @Test public void testToPermutation() {
         int[] uuP = {-1, 3, 4, -2};
-        Element uP = new Element(uuP);
+        TypeD uP = new TypeD(uuP);
 
         assertTrue(u.toPermutation().equals(uP));
         assertTrue(u.toPermutation().equals(v.toPermutation()));
