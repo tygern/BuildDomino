@@ -17,6 +17,12 @@ abstract class Element {
     protected int rank; // The rank of the Coxeter group containing
                         // the element
 
+    abstract boolean isRightDescent(int s);
+
+    abstract Element findInverse();
+
+    abstract int length();
+
     /**
      * This method gets the size of the element
      * @return The rank
@@ -63,6 +69,14 @@ abstract class Element {
                 return -1 * (i + 1);
         }
         return 0;
+    }
+
+    /**
+     * This method inverts the element
+     * @return Nothing
+     */
+    public void invert() {
+        this.oneLine = findInverse().oneLine;
     }
 
     /**
@@ -199,10 +213,6 @@ abstract class Element {
 
         return right;
     }
-
-    abstract boolean isRightDescent(int s);
-
-    abstract Element findInverse();
 
     /**
      * This method gets the left descent set of the element.

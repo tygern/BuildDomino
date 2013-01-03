@@ -81,14 +81,6 @@ class TypeD extends Element{
     }
 
     /**
-     * This method inverts the element
-     * @return Nothing
-     */
-    public void invert() {
-        this.oneLine = findInverse().oneLine;
-    }
-
-    /**
      * This method multiplies the element on the right by a generator,
      * s.
      * @param s The generator

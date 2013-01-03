@@ -116,7 +116,16 @@ class TypeA extends Element{
         return countInv();
     }
 
+    /**
+     * This method returns true if s is in the right descent set of
+     * the element, false otherwise.
+     * @return true is s is a descent of the element
+     */
     protected boolean isRightDescent(int s) {
-        return true;
+        if (s >= 1 && s <= rank) {
+            return (oneLine[s - 1] > oneLine[s]);
+        }
+        return false;
     }
+
 }

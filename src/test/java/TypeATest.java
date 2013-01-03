@@ -102,6 +102,19 @@ public class TypeATest {
         assertEquals(2,y.length());
     } 
 
+    @Test public void testRightDescent() {
+        BoundedSet wD = new BoundedSet(1,4);
+        BoundedSet uD = new BoundedSet(1,4);
+        BoundedSet yD = new BoundedSet(1,4);
+
+        wD.add(2).add(3);
+        yD.add(3);
+        
+        assertTrue(w.rightDescent().equals(wD));
+        assertTrue(u.rightDescent().equals(uD));
+        assertTrue(y.rightDescent().equals(yD));
+    } 
+
     /*
     @Test public void testRightMultiply() {
         int[] yyww = {1, 2, 4, 3};
