@@ -6,9 +6,9 @@
 import java.util.*;
 
 /**
- * This class stores an element of a Coxeter group of rank "size" as a
- * signed permutation, oneLine.  The methods contained in this class
- * can preform elementary operations on the element.
+ * This class stores an element of a Coxeter group of type D and rank
+ * "size" as a signed permutation, oneLine.  The methods contained in
+ * this class can preform elementary operations on the element.
  * @author Tyson Gern (tygern@gmail.com)
  */
 class TypeD extends Element{
@@ -73,7 +73,7 @@ class TypeD extends Element{
      * @return The inverse of element
      */
     public TypeD findInverse() {
-        TypeD inverse = new TypeD(this.size);
+        TypeD inverse = new TypeD(this.rank);
         for(int i = 0; i < size; i++) {
             inverse.oneLine[Math.abs(this.oneLine[i]) - 1] = this.getSign(i + 1) * (i + 1);
         }
@@ -95,18 +95,15 @@ class TypeD extends Element{
      * @return Nothing
      */
     private TypeD rightMultiplyS(int s) {
-        if (s <= size && s >= 1) {
-            int temp;
+        if (s <= rank && s >= 1) {
             int sign = 1;
 
             if (s == 1) {
                 sign = -1;
                 s = 2;
             }
-
-            temp = oneLine[s-2];
-            oneLine[s-2] = sign * oneLine[s-1];
-            oneLine[s-1] = sign * temp;
+            
+            switchPlaces(s-2, s-1, sign);
         }
         return this;
     }
@@ -118,29 +115,15 @@ class TypeD extends Element{
      * @return Nothing
      */
     private TypeD leftMultiplyS(int s) {
-        if (s <= size && s >= 1) {
-            int val1;
-            int val2;
-            int loc1 = 0;
-            int loc2;
+        if (s <= rank && s >= 1) {
             int sign = 1;
 
             if (s == 1) {
                 sign = -1;
+                s = 2;
             }
 
-            while (Math.abs(oneLine[loc1]) != s && Math.abs(oneLine[loc1]) != s + 1) {
-                loc1++;
-            }
-            val1 = oneLine[loc1];
-            loc2 = loc1 + 1;
-
-            while (Math.abs(oneLine[loc2]) != s && Math.abs(oneLine[loc2]) != s + 1) {
-                loc2++;
-            }
-            val2 = oneLine[loc2];
-            oneLine[loc1] = sign * val2;
-            oneLine[loc2] = sign * val1;
+            switchValues(s - 1, s, sign);
         }
 
         return this;
@@ -244,42 +227,18 @@ class TypeD extends Element{
     }
 
     /**
-     * This method gets the right descent set of the element.
-     * @return the right descent set.
-     */
-    public BoundedSet rightDescent() {
-        BoundedSet right = new BoundedSet(1, size);
-
-        for (int i = 1; i <= size; i++) {
-            if (isRightDescent(i)) {
-                right.add(i);
-            }
-        }
-
-        return right;
-    }
-
-    /**
      * This method returns true if s is in the right descent set of
-     * the elemtent, false otherwise.
+     * the element, false otherwise.
      * @return true is s is a descent of the element
      */
-    private boolean isRightDescent(int s) {
+    protected boolean isRightDescent(int s) {
         if (s == 1) {
             return (-1 * oneLine[1] > oneLine[0]);
         }
-        if (s >= 2 && s <= size) {
+        if (s >= 2 && s <= rank) {
             return (oneLine[s - 2] > oneLine[s - 1]);
         }
         return false;
-    }
-
-    /**
-     * This method gets the left descent set of the element.
-     * @return the left descent set.
-     */
-    public BoundedSet leftDescent() {
-        return findInverse().rightDescent();
     }
 
     /**

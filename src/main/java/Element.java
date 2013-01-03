@@ -148,4 +148,68 @@ abstract class Element {
         return count;
     }
 
+    protected void switchPlaces(int place1, int place2, int sign) {
+        int temp;
+        
+        temp = oneLine[place1];
+        oneLine[place1] = sign * oneLine[place2];
+        oneLine[place2] = sign * temp;
+    }
+
+    protected void switchPlaces(int place1, int place2) {
+        switchPlaces(place1, place2, 1);
+    }
+
+    protected void switchValues(int value1, int value2, int sign) {
+        int first;
+        int second;
+        int loc1 = 0;
+        int loc2;
+        
+        while (Math.abs(oneLine[loc1]) != value1 && Math.abs(oneLine[loc1]) != value2) {
+            loc1++;
+        }
+        first = oneLine[loc1];
+        loc2 = loc1 + 1;
+        
+        while (Math.abs(oneLine[loc2]) != value1 && Math.abs(oneLine[loc2]) != value2) {
+            loc2++;
+        }
+        second = oneLine[loc2];
+        oneLine[loc1] = sign * second;
+        oneLine[loc2] = sign * first;
+    }
+
+    protected void switchValues(int value1, int value2) {
+        switchValues(value1, value2, 1);
+    }
+
+    /**
+     * This method gets the right descent set of the element.
+     * @return the right descent set.
+     */
+    public BoundedSet rightDescent() {
+        BoundedSet right = new BoundedSet(1, rank);
+
+        for (int i = 1; i <= rank; i++) {
+            if (isRightDescent(i)) {
+                right.add(i);
+            }
+        }
+
+        return right;
+    }
+
+    abstract boolean isRightDescent(int s);
+
+    abstract Element findInverse();
+
+    /**
+     * This method gets the left descent set of the element.
+     * @return the left descent set.
+     */
+    public BoundedSet leftDescent() {
+        return findInverse().rightDescent();
+    }
+
 }
