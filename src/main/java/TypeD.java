@@ -11,11 +11,8 @@ import java.util.*;
  * can preform elementary operations on the element.
  * @author Tyson Gern (tygern@gmail.com)
  */
-class TypeD {
-    private int[] oneLine; // The signed permutation of the element
-    private int rank; // The rank of the Coxeter group containing the
-                      // element
- 
+class TypeD extends Element{
+
     /**
      * This constructs an element from a signed permutation.
      * @param input The signed permutation
