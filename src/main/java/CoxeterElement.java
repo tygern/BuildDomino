@@ -64,7 +64,7 @@ class CoxeterElement {
     public boolean equals(CoxeterElement other) {
         if (rank != other.rank) return false;
         return (toPermutation().equals(other.toPermutation()));
-    }
+   }
 
     /**
      * This method returns the nth generator in the given expression

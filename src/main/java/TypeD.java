@@ -6,7 +6,7 @@
 import java.util.*;
 
 /**
- * This class stores an element of a Coxeter group of rank "rank" as a
+ * This class stores an element of a Coxeter group of rank "size" as a
  * signed permutation, oneLine.  The methods contained in this class
  * can preform elementary operations on the element.
  * @author Tyson Gern (tygern@gmail.com)
@@ -18,15 +18,16 @@ class TypeD extends Element{
      * @param input The signed permutation
      */
     public TypeD(int[] input) {
+        size = input.length;
         rank = input.length;
-        oneLine = new int[rank];
+        oneLine = new int[size];
         int sign = 1;
 
-        boolean[] number = new boolean[rank];
-        for (int i = 0; i < rank; i++) number[i] = false;
+        boolean[] number = new boolean[size];
+        for (int i = 0; i < size; i++) number[i] = false;
         
-        for(int i = 0; i < rank; i++) {
-            if (Math.abs(input[i]) > rank || input[i] == 0 || number[Math.abs(input[i]) - 1]) {
+        for(int i = 0; i < size; i++) {
+            if (Math.abs(input[i]) > size || input[i] == 0 || number[Math.abs(input[i]) - 1]) {
                 throw new IllegalArgumentException("Invalid permutation");
             }
             oneLine[i] = input[i];
@@ -46,15 +47,8 @@ class TypeD extends Element{
      */
     private TypeD(int rank) {
         this.rank = rank;
-        oneLine = new int[rank];
-    }
-
-    /**
-     * This method gets the rank of the element
-     * @return The rank
-     */
-    public int getRank() {
-        return rank;
+        this.size = rank;
+        oneLine = new int[size];
     }
 
     /**
@@ -64,9 +58,9 @@ class TypeD extends Element{
      * @return true if the two elements are equal
      */
     public boolean equals(TypeD other) {
-        if (rank != other.rank) return false;
+        if (size != other.size) return false;
 
-        for (int i = 0; i < rank; i++) {
+        for (int i = 0; i < size; i++) {
             if (oneLine[i] != other.oneLine[i]) {
                 return false;
             }
@@ -75,52 +69,12 @@ class TypeD extends Element{
     }
 
     /**
-     * This method gets the sign of the signed of the number that
-     * origin maps to.
-     * @param origin The origin number
-     * @return The sign of the element applied to origin
-     */
-    public int getSign(int origin) {
-        return Math.abs(oneLine[origin - 1]) / oneLine[origin - 1];
-    }
-
-    /**
-     * This method gets the number that origin maps to.
-     * @param origin The origin number
-     * @return The element applied to origin
-     */
-    public int mapsTo(int origin) {
-        if ((Math.abs(origin) <= rank) && (origin != 0)) {
-            if (origin > 0) {
-                return oneLine[origin - 1];
-            }
-            return -1 * oneLine[-1 * origin - 1];
-        }
-        return 0;
-    }
-
-    /**
-     * This method gets the number that maps to target.
-     * @param target The target number
-     * @return The number that element maps to target
-     */
-    public int mapsFrom(int target) {
-        for(int i = 0; i < rank; i++) {
-            if(oneLine[i] == target)
-                return i + 1;
-            if(-1 * oneLine[i] == target)
-                return -1 * (i + 1);
-        }
-        return 0;
-    }
-
-    /**
      * This method gets the inverse
      * @return The inverse of element
      */
     public TypeD findInverse() {
-        TypeD inverse = new TypeD(this.rank);
-        for(int i = 0; i < rank; i++) {
+        TypeD inverse = new TypeD(this.size);
+        for(int i = 0; i < size; i++) {
             inverse.oneLine[Math.abs(this.oneLine[i]) - 1] = this.getSign(i + 1) * (i + 1);
         }
         return inverse;
@@ -135,30 +89,13 @@ class TypeD extends Element{
     }
 
     /**
-     * This method returns a string of the one line signed permutation
-     * of the element.
-     * @return A string that describes the element
-     */
-    public String toString() {
-        String output;
-        
-        output = "[" + oneLine[0];
-        for (int i = 1; i < rank; i++) {
-            output += (", " + oneLine[i]);
-        }
-        output += "]";
-
-        return output;
-    }
-
-    /**
      * This method multiplies the element on the right by a generator,
      * s.
      * @param s The generator
      * @return Nothing
      */
     private TypeD rightMultiplyS(int s) {
-        if (s <= rank && s >= 1) {
+        if (s <= size && s >= 1) {
             int temp;
             int sign = 1;
 
@@ -181,7 +118,7 @@ class TypeD extends Element{
      * @return Nothing
      */
     private TypeD leftMultiplyS(int s) {
-        if (s <= rank && s >= 1) {
+        if (s <= size && s >= 1) {
             int val1;
             int val2;
             int loc1 = 0;
@@ -218,7 +155,7 @@ class TypeD extends Element{
         if (-1 * oneLine[1] > oneLine[0] && -1 * oneLine[0] > oneLine[2]) return false; // 13
         if (oneLine[1] > oneLine[2] && -1 * oneLine[2] > oneLine[0]) return false; // 31
         
-        for(int j = 0; j < rank - 3; j++) {
+        for(int j = 0; j < size - 3; j++) {
             if (oneLine[j] > oneLine[j + 1] && oneLine[j + 1] > oneLine[j + 2]) return false; //321
             if (oneLine[j] > oneLine[j + 2] && oneLine[j + 2] > oneLine[j + 1]) return false; //312
             if (oneLine[j + 1] > oneLine[j] && oneLine[j] > oneLine[j + 2]) return false; //231
@@ -282,7 +219,7 @@ class TypeD extends Element{
             return false;
         }
         
-        while (j < rank - 2) {
+        while (j < size - 2) {
             if (oneLine[j] > j + 2) {
                 return false;
             }
@@ -307,79 +244,13 @@ class TypeD extends Element{
     }
 
     /**
-     * This method counts the number of inversions in the signed
-     * permutation of the element.
-     * @return the number of inversions
-     */
-    private int countInv() {
-        return countInv(1);
-    }
-
-    /**
-     * This method counts the number of inversions in the signed
-     * permutation of the element, allowing for the multiplication of
-     * factor (usually -1).
-     * @return the number of inversions, taking the factor into
-     * account.
-     */
-    private int countInv(int factor) {
-        return countInv(factor, 0, rank);
-    }
-
-    /**
-     * This is a helper method for countInv(int).  It counts the
-     * number of inversions between start and end in the signed
-     * permutation of the element, allowing for the multiplication of
-     * factor (usually -1).
-     * @return the number of inversions, taking the factor into
-     * account.
-     */
-    private int countInv(int factor, int start, int end) {
-        if (end - start <= 1) {
-            return 0;
-        }
-        else if (end - start == 2) {
-            if (factor * oneLine[start] > oneLine[end - 1]) {
-                return 1;
-            }
-            return 0;
-        }
-        int middle = (start + end) / 2;
-        return countInv(factor, start, middle) + countInv(factor, middle, end) + mergeInv(factor, start, end);
-    }
-
-    /**
-     * This method counts the number of inversions between start and
-     * end in the signed permutation of the element tha happen between
-     * the first and second half of the array, allowing for the
-     * multiplication of factor (usually -1).
-     * @return the number of inversions, taking the factor into
-     * account.
-     */
-    private int mergeInv(int factor, int start, int end) {
-        int middle = (start + end) / 2;
-        int count = 0;
-
-        for (int i = start; i < middle; i++) {
-            int value = factor*oneLine[i];
-            for (int j = middle; j < end; j++) {
-                if (value > oneLine[j]) {
-                    count++;
-                }
-            }
-        }
-
-        return count;
-    }
-
-    /**
      * This method gets the right descent set of the element.
      * @return the right descent set.
      */
     public BoundedSet rightDescent() {
-        BoundedSet right = new BoundedSet(1, rank);
+        BoundedSet right = new BoundedSet(1, size);
 
-        for (int i = 1; i <= rank; i++) {
+        for (int i = 1; i <= size; i++) {
             if (isRightDescent(i)) {
                 right.add(i);
             }
@@ -397,7 +268,7 @@ class TypeD extends Element{
         if (s == 1) {
             return (-1 * oneLine[1] > oneLine[0]);
         }
-        if (s >= 2 && s <= rank) {
+        if (s >= 2 && s <= size) {
             return (oneLine[s - 2] > oneLine[s - 1]);
         }
         return false;
@@ -421,7 +292,7 @@ class TypeD extends Element{
         TypeD permutation = new TypeD(oneLine);
         
         while (permutation.length() != 0) {
-            for (int i = permutation.rank; i >= 1; i--) {
+            for (int i = permutation.size; i >= 1; i--) {
                 if (permutation.isRightDescent(i)) {
                     generator.add(i);
                     permutation.rightMultiplyS(i);
@@ -435,7 +306,7 @@ class TypeD extends Element{
             genArray[length - 1 - i] = generator.get(i).intValue();
         }
 
-        CoxeterElement redExp = new CoxeterElement(genArray, permutation.rank);
+        CoxeterElement redExp = new CoxeterElement(genArray, permutation.size);
         return redExp;
         
     }
@@ -447,14 +318,14 @@ class TypeD extends Element{
      * @return the product of this and other
      */
     public TypeD rightMultiply(TypeD other) {
-        if (other.rank != rank) {
+        if (other.size != size) {
             return null;
         }
         
         TypeD result;
-        int[] resultPerm = new int[rank];
+        int[] resultPerm = new int[size];
 
-        for (int i = 1; i <= rank; i++) {
+        for (int i = 1; i <= size; i++) {
             resultPerm[i - 1] = mapsTo(other.mapsTo(i));
         }
 
