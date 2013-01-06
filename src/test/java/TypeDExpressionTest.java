@@ -7,16 +7,16 @@ import org.junit.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class CoxeterElementTest {
+public class TypeDExpressionTest {
 
     int[] uu = {1, 2, 3, 4};
     int[] vv = {2, 1, 3, 4, 3, 3};
 
-    CoxeterElement u, v;
+    TypeDExpression u, v;
 
     @Before public void setUp() {
-        u = new CoxeterElement(uu, 4);
-        v = new CoxeterElement(vv, 4);
+        u = new TypeDExpression(uu, 4);
+        v = new TypeDExpression(vv, 4);
     }
     
     @After public void tearDown() {
@@ -27,13 +27,13 @@ public class CoxeterElementTest {
     @Test(expected = NumberFormatException.class)
     public void testRangeBig() throws Exception {
         int[] big = {1,2,3,7};
-        CoxeterElement bigElm = new CoxeterElement(big, 6);
+        TypeDExpression bigElm = new TypeDExpression(big, 6);
     }
 
     @Test(expected = NumberFormatException.class)
     public void testRangeZero() throws Exception {
         int[] zero = {1,2,0,7};
-        CoxeterElement zeroElm = new CoxeterElement(zero, 8);
+        TypeDExpression zeroElm = new TypeDExpression(zero, 8);
     }
 
     @Test public void testToPermutation() {
@@ -56,19 +56,19 @@ public class CoxeterElementTest {
     @Test(expected = IllegalArgumentException.class)
     public void testRightMultiplyRank() throws Exception {
         int[] ww = {1, 2, 3, 4, 2, 1, 3, 4};
-        CoxeterElement w = new CoxeterElement(ww, 6);
+        TypeDExpression w = new TypeDExpression(ww, 6);
         u.rightMultiply(w);
     }
 
     @Test public void testRightMultiply() {
         int[] ww = {1, 2, 3, 4, 2, 1, 3, 4};
-        CoxeterElement w = new CoxeterElement(ww, 4);
+        TypeDExpression w = new TypeDExpression(ww, 4);
         assertTrue(u.rightMultiply(v).equals(w));
     }
 
     @Test public void testLeftMultiply() {
         int[] ww = {1, 2, 3, 4, 2, 1, 3, 4};
-        CoxeterElement w = new CoxeterElement(ww, 4);
+        TypeDExpression w = new TypeDExpression(ww, 4);
         assertTrue(v.rightMultiply(u).equals(w));
     }
 

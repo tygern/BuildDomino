@@ -10,8 +10,8 @@ import java.util.*;
 * "rank" as a product of generators.  We use "2" as our branch node.
 * @author Tyson Gern (tygern@gmail.com)
 */
-class CoxeterElement {
-    private int[] expression;
+class TypeDExpression {
+    private int[] generators;
     private int rank = 0;
     private int length;
 
@@ -22,7 +22,7 @@ class CoxeterElement {
      * generators
      * @param rank The rank of the Coxeter group
      */
-    public CoxeterElement(int[] input, int rank) throws NumberFormatException{
+    public TypeDExpression(int[] input, int rank) throws NumberFormatException{
 
         // Check all generators are legal
         for(int i = 0; i < input.length; i++) {
@@ -33,14 +33,14 @@ class CoxeterElement {
         
         this.rank = rank;
         this.length = input.length;
-        this.expression = new int[length];
+        this.generators = new int[length];
         for(int i = 0; i < input.length; i++) {
-            expression[i] = input[i];
+            generators[i] = input[i];
         }
     }
 
     /**
-     * This method gets the rank of the CoxeterElement
+     * This method gets the rank of the TypeDExpression
      * @return The rank
      */
     public int getRank() {
@@ -48,7 +48,7 @@ class CoxeterElement {
     }
 
     /**
-     * This method gets the length of the CoxeterElement
+     * This method gets the length of the TypeDExpression
      * @return The length
      */
     public int getLength() {
@@ -61,20 +61,20 @@ class CoxeterElement {
      * @param other The other element
      * @return true if the two elements are equal
      */
-    public boolean equals(CoxeterElement other) {
+    public boolean equals(TypeDExpression other) {
         if (rank != other.rank) return false;
         return (toPermutation().equals(other.toPermutation()));
    }
 
     /**
      * This method returns the nth generator in the given expression
-     * for the CoxeterElement.
+     * for the TypeDExpression.
      * @param n The place of the desired generator
      * @return The label of the generator
      */
     public int nthGenerator(int n) {
         if ((n >= 0) && (n < length)) {
-            return expression[n];
+            return generators[n];
         }
         return 0;
     }
@@ -85,24 +85,15 @@ class CoxeterElement {
      * @return the corresponding signed permutation
      */
     public TypeD toPermutation() {
-        int[] permutation = new int[rank];
-        int temp;
-        int generator;
         TypeD answer;
+        int generator;
 
-        for (int i = 0; i < rank; i++) {
-            permutation[i] = i + 1;
-        }
-        answer = new TypeD(permutation);
+        answer = new TypeD(rank);
 
         for (int i = 0; i < length; i++) {
-            generator = expression[i];
-            if (generator > 1) {
-                answer.switchPlaces(generator - 1, generator - 2);
-            }
-            else {
-                answer.switchPlaces(0, 1, -1);
-            }
+            generator = generators[i];
+            if (generator > 1) answer.switchPlaces(generator - 1, generator - 2);
+            else answer.switchPlaces(0, 1, -1);
         }
 
         return answer;
@@ -113,7 +104,7 @@ class CoxeterElement {
      * element.
      * @return a reduced expression
      */
-    public CoxeterElement reduce() {
+    public TypeDExpression reduce() {
         return toPermutation().findRE();
     }
 
@@ -133,22 +124,22 @@ class CoxeterElement {
      * @param the other experssion
      * @return a reduced expression for the product of this and other
      */
-    public CoxeterElement rightMultiply(CoxeterElement other) {
+    public TypeDExpression rightMultiply(TypeDExpression other) {
         if (rank != other.rank) {
             throw new IllegalArgumentException("Invalid rank");
         }
-        CoxeterElement result;
+        TypeDExpression result;
         int[] newExpression = new int[length + other.length];
         int i = 0;
         while (i < length) {
-            newExpression[i] = expression[i];
+            newExpression[i] = generators[i];
             i++;
         }
         while (i < length + other.length) {
-            newExpression[i] = other.expression[i - length];
+            newExpression[i] = other.generators[i - length];
             i++;
         }
-        result = new CoxeterElement(newExpression, rank);
+        result = new TypeDExpression(newExpression, rank);
         return result.reduce();
     }
 
@@ -159,7 +150,7 @@ class CoxeterElement {
      * @param the other experssion
      * @return a reduced expression for the product of this and other
      */
-    public CoxeterElement leftMultiply(CoxeterElement other) {
+    public TypeDExpression leftMultiply(TypeDExpression other) {
         return other.rightMultiply(this);
     }
 
@@ -171,9 +162,9 @@ class CoxeterElement {
         String output = "(";
         if (length > 0) {
             for (int i = 0; i < length - 1; i++) {
-                output += (expression[i] + ", ");
+                output += (generators[i] + ", ");
             }
-            output += expression[length - 1];
+            output += generators[length - 1];
         }
         
         return output += ")";

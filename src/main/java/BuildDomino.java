@@ -244,7 +244,7 @@ class BuildDomino {
         int rank;
         int[] intArray = null;
         int highGenerator = 0;
-        CoxeterElement wCox = null;
+        TypeDExpression wCox = null;
 
         while (wCox == null) {
             while (intArray == null) {
@@ -260,7 +260,7 @@ class BuildDomino {
             rank = getInt(rankBound, "Rank: \n" + secondaryInputLine);
             
             try {
-                wCox = new CoxeterElement(intArray, rank);
+                wCox = new TypeDExpression(intArray, rank);
             }
             catch (NumberFormatException nfe) {
                 System.out.println("Invalid element");
@@ -275,7 +275,7 @@ class BuildDomino {
     public static TypeD fromRE(int rank) {
         int[] intArray = null;
         int highGenerator = 0;
-        CoxeterElement wCox = null;
+        TypeDExpression wCox = null;
 
         while (wCox == null) {
             while (intArray == null) {
@@ -289,7 +289,7 @@ class BuildDomino {
             }
             
             try {
-                wCox = new CoxeterElement(intArray, rank);
+                wCox = new TypeDExpression(intArray, rank);
             }
             catch (NumberFormatException nfe) {
                 System.out.println("Invalid element");

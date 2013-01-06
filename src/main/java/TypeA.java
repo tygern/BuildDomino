@@ -35,13 +35,16 @@ class TypeA extends Element{
     }
     
     /**
-     * This constructs an empty element of a particular rank.
+     * This constructs the identity element of a particular rank.
      * @param rank The rank of the element
      */
-    private TypeA(int rank) {
+    protected TypeA(int rank) {
         this.rank = rank;
         this.size = rank + 1;
         oneLine = new int[size];
+        for (int i = 0; i < size; i++) {
+            oneLine[i] = i + 1;
+        }
     }
 
     /**

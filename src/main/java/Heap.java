@@ -26,7 +26,7 @@ class Heap {
      * @param w The element of the Coxeter group
      */
     public Heap (TypeD w) {
-        CoxeterElement wRE = w.findRE(); // Note that this will always be reduced.
+        TypeDExpression wRE = w.findRE(); // Note that this will always be reduced.
         
         size = wRE.getLength();
         blocks = new Domino[size];
@@ -48,7 +48,7 @@ class Heap {
      * product of generators.
      * @param w The element of the Coxeter group
      */
-    public Heap (CoxeterElement w) {
+    public Heap (TypeDExpression w) {
         this(w.toPermutation());
     }
 

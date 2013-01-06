@@ -42,13 +42,16 @@ class TypeD extends Element{
     }
     
     /**
-     * This constructs an empty element of a particular rank.
+     * This constructs the identity element of a particular rank.
      * @param rank The rank of the element
      */
-    private TypeD(int rank) {
+    protected TypeD(int rank) {
         this.rank = rank;
         this.size = rank;
         oneLine = new int[size];
+        for (int i = 0; i < size; i++) {
+            oneLine[i] = i + 1;
+        }
     }
 
     /**
@@ -217,11 +220,11 @@ class TypeD extends Element{
     }
 
     /**
-     * This method creates a CoxeterElement reduced expression from a
+     * This method creates a TypeDExpression reduced expression from a
      * signed permutation.
      * @return a reduced expression
      */
-    public CoxeterElement findRE() {
+    public TypeDExpression findRE() {
         ArrayList<Integer> generator = new ArrayList<Integer> ();
         TypeD permutation = new TypeD(oneLine);
         
@@ -240,7 +243,7 @@ class TypeD extends Element{
             genArray[length - 1 - i] = generator.get(i).intValue();
         }
 
-        CoxeterElement redExp = new CoxeterElement(genArray, permutation.size);
+        TypeDExpression redExp = new TypeDExpression(genArray, permutation.size);
         return redExp;
         
     }
