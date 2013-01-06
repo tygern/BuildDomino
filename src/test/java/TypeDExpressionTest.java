@@ -7,7 +7,7 @@ import org.junit.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TypeDExpressionTest {
+public class TypeDExpressionTest extends Expression{
 
     int[] uu = {1, 2, 3, 4};
     int[] vv = {2, 1, 3, 4, 3, 3};
