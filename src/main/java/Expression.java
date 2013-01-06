@@ -6,14 +6,18 @@
 import java.util.*; 
 
 /**
-* This class stores an element of a Coxeter group of type D and rank
-* "rank" as a product of generators.  We use "2" as our branch node.
+* This class stores an element of a Coxeter group of rank "rank" as a
+* product of generators.
 * @author Tyson Gern (tygern@gmail.com)
 */
 abstract class Expression {
     protected int[] generators;
     protected int rank = 0;
     protected int length;
+
+    abstract Element toPermutation();
+
+    abstract Expression reduce();
 
     /**
      * This method gets the rank of the TypeDExpression
@@ -59,4 +63,26 @@ abstract class Expression {
         
         return output += ")";
     }   
+
+    /**
+     * This method decides if two elements of a Coxeter group are
+     * equal.
+     * @param other The other element
+     * @return true if the two elements are equal
+     */
+    public boolean equals(Expression other) {
+        if (getClass() != other.getClass()) return false;
+        if (rank != other.rank) return false;
+        return (toPermutation().equals(other.toPermutation()));
+   }
+
+    /**
+     * This method tells if an expression is reduced
+     * element.
+     * @return true if the expression is reduced.
+     */
+    public boolean isReduced() {
+        return (length == reduce().length);
+    }
+
 }

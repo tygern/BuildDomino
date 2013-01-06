@@ -36,17 +36,6 @@ class TypeAExpression extends Expression{
     }
 
     /**
-     * This method decides if two elements of a Coxeter group are
-     * equal.
-     * @param other The other element
-     * @return true if the two elements are equal
-     */
-    public boolean equals(TypeAExpression other) {
-        if (rank != other.rank) return false;
-        return (toPermutation().equals(other.toPermutation()));
-   }
-
-    /**
      * This method converts an element of a Coxeter group given as a
      * product of commuting generators to a signed permutation.
      * @return the corresponding signed permutation
@@ -72,15 +61,6 @@ class TypeAExpression extends Expression{
      */
     public TypeAExpression reduce() {
         return toPermutation().findRE();
-    }
-
-    /**
-     * This method tells if an expression is reduced
-     * element.
-     * @return true if the expression is reduced.
-     */
-    public boolean isReduced() {
-        return (length == reduce().length);
     }
 
     /**
