@@ -222,4 +222,22 @@ abstract class Element {
         return findInverse().rightDescent();
     }
 
+    /**
+     * This method decides if two elements of a Coxeter group are
+     * equal.
+     * @param other The other element
+     * @return true if the two elements are equal
+     */
+    public boolean equals(Element other) {
+        if (getClass() != other.getClass()) return false;
+        if (size != other.size) return false;
+
+        for (int i = 0; i < size; i++) {
+            if (oneLine[i] != other.oneLine[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
