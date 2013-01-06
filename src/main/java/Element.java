@@ -162,6 +162,11 @@ abstract class Element {
         return count;
     }
 
+    /**
+     * This method switched the entries in place1 and place2 of
+     * oneLine, and multiplies each by sign.
+     * @return nothing
+     */
     protected void switchPlaces(int place1, int place2, int sign) {
         int temp;
         
@@ -170,10 +175,20 @@ abstract class Element {
         oneLine[place2] = sign * temp;
     }
 
+    /**
+     * This method switched the entries in place1 and place2 of
+     * oneLine.
+     * @return nothing
+     */
     protected void switchPlaces(int place1, int place2) {
         switchPlaces(place1, place2, 1);
     }
 
+    /**
+     * This method switched the entries with value1 and value2 of
+     * oneLine, and multiplies each by sign.
+     * @return nothing
+     */
     protected void switchValues(int value1, int value2, int sign) {
         int first;
         int second;
@@ -194,6 +209,11 @@ abstract class Element {
         oneLine[loc2] = sign * first;
     }
 
+    /**
+     * This method switched the entries with value1 and value2 of
+     * oneLine.
+     * @return nothing
+     */
     protected void switchValues(int value1, int value2) {
         switchValues(value1, value2, 1);
     }

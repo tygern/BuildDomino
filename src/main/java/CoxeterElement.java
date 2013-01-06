@@ -93,20 +93,18 @@ class CoxeterElement {
         for (int i = 0; i < rank; i++) {
             permutation[i] = i + 1;
         }
+        answer = new TypeD(permutation);
+
         for (int i = 0; i < length; i++) {
             generator = expression[i];
             if (generator > 1) {
-                temp = permutation[generator - 2];
-                permutation[generator - 2] = permutation[generator - 1];
-                permutation[generator - 1] = temp;
+                answer.switchPlaces(generator - 1, generator - 2);
             }
             else {
-                temp = permutation[0];
-                permutation[0] = -1 * permutation[1];
-                permutation[1] = -1 * temp;
+                answer.switchPlaces(0, 1, -1);
             }
         }
-        answer = new TypeD(permutation);
+
         return answer;
     }
 
