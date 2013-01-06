@@ -7,16 +7,16 @@ import org.junit.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class TypeDExpressionTest{
+public class TypeAExpressionTest{
 
     int[] uu = {1, 2, 3, 4};
-    int[] vv = {2, 1, 3, 4, 3, 3};
+    int[] vv = {1, 2, 4, 4, 3, 4, 1, 1};
 
-    TypeDExpression u, v;
+    TypeAExpression u, v;
 
     @Before public void setUp() {
-        u = new TypeDExpression(uu, 4);
-        v = new TypeDExpression(vv, 4);
+        u = new TypeAExpression(uu, 4);
+        v = new TypeAExpression(vv, 4);
     }
     
     @After public void tearDown() {
@@ -27,18 +27,18 @@ public class TypeDExpressionTest{
     @Test(expected = NumberFormatException.class)
     public void testRangeBig() throws Exception {
         int[] big = {1,2,3,7};
-        TypeDExpression bigElm = new TypeDExpression(big, 6);
+        TypeAExpression bigElm = new TypeAExpression(big, 6);
     }
 
     @Test(expected = NumberFormatException.class)
     public void testRangeZero() throws Exception {
         int[] zero = {1,2,0,7};
-        TypeDExpression zeroElm = new TypeDExpression(zero, 8);
+        TypeAExpression zeroElm = new TypeAExpression(zero, 8);
     }
 
     @Test public void testToPermutation() {
-        int[] uuP = {-1, 3, 4, -2};
-        TypeD uP = new TypeD(uuP);
+        int[] uuP = {2, 3, 4, 5, 1};
+        TypeA uP = new TypeA(uuP);
 
         assertTrue(u.toPermutation().equals(uP));
         assertTrue(u.toPermutation().equals(v.toPermutation()));
@@ -56,19 +56,19 @@ public class TypeDExpressionTest{
     @Test(expected = IllegalArgumentException.class)
     public void testRightMultiplyRank() throws Exception {
         int[] ww = {1, 2, 3, 4, 2, 1, 3, 4};
-        TypeDExpression w = new TypeDExpression(ww, 6);
+        TypeAExpression w = new TypeAExpression(ww, 6);
         u.rightMultiply(w);
     }
 
     @Test public void testRightMultiply() {
-        int[] ww = {1, 2, 3, 4, 2, 1, 3, 4};
-        TypeDExpression w = new TypeDExpression(ww, 4);
+        int[] ww = {1, 2, 3, 4, 1, 2, 3, 4};
+        TypeAExpression w = new TypeAExpression(ww, 4);
         assertTrue(u.rightMultiply(v).equals(w));
     }
 
     @Test public void testLeftMultiply() {
-        int[] ww = {1, 2, 3, 4, 2, 1, 3, 4};
-        TypeDExpression w = new TypeDExpression(ww, 4);
+        int[] ww = {1, 2, 3, 4, 1, 2, 3, 4};
+        TypeAExpression w = new TypeAExpression(ww, 4);
         assertTrue(v.rightMultiply(u).equals(w));
     }
 

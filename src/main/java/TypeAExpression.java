@@ -6,11 +6,11 @@
 import java.util.*; 
 
 /**
-* This class stores an element of a Coxeter group of type D and rank
-* "rank" as a product of generators.  We use "2" as our branch node.
+* This class stores an element of a Coxeter group of type A and rank
+* "rank" as a product of generators.
 * @author Tyson Gern (tygern@gmail.com)
 */
-class TypeDExpression extends Expression{
+class TypeAExpression extends Expression{
     /**
      * This constructs an element of a Coxeter group of rank "rank"
      * given a list of generators.
@@ -18,7 +18,7 @@ class TypeDExpression extends Expression{
      * generators
      * @param rank The rank of the Coxeter group
      */
-    public TypeDExpression(int[] input, int rank) throws NumberFormatException{
+    public TypeAExpression(int[] input, int rank) throws NumberFormatException{
 
         // Check all generators are legal
         for(int i = 0; i < input.length; i++) {
@@ -41,7 +41,7 @@ class TypeDExpression extends Expression{
      * @param other The other element
      * @return true if the two elements are equal
      */
-    public boolean equals(TypeDExpression other) {
+    public boolean equals(TypeAExpression other) {
         if (rank != other.rank) return false;
         return (toPermutation().equals(other.toPermutation()));
    }
@@ -51,16 +51,15 @@ class TypeDExpression extends Expression{
      * product of commuting generators to a signed permutation.
      * @return the corresponding signed permutation
      */
-    public TypeD toPermutation() {
-        TypeD answer;
+    public TypeA toPermutation() {
+        TypeA answer;
         int generator;
 
-        answer = new TypeD(rank);
+        answer = new TypeA(rank);
 
         for (int i = 0; i < length; i++) {
             generator = generators[i];
-            if (generator > 1) answer.switchPlaces(generator - 1, generator - 2);
-            else answer.switchPlaces(0, 1, -1);
+            answer.switchPlaces(generator, generator - 1);
         }
 
         return answer;
@@ -71,7 +70,7 @@ class TypeDExpression extends Expression{
      * element.
      * @return a reduced expression
      */
-    public TypeDExpression reduce() {
+    public TypeAExpression reduce() {
         return toPermutation().findRE();
     }
 
@@ -91,11 +90,11 @@ class TypeDExpression extends Expression{
      * @param the other experssion
      * @return a reduced expression for the product of this and other
      */
-    public TypeDExpression rightMultiply(TypeDExpression other) {
+    public TypeAExpression rightMultiply(TypeAExpression other) {
         if (rank != other.rank) {
             throw new IllegalArgumentException("Invalid rank");
         }
-        TypeDExpression result;
+        TypeAExpression result;
         int[] newExpression = new int[length + other.length];
         int i = 0;
         while (i < length) {
@@ -106,7 +105,7 @@ class TypeDExpression extends Expression{
             newExpression[i] = other.generators[i - length];
             i++;
         }
-        result = new TypeDExpression(newExpression, rank);
+        result = new TypeAExpression(newExpression, rank);
         return result.reduce();
     }
 
@@ -117,7 +116,7 @@ class TypeDExpression extends Expression{
      * @param the other experssion
      * @return a reduced expression for the product of this and other
      */
-    public TypeDExpression leftMultiply(TypeDExpression other) {
+    public TypeAExpression leftMultiply(TypeAExpression other) {
         return other.rightMultiply(this);
     }
 }

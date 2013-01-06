@@ -243,7 +243,7 @@ class TypeD extends Element{
             genArray[length - 1 - i] = generator.get(i).intValue();
         }
 
-        TypeDExpression redExp = new TypeDExpression(genArray, permutation.size);
+        TypeDExpression redExp = new TypeDExpression(genArray, permutation.rank);
         return redExp;
         
     }

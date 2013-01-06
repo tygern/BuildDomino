@@ -114,4 +114,33 @@ class TypeA extends Element{
         return false;
     }
 
+    /**
+     * This method creates a TypeAExpression reduced expression from a
+     * signed permutation.
+     * @return a reduced expression
+     */
+    public TypeAExpression findRE() {
+        ArrayList<Integer> generator = new ArrayList<Integer> ();
+        TypeA permutation = new TypeA(oneLine);
+        
+        while (permutation.length() != 0) {
+            for (int i = permutation.size; i >= 1; i--) {
+                if (permutation.isRightDescent(i)) {
+                    generator.add(i);
+                    permutation.rightMultiplyS(i);
+                }
+            }
+        }
+
+        int length = generator.size();
+        int[] genArray = new int[length];
+        for (int i = 0; i < length; i++) {
+            genArray[length - 1 - i] = generator.get(i).intValue();
+        }
+
+        TypeAExpression redExp = new TypeAExpression(genArray, permutation.rank);
+        return redExp;
+        
+    }
+
 }
