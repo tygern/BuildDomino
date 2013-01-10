@@ -65,15 +65,6 @@ class TypeDExpression extends Expression{
     }
 
     /**
-     * This method tells if an expression is reduced
-     * element.
-     * @return true if the expression is reduced.
-     */
-    public boolean isReduced() {
-        return (length == reduce().length);
-    }
-
-    /**
      * This method multiplies a element given in terms of generators
      * on the right by another signed permutation and reduces the
      * product.
