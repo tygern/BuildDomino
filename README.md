@@ -17,7 +17,7 @@ Installation
         cd BuildDomino/target/
         java -jar build-domino-x.y.z.jar
         
-**Note:** Requires java JRE 7
+**Note:** Requires java JRE 6
 
 Introduction
 ============

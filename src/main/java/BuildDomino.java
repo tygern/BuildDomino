@@ -126,115 +126,111 @@ class BuildDomino {
         }
 
         choice = getString(inputLine);
-        switch (choice) {
-        case "expression":
+        if (choice.equals("expression")) {
             w = fromRE();
-            break;
-        case "permutation":
+            }
+        else if (choice.equals("permutation")) {
             w = fromPerm();
-            break;
-        case "print":
+            }
+        else if (choice.equals("print")) {
             if (w == null) nullElement();
             else System.out.println(w);
-            break;
-        case "rightmultiply":
+            }
+        else if (choice.equals("rightmultiply")) {
             if (w == null) {
                 nullElement();
-                break;
             }
-            System.out.println("permutation or expression?");
-            form = getString(secondaryInputLine);
-            switch (form) {
-            case "permutation":
-                x = fromPerm();
-                System.out.println(w.rightMultiply(x));
-                break;
-            case "expression":
-                x = fromRE(w.getRank());
-                System.out.println(w.findRE().rightMultiply(x.findRE()));
-                break;
-            default:
-                badInput(form);
-                break;
+            else {
+                System.out.println("permutation or expression?");
+                form = getString(secondaryInputLine);
+                if (form.equals("permutation")) {
+                    x = fromPerm();
+                    System.out.println(w.rightMultiply(x));
+                }
+                else if (form.equals("expression")) {
+                    x = fromRE(w.getRank());
+                    System.out.println(w.findRE().rightMultiply(x.findRE()));
+                }
+                else {
+                    badInput(form);
+                }
             }
-            break;
-        case "leftmultiply":
+        }
+        else if (choice.equals("leftmultiply")) {
             if (w == null) {
                 nullElement();
-                break;
             }
-            System.out.println("Permutation or expression?");
-            form = getString(secondaryInputLine);
-            switch (form) {
-            case "permutation":
-                x = fromPerm();
-                System.out.println(w.leftMultiply(x));
-                break;
-            case "expression":
-                x = fromRE(w.getRank());
-                System.out.println(w.findRE().leftMultiply(x.findRE()));
-                break;
-            default:
-                badInput(form);
-                break;
+            else {
+                System.out.println("Permutation or expression?");
+                form = getString(secondaryInputLine);
+                if (form.equals("permutation")) {
+                    x = fromPerm();
+                    System.out.println(w.leftMultiply(x));
+                }
+                else if (form.equals("expression")) {
+                    x = fromRE(w.getRank());
+                    System.out.println(w.findRE().leftMultiply(x.findRE()));
+                }
+                else {
+                    badInput(form);
+                }
             }
-            break;
-        case "reduced":
+        }
+        else if (choice.equals("reduced")) {
             if (w == null) nullElement();
             else System.out.println(w.findRE());
-            break;
-        case "length":
+        }
+        else if (choice.equals("length")) {
             if (w == null) nullElement();
             else System.out.println(w.length());
-            break;
-        case "descent":
+        }
+        else if (choice.equals("descent")) {
             if (w == null) nullElement();
             else {
                 System.out.println("Right: " + w.rightDescent());
                 System.out.println("Left: " + w.leftDescent());
             }
-            break;
-        case "inverse":
+        }
+        else if (choice.equals("inverse")) {
             if (wInv == null) nullElement();
             else System.out.println(wInv);
-            break;
-        case "righttikz":
+        }
+        else if (choice.equals("righttikz")) {
             if (tR == null) nullElement();
             else tR.tikzDraw();
-            break;
-        case "lefttikz":
+        }
+        else if (choice.equals("lefttikz")) {
             if (tL == null) nullElement();
             else tL.tikzDraw();
-            break;
-        case "heaptikz":
+        }
+        else if (choice.equals("heaptikz")) {
             if (wHeap == null) nullElement();
             else wHeap.tikzDraw();
-            break;
-        case "rightdraw":
+        }
+        else if (choice.equals("rightdraw")) {
             if (tR == null) nullElement();
             else tR.screenDraw();
-            break;
-        case "leftdraw":
+        }
+        else if (choice.equals("leftdraw")) {
             if (tL == null) nullElement();
             else tL.screenDraw();
-            break;
-        case "heapdraw":
+        }
+        else if (choice.equals("heapdraw")) {
             if (wHeap == null) nullElement();
             else wHeap.screenDraw();
-            break;
-        case "bad":
+        }
+        else if (choice.equals("bad")) {
             if (tL == null) nullElement();
             else System.out.println(w.isBad());
-            break;
-        case "help":
+        }
+        else if (choice.equals("help")) {
             printHelp();
-            break;
-        case "quit": case "q": case "exit":
+        }
+        else if (choice.equals("quit") || choice.equals("q") || choice.equals("exit")) {
             System.exit(0);
-            break;
-        default:
+        }
+        else {
             badInput(choice);
-            break;
         }
 
         return w;
