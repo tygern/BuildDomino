@@ -11,7 +11,7 @@ import java.util.*;
  * this class can preform elementary operations on the element.
  * @author Tyson Gern (tygern@gmail.com)
  */
-class TypeD extends Element{
+class TypeD extends EvenElement{
 
     /**
      * This constructs an element from a signed permutation.
