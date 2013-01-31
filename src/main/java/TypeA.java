@@ -143,4 +143,35 @@ class TypeA extends Element{
         
     }
 
+    /**
+     * This method multiplies a permutation on the right by another
+     * permutation.
+     * @param the other element
+     * @return the product of this and other
+     */
+    public TypeA rightMultiply(TypeA other) {
+        if (other.size != size) {
+            return null;
+        }
+        
+        TypeA result;
+        int[] resultPerm = new int[size];
+
+        for (int i = 1; i <= size; i++) {
+            resultPerm[i - 1] = mapsTo(other.mapsTo(i));
+        }
+
+        result = new TypeA(resultPerm);
+        return result;
+    }
+
+    /**
+     * This method multiplies a permutation on the left by another
+     * permutation.
+     * @param the other element
+     * @return the product of this and other
+     */
+    public TypeA leftMultiply(TypeA other) {
+        return other.rightMultiply(this);
+    }
 }

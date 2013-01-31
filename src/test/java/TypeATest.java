@@ -115,7 +115,6 @@ public class TypeATest {
         assertTrue(y.rightDescent().equals(yD));
     } 
 
-    /*
     @Test public void testRightMultiply() {
         int[] yyww = {1, 2, 4, 3};
         TypeA yw = new TypeA(yyww);
@@ -129,5 +128,4 @@ public class TypeATest {
         assertTrue(u.leftMultiply(x) == null);
         assertTrue(y.leftMultiply(w).equals(z));
     }
-    */
 }
