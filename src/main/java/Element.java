@@ -80,6 +80,18 @@ abstract class Element {
     }
 
     /**
+     * This method gets the inverse
+     * @return The inverse of element
+     */
+    protected int[] invertPermutation() {
+        int[] perm = new int[size];
+        for(int i = 0; i < size; i++) {
+            perm[Math.abs(this.oneLine[i]) - 1] = this.getSign(i + 1) * (i + 1);
+        }
+        return perm;
+    }
+
+    /**
      * This method returns a string of the one line signed permutation
      * of the element.
      * @return A string that describes the element
@@ -258,6 +270,31 @@ abstract class Element {
             }
         }
         return true;
+    }
+
+    /**
+     * This method multiplies a permutation on the right by another
+     * permutation.
+     * @param the other element
+     * @return the product of this and other
+     */
+    public int[] rightMultiplyPerm(Element other) {
+        int[] resultPerm = new int[size];
+
+        for (int i = 1; i <= size; i++) {
+            resultPerm[i - 1] = mapsTo(other.mapsTo(i));
+        }
+        
+        return resultPerm;
+    }
+
+    /**
+     * This method checks if two elements have the same rank and type.
+     * @param the other element
+     * @return true if the elements are compatible.
+     */
+    protected boolean compatible(Element other) {
+        return (other.rank == rank && other.getClass().equals(getClass()));
     }
 
 }

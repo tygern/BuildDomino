@@ -52,11 +52,7 @@ class TypeA extends Element{
      * @return The inverse of element
      */
     public TypeA findInverse() {
-        TypeA inverse = new TypeA(this.rank);
-        for(int i = 0; i < size; i++) {
-            inverse.oneLine[this.oneLine[i] - 1] = i + 1;
-        }
-        return inverse;
+        return new TypeA(this.invertPermutation());
     }
 
     /**
@@ -150,19 +146,8 @@ class TypeA extends Element{
      * @return the product of this and other
      */
     public TypeA rightMultiply(TypeA other) {
-        if (other.size != size) {
-            return null;
-        }
-        
-        TypeA result;
-        int[] resultPerm = new int[size];
-
-        for (int i = 1; i <= size; i++) {
-            resultPerm[i - 1] = mapsTo(other.mapsTo(i));
-        }
-
-        result = new TypeA(resultPerm);
-        return result;
+        if (!compatible(other)) return null;
+        return new TypeA(rightMultiplyPerm(other));
     }
 
     /**

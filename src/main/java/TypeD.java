@@ -59,11 +59,7 @@ class TypeD extends EvenElement{
      * @return The inverse of element
      */
     public TypeD findInverse() {
-        TypeD inverse = new TypeD(this.rank);
-        for(int i = 0; i < size; i++) {
-            inverse.oneLine[Math.abs(this.oneLine[i]) - 1] = this.getSign(i + 1) * (i + 1);
-        }
-        return inverse;
+        return new TypeD(this.invertPermutation());
     }
 
     /**
@@ -255,19 +251,8 @@ class TypeD extends EvenElement{
      * @return the product of this and other
      */
     public TypeD rightMultiply(TypeD other) {
-        if (other.size != size) {
-            return null;
-        }
-        
-        TypeD result;
-        int[] resultPerm = new int[size];
-
-        for (int i = 1; i <= size; i++) {
-            resultPerm[i - 1] = mapsTo(other.mapsTo(i));
-        }
-
-        result = new TypeD(resultPerm);
-        return result;
+        if (!compatible(other)) return null;
+        return new TypeD(rightMultiplyPerm(other));
     }
 
     /**
