@@ -13,4 +13,14 @@ import java.util.*;
  */
 abstract class EvenElement extends Element {
 
+    protected int countNeg() {
+        int count = 0;
+        
+        for (int i = 1; i <= size; i++) {
+            if (mapsto(i) < 0) count ++;
+        }
+        
+        return count;
+    }
+
 }
