@@ -1,5 +1,6 @@
 *.class
 *~
+*#*
 target/classes
 target/resources
 target/test
