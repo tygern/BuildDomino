@@ -17,7 +17,7 @@ abstract class EvenElement extends Element {
         int count = 0;
         
         for (int i = 1; i <= size; i++) {
-            if (mapsto(i) < 0) count ++;
+            if (mapsTo(i) < 0) count ++;
         }
         
         return count;
