@@ -1,4 +1,4 @@
-THIS_VERSION = "0.2.0-SNAPSHOT"
+THIS_VERSION = "0.2.0"
 
 define 'build-domino' do
   project.version = THIS_VERSION
