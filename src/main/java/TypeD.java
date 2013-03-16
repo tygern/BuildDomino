@@ -112,9 +112,10 @@ class TypeD extends EvenElement{
         if (-1 * oneLine[0] > oneLine[2]) return false; // 13 or 31
         
         for(int j = 0; j <= size - 3; j++) {
-            if (oneLine[j] > oneLine[j + 1] && oneLine[j + 1] > oneLine[j + 2]) return false; //321
-            if (oneLine[j] > oneLine[j + 2] && oneLine[j + 2] > oneLine[j + 1]) return false; //312
-            if (oneLine[j + 1] > oneLine[j] && oneLine[j] > oneLine[j + 2]) return false; //231
+            if (oneLine[j] > oneLine[j+2]) return false;
+            // if (oneLine[j] > oneLine[j + 1] && oneLine[j + 1] > oneLine[j + 2]) return false; //321
+            // if (oneLine[j] > oneLine[j + 2] && oneLine[j + 2] > oneLine[j + 1]) return false; //312
+            // if (oneLine[j + 1] > oneLine[j] && oneLine[j] > oneLine[j + 2]) return false; //231
         }
 
         return true;
