@@ -109,10 +109,9 @@ class TypeD extends EvenElement{
      * @return true if the element is right bad
      */
     private boolean isRightBad() {
-        if (-1 * oneLine[1] > oneLine[0] && -1 * oneLine[0] > oneLine[2]) return false; // 13
-        if (oneLine[1] > oneLine[2] && -1 * oneLine[2] > oneLine[0]) return false; // 31
+        if (-1 * oneLine[0] > oneLine[2]) return false; // 13 or 31
         
-        for(int j = 0; j < size - 3; j++) {
+        for(int j = 0; j <= size - 3; j++) {
             if (oneLine[j] > oneLine[j + 1] && oneLine[j + 1] > oneLine[j + 2]) return false; //321
             if (oneLine[j] > oneLine[j + 2] && oneLine[j + 2] > oneLine[j + 1]) return false; //312
             if (oneLine[j + 1] > oneLine[j] && oneLine[j] > oneLine[j + 2]) return false; //231

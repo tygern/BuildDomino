@@ -106,10 +106,12 @@ public class TypeDTest {
         int[] ww4 = {1, -4, 3, -2};
         int[] ww6 = {-1, -6, 3, -4, 5, -2};
         int[] ww8 = {1, -8, 3, -6, 5, -4, 7, -2};
+        int[] ww44 = {-1,3,4,-2};
 
         TypeD w4 = new TypeD(ww4);
         TypeD w6 = new TypeD(ww6);
         TypeD w8 = new TypeD(ww8);
+        TypeD w44 = new TypeD(ww44);
         
         assertTrue(w4.isBad());
         assertTrue(w6.isBad());
@@ -117,6 +119,8 @@ public class TypeDTest {
         assertFalse(v.isBad());
         assertFalse(y.isBad());
         assertFalse(z.isBad());
+
+        assertFalse(w44.isBad());
     } 
 
     @Test public void testLength() {
